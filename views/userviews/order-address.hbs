@@ -1,0 +1,660 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">checkout</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="index-2.html">Shop</a></li>
+          <li>checkout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="saveaddres">
+  <section class="checkout-wrapper section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="checkout-steps-form-style-1">
+            <ul id="accordionExample">
+
+              <li>
+
+                <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                  aria-expanded="false" aria-controls="collapseFour">Click on to add new delivery address</h6>
+                <section class="checkout-steps-form-content collapse" id="collapseFour" aria-labelledby="headingFour"
+                  data-bs-parent="#accordionExample">
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="single-form form-default">
+                        <label>Full Name</label>
+                        <div class="row">
+                          <div class="col-md-6 form-input form">
+                            <input type="text" id="reg-fn" name="firstname" onkeyup=" validatefName()"
+                              placeholder="First Name" required>
+                            <p id="FName-error" class="error text-danger"></p>
+                          </div>
+                          <div class="col-md-6 form-input form">
+                            <input type="text" id="reg-ln" onkeyup="validatelName()" name="lastname"
+                              placeholder="Last Name" required>
+                            <p id="LName-error" class="error text-danger"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{!-- <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Email</label>
+                        <div class="form-input form">
+                          <input type="text" name="email" placeholder="Email">
+                        </div>
+                      </div>
+                    </div> --}}
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Mobile</label>
+                        <div class="form-input form">
+                          <input type="text" id="reg-phone" onkeyup="validatePhoneNUmber()" name="mobile"
+                            placeholder="Mobile" required>
+                          <p id="Phone-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>City</label>
+                        <div class="form-input form">
+                          <input type="text" id="reg-cn" name="city" onkeyup="validateCityName()" placeholder="City"
+                            required>
+                          <p id="CName-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Pincode</label>
+                        <div class="form-input form">
+                          <input type="text" name="pincode" onkeyup="validatePincode()" id="reg-pin"
+                            placeholder="Pincode" required>
+                          <p id="pin-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>State</label>
+                        <div class="select-items">
+                          <select class="form-control" name="state" required>
+                            <option value="0">select</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="checkout-payment-option">
+                        <h6 class="heading-6 font-weight-400 payment-title">Select Delivery Type
+                          Option</h6>
+                        <div class="payment-option-wrapper">
+                          <div class="single-payment-option">
+                            <input type="radio" name="shipping" checked id="shipping-1" required>
+                            <label for="shipping-1">
+                              {{!-- <img src="#" alt="Sipping"> --}}
+                              <p>Home</p>
+                            </label>
+                          </div>
+
+                          <div class="single-payment-option">
+                            <input type="radio" name="shipping" id="shipping-4" required>
+                            <label for="shipping-4">
+                              {{!-- <img src="#" alt="Sipping"> --}}
+                              <p>Office</p>
+
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="steps-form-btn button">
+                        {{!-- <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                          aria-expanded="false" aria-controls="collapseThree">previous</button> --}}
+                        {{!-- <input type="submit" class="btn btn-alt"></input> --}}
+                      </div>
+                    </div>
+                  </div>
+
+                </section>
+              </li>
+              <li>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="checkout-sidebar-coupon">
+            <p>Appy Coupon to get discount!</p>
+
+            <div class="single-form form-default">
+              <div class="form-input form">
+                <input type="text" placeholder="Coupon Code" name="coupon" id="couponInput">
+              </div>
+              {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
+              <div class="button">
+                <button class="btn" type="button" onclick="couponApply()">Apply</button>
+              </div>
+              <p style="color:orangered" id="couperr"></p>
+            </div>
+
+          </div>
+          <div class="checkout-sidebar-coupon mt-30">
+            <p>Enter the wallet Amount</p>
+
+            <div class="single-form form-default">
+              <div class="form-input form">
+                <input type="text" placeholder="Wallet amount" name="wallet" id="walletInput">
+              </div>
+              {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
+              <div class="button">
+                <button class="btn" type="button" onclick="applyWalletAmount()">Apply</button>
+              </div>
+              <p style="color:orangered" id="walletid"></p>
+            </div>
+
+          </div>
+          <div class="checkout-sidebar">
+
+
+            <div class="checkout-sidebar-price-table mt-30">
+              <div class="container select-items" style="color:rgb(204, 237, 165) height:100 px">
+                {{!-- <select type="text" name="" style="color:blue" value="{{editProducts.size}}"
+                  class="btn btn-outline-Light style form-control" aria-label="Default select example">
+                  <option selected>Select Payment Options</option>
+                  <option value="cod">Cash On Delivery(COD)</option> --}}
+
+
+
+                  {{!-- <div class="payment">
+                    <h5 class="title">Payment method</h5>
+                    <label class=" radio-inline">
+                      <input type="radio" name="paymentMethod" value="COD" checked> COD </label><br>
+
+                    <label class="radio-inline mt-2">
+                      <input type="radio" name="paymentMethod" value="Razorpay"> Razorpay
+                    </label><br>
+                    <label class="radio-inline mt-2">
+                      <input type="radio" name="paymentMethod" value="paypal"> Paypal
+                    </label>
+
+                  </div> --}}
+
+
+
+
+
+
+
+
+
+              <div class="payment">
+                <h5 class="title">Payment method</h5>
+                <label class=" radio-inline">
+                  <input type="radio" name="paymentMethod" onclick="selectPayment('COD')" value="COD"> COD
+                </label><br>
+
+                <label class="radio-inline mt-2">
+                  <input type="radio" name="paymentMethod" onclick="selectPayment('Razorpay')" value="Razorpay"> Razorpay
+                </label><br>
+                <label class="radio-inline mt-2">
+                  <input type="radio" name="paymentMethod" onclick="selectPayment('paypal')" value="paypal"> Paypal
+                </label>
+
+              </div>
+
+
+
+
+
+
+
+                  {{!--
+                </select> --}}
+              </div>
+            </div>
+
+            <div class="checkout-sidebar-price-table mt-30">
+              <h5 class="title">Pricing Table</h5>
+              <div class="sub-total-price">
+                <div class="total-price">
+                  <p class="value">Subotal Price:</p>
+                  <p class="price" id="totval">₹ {{totalvalue}}</p>
+                  <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
+                </div>
+
+
+              </div>
+
+
+
+              <button type="submit" onclick="saveAddress(event)" class="btn btn-primary">place Order</button>
+
+
+
+
+
+
+
+
+
+
+            </div>
+            {{!-- <div class="checkout-sidebar-banner mt-30">
+              <a href="product-grids.html">
+                <img src="assets/images/banner/banner.jpg" alt="#">
+              </a>
+            </div> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  var fnameError = document.getElementById('FName-error');
+  var lnameError = document.getElementById('LName-error');
+  var phoneError = document.getElementById('Phone-error');
+  var cnameError = document.getElementById('CName-error');
+  var pinError = document.getElementById('pin-error');
+  var submitError = document.getElementById('Submit-error');
+
+
+  function validatefName() {
+    var name = document.getElementById('reg-fn').value;
+    if (name.length == 0) {
+      fnameError.innerHTML = '**Firstname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      fnameError.innerHTML = '**Please provide firstname';
+      return false;
+    }
+    fnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validatelName() {
+    var name = document.getElementById('reg-ln').value;
+    if (name.length == 0) {
+      lnameError.innerHTML = '**Lastname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      lnameError.innerHTML = '**Please provide lastname';
+      return false;
+    }
+    lnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+
+
+  function validatePhoneNUmber() {
+    var message = document.getElementById('reg-phone').value;
+    var required = 10;
+    var left = required - message.length;
+    if (left > 0) {
+      phoneError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> ' + 'length insufficient,' + left + ' more required';
+      return false;
+    }
+    phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validateCityName() {
+    var name = document.getElementById('reg-cn').value;
+    if (name.length == 0) {
+      cnameError.innerHTML = '**City is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      cnameError.innerHTML = '**Please provide city name';
+      return false;
+    }
+    cnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+  function validatePincode() {
+    var message = document.getElementById('reg-pin').value;
+    var required = 6;
+    var left = required - message.length;
+    if (left > 0) {
+      pinError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> ' + 'length insufficient,' + left + ' more required';
+      return false;
+    }
+    pinError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+
+
+  function validateForm() {
+    if (!validatelName() || !validatefName() || !validateCityName() || !validatePhoneNUmber() || !validatePincode()) {
+      alert('validation failed');
+      // submitError.style.display='block';
+     // submitError.innerHTML = 'Please fix error to submit';
+      //setTimeout(function () { submitError.style.display = 'none'; }, 5000);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
+
+
+
+
+var paymentMethod;
+ function selectPayment(payment) {
+
+    paymentMethod = payment
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function couponApply() {
+
+    let couponCode = document.getElementById('couponInput').value;
+
+    $.ajax({
+      url: '/apply-coupon',
+      data: {
+        coupon: document.getElementById("couponInput").value,
+
+      },
+      method: 'post',
+      success: (response) => {
+
+        if (response.status && response.total) {
+
+
+
+          document.getElementById("totval").innerHTML = response.total;
+          document.getElementById("totalhidden").value = response.total;
+
+          document.getElementById("couperr").innerHTML = response.err;
+          document.getElementById("couperr").style.color = "green";
+
+        } else {
+          document.getElementById("couperr").innerHTML = response.err;
+          document.getElementById("couperr").style.color = "red";
+
+        }
+
+      }
+    })
+
+
+  }
+
+
+
+
+
+  /*****************************************************************/
+  function applyWalletAmount() {
+
+    let amount = document.getElementById('walletInput').value;
+
+    $.ajax({
+      url: '/WalletAmount',
+      data: {
+        amount: amount,
+
+      },
+      method: 'post',
+      success: (response) => {
+
+        if (response.status && response.total) {
+
+          console.log(response);
+
+          document.getElementById("totval").innerHTML = response.total;
+          document.getElementById("totalhidden").value = response.total;
+          document.getElementById("walletid").innerHTML = response.msg;
+          document.getElementById("walletid").style.color = "green";
+
+        } else {
+          document.getElementById("walletid").innerHTML = response.msg;
+          document.getElementById("walletid").style.color = "red";
+
+        }
+
+      }
+    })
+
+
+  }
+  /**************************************************************************/
+
+
+
+
+
+  function saveAddress(e) {
+
+
+
+    
+/*if(! paymentMethod){
+
+     swal.fire({
+        title: "Please Select Address to Place Order",
+        icon: 'warning',
+        dangerMode: true,
+      })
+
+}*/
+//else{
+
+
+e.preventDefault()
+
+  $.ajax({
+        url: '/place-order',
+        method: 'post',
+        data: $('#saveaddres').serialize(),
+        success: (response) => {
+          //location.href = '/order-success'
+          console.log(response);
+          if (response.paymentMethod == 'COD') {
+            location.href = '/order-successful'
+          }
+
+          else if (response.paypal) {
+            location.href = response.url
+
+          } else {
+
+            razorpayPayment(response)
+          }
+        }
+
+      })
+
+
+  //}
+    
+//}
+
+//}
+  //  if (validateForm()) {
+   
+   //}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function razorpayPayment(order) {
+    console.log('orderamount', order)
+    var options = {
+      "key": "rzp_test_gpdw4Vd4R7dTYf", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Kstyles",
+      "description": "Test Transaction",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+
+        verifyPayment(response, order)
+      },
+      "prefill": {
+        "name": "Divyadas M P",
+        "email": "ranidivyadas@gmail.com",
+        "contact": "8086986052"
+      },
+      "notes": {
+        "address": "Kstyles Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+
+
+  function verifyPayment(payment, order) {
+
+
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-successful'
+
+        } else {
+          location.href = '/order-failed'
+        }
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+  integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+  integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

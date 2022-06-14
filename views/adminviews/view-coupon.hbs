@@ -1,0 +1,161 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+
+
+
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Coupon Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Coupons</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row mb-2">
+                <div class="col-sm-11">
+                    <div class="text-sm-end text-right">
+                        <a href="/admin/add-new-coupon"
+                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                class="mdi mdi-plus me-1"></i> Add New Coupon</a>
+                    </div>
+                </div><!-- end col-->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table align-middle table-nowrap table-check"
+                                    style="width:100%">
+                                    <thead>
+
+                                        <tr>
+                                            <th style="width: 20px;" class="align-middle">
+
+                                            </th>
+                                            <th scope="col">Sl.</th>
+                                            <th class="align-middle">Coupon Code</th>
+                                            <th class="align-middle">Valid from</th>
+                                            <th class="align-middle">Valid to</th>
+                                            <th class="align-middle">Coupon discount(%)</th>
+                                            <th class="align-middle">Status</th>
+                                            <th class="align-middle">Action</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        {{#each coupondata}}
+                                        <tr>
+
+
+
+                                            <td>
+
+                                            </td>
+
+                                            <th class="align-middle" scope="row">{{inc @index}}</th>
+
+
+
+                                            <td name="couponname">{{this.couponcode}}</td>
+
+                                            <td name="from">{{this.fromDate}}</td>
+                                            <td name="to">{{this.toDate}}</td>
+                                            <td>
+                                                <span
+                                                    class="badge badge-pill badge-soft-success font-size-12">{{this.percentage}}</span>
+                                            </td>
+                                            <td>
+
+
+
+
+
+                                                <div class="form-group row mb-4">
+                                                    {{!-- <label for="taskname"
+                                                        class="col-form-label col-lg-2 ">Status</label> --}}
+                                                    <div class="col-lg-10">
+
+                                                        <select onchange="couponStatus(value,'{{this._id}}')"
+                                                            class="btn btn-outline-light style"
+                                                            aria-label="Default select example">
+                                                            <option value="{{this.status}}" name="status"   onchange="couponStatus(status, '{{this._id}}')"
+                                                                class="badge badge-pill badge-soft-success font-size-12"
+                                                                selected disabled> {{this.status}}</option>
+                                                            <option value="Active">Active</option>
+                                                            <option value="Expired">Expired</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </td>
+                                            <td>
+                                                <div class="d-flex gap-3">
+                                                    {{!-- <a href="/admin/edit-category-offer/{{this.id}}" value="Edit"
+                                                        class="text-success"><i
+                                                            class="mdi mdi-pencil font-size-18"></i></button> --}}
+                                                        <a href="/admin/delete-coupon/{{this._id}}" data-method="delete" value="delete"
+                                                          
+                                                            class="text-danger"><i
+                                                                class="mdi mdi-delete font-size-18"></i></a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        {{/each}}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+        });
+    });
+</script>
+
+
+<script>
+    function couponStatus(status, couponId) {
+        $.ajax({
+            url: '/admin/change-coupon-status',
+            type: 'post',
+            data: {
+                status: status,
+                couponId: couponId
+            }
+        })
+    }
+</script>

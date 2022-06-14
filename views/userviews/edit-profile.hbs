@@ -1,0 +1,131 @@
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    function enable(e){
+        
+        //document.getElementById("test").style.display="block";
+        //e.preventDefault();
+    }
+</script>
+
+
+
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">User Profile</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+                    <li>Edit profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="account-login section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                <div class="register-form">
+                    <div class="title">
+                        {{!-- <h3>No Account? Register</h3> --}}
+                        {{!-- <h6 style="color:red">{{message}}</h6> --}}
+                        {{#if message}}
+                        <div id="test" class="alert alert-warning alert-dismissible" >
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{message}}</strong>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{!-- from which route in which we are calling the post is what indicated by action--}}
+
+
+
+                    <form class="row" id="saveprofile">
+
+                        <input value="{{userdetails._id}}" name="profid" style="display:none" type="text">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-fn">First Name</label>
+                                <input class="form-control" type="text" value="{{userdetails.firstname}}" name="fname" id="reg-fn" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-ln">Last Name</label>
+                                <input class="form-control" type="text" value="{{userdetails.lastname}}" name="lname" id="reg-ln" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-email">E-mail Address</label>
+                                <input class="form-control" type="email" value="{{userdetails.email}}" name="email" id="reg-email" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-phone">Phone Number</label>
+                                <input class="form-control" type="text" name="mobile" value="{{userdetails.mobile}}" id="reg-phone" required>
+                            </div>
+                        </div>
+                        {{!-- <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass">Password</label>
+                                <input class="form-control" type="password" name="pass" id="reg-pass" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass-confirm">Confirm Password</label>
+                                <input class="form-control" type="password" name="repass" id="reg-pass-confirm"
+                                    required>
+                            </div>
+                        </div> --}}
+                        <div class="button">
+                            <button class="btn" onclick="saveProfile(event)" type="submit">Save</button>
+                        </div>
+                        {{!-- <p class="outer-link">Already have an account? <a href="/login">Login Now</a>
+                        </p> --}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+  function saveProfile(e) {
+  e.preventDefault()
+
+    $.ajax({
+      url: '/save-profile',
+      method:'post',
+      data:$('#saveprofile').serialize(),
+      success:(response)=>{
+        
+         location.href = '/userprofile'
+        windows.reload()
+
+      }
+     
+
+    })
+
+  }
+
+
+
+</script>

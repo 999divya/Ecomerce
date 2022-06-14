@@ -1,0 +1,239 @@
+{{!-- <div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div> --}}
+<section class="hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 custom-padding-right">
+                <div class="slider-head">
+
+                    <div class="hero-slider">
+
+                        <div class="single-slider"
+                            style="background-image: url(userasset/images/hero/slider-bg1.avif);">
+                            <div class="content">
+
+                                <h2><span><strong style="color:white">The wait is over, experience the latest
+                                            collections</strong></span>
+
+                                </h2>
+
+                                <h3><span></span></h3>
+                                <div class="button">
+                                    <a href="product-grids.html" class="btn btn success">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="single-slider"
+                            style="background-image: url(userasset/images/hero/slider-bg2.avif);">
+                            <div class="content">
+                                <h2><span style="color:white"> <strong>Big Sale Offer,<br> <br> Get the Best Deal on all
+                                            latest
+                                            Collections</strong></span> </h2>
+                                <h2><span style="color:white"><br><strong>Express yourselves with the best aesthetic
+                                            choices of outfit
+                                            through Kstyles</strong></span></h2>
+                                <p></p>
+                                <h3><span></span></h3>
+                                <div class="button">
+                                    <a href="product-grids.html" class="btn">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
+
+                        <div class="hero-small-banner"
+                            style="background-image: url('userasset/images/hero/slider-bnr.jpg');">
+                            <div class="content">
+                                <h2>
+                                    <span style="color:white"><strong>Here is your iconic fashion kid<br>
+                                            Shop from Kstyles
+                                        </strong></span>
+                                </h2>
+                                <h3 style="color:white">Kid's world</h3>
+                                <div class="button mt-3">
+                                    <a class="btn" href="#">Shop Now</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12 col-md-6 col-12">
+                        <div>
+                            <div class="hero-small-banner style2"
+                                style="background-image: url('userasset/images/hero/slider-bnr22.avif');">
+                                <div class="content">
+                                    <h2>Summer Sale!</h2>
+                                    <p>Saving up to 50% off on all kstyle fashion attire this week.</p>
+                                    <div class="button">
+                                        <a class="btn" href="#">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<section class="featured-categories section">
+    <div class="container justify-content-center">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Featured Categories</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {{#each categorys}}
+
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="text-center">
+                    <a class="font-weight-bold text-center"><strong>{{this.category}}</strong></a>
+                    <div class="single-category shadow-sm p-3 mb-5 bg-body rounded" style="height:200px; width:280px">
+
+                        <form action="/category-view" method="post">
+
+                            <input type="text" style="display: none;" name="category" value="{{this.category}}">
+
+
+                            <div class="images rounded-circle">
+                                <ul>
+
+                                    <li> <img src="{{this.Image}}" class="img-fluid rounded-circle"
+                                            style="height:180px; width:180px" alt="#">
+                                        <div class="button"><button type="submit" value="{{this.category}}"
+                                                class="btn">Shop
+                                                now</button></div>
+                                    </li>
+
+                                    </button>
+                                </ul>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+
+
+<section class="trending-product section">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-title">
+                <h2>Trending Products</h2>
+                {{!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                    suffered alteration in some form.</p> --}}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            {{#each products}}
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="single-product shadow p-3 mb-5 bg-body rounded">
+                    <div class="product-image ">
+                        <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                                alt="#"></a>
+                           
+                        <span class="sale-tag">{{check this.percentage}}</span>
+                  
+                        <div class="button">
+                            <div class="button">
+                                {{!-- <form action="/add-to-cart" method="post"
+                                    enctype="application/x-www-form-urlencoded"> --}}
+                                    {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
+                                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
+                                            <i class="lni lni-cart"></i>Add to Cart</button>
+                                        {{!--
+                                    </form> --}}
+                                    {{!-- </form> --}}
+
+                                <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">{{this.type}}</span>
+                        <h4 class="title">
+                            <a href="product-grids.html">{{this.name}}</a>
+                        </h4>
+                        <span class="category">{{this.brand}}</span>
+
+                        <div class="price">₹
+                            <span>{{this.discount}}</span>
+                            <span class="discount-price">{{this.price}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        
+    </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    function displayconfirm(proId) {
+        
+        $.ajax({
+            method: 'get',
+            url: '/add-to-cart/' + proId,
+            success: (response) => {
+                if (response.status) {
+                    alert('cart added')
+                    let count = $('#cart-count').html()
+                    count = parseInt(count) + 1
+
+                    $("#cart-count").html(count)
+                }
+            }
+
+
+        })
+
+    }
+</script>

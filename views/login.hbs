@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">Login</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="/"><i class="lni lni-home"></i> Home</a></li>
+                    <li>Login</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="account-login section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+
+                <form class="card login-form" action="/login" method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="card-body">
+                        <div class="title">
+                            <h3>Login Now</h3>
+                            {{#if message}}
+                            <div class="alert alert-warning alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{message}}</strong>
+                            </div>
+                            {{/if}}
+                            <button class="btn btn-primary float-sm-end" type="submit"><a href="/otp-mobile"
+                                    style="text-decoration:none; color:white;">OTP Login</a></button>
+                        </div>
+                        <div class="form-group input-group">
+                            <label for="reg-fn">Email</label>
+                            <input class="form-control" type="email" name="email" id="reg-email" required>
+                        </div>
+                        <div class="form-group input-group">
+                            <label for="reg-fn">Password</label>
+                            <input class="form-control" type="password" name="pass" id="reg-pass" required>
+                        </div>
+
+                        <div class="button">
+                            <button class="btn" onclick="display()" type="submit">Login</button>
+                        </div>
+                        <p class="outer-link">Don't have an account? <a class="btn" href="/register">Register here </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function display() {
+
+
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'login Credentials submitted successfully',
+            showConfirmButton: false,
+            timer: 1800
+
+        })
+    }
+
+</script>

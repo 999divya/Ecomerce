@@ -1,0 +1,143 @@
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Customers</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Customers</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            {{!-- <div class="button text-sm-end">
+
+                <a href="/admin/manage-users" type="submit" name="adduser"
+                    class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">All users</a>
+            </div> --}}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <form class="p-3" action="/admin/user-search" method="get">
+                                            <div class="form-group m-0">
+                                                <div class="input-group">
+                                                    <input type="text" name="searchdata" class="form-control"
+                                                        placeholder="Search ..." aria-label="Search Result">
+
+                                                    <button class="btn btn-primary" type="submit"><i
+                                                            class="mdi mdi-magnify"></i></button>
+
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                                {{#if k}}
+                                <div class="col-sm-8">
+                                    <div class="button text-sm-end">
+                                        <a href="/admin/view-users" type="submit" name="viewusers"
+                                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                class="ri-arrow-go-back-line"></i>View all users</a>
+                                    </div>
+                                </div><!-- end col-->
+                            </div>
+
+                            {{/if}}
+
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each Allusers}}
+                                        <tr>
+                                            
+                                                <th class="align-middle" scope="row">{{inc @index}}</th>
+                                            
+                                        
+                                            <td>{{this.firstname}}</td>
+                                            <td>{{this.lastname}}</td>
+                                            <td>
+                                            <p class="mb-0">{{this.email}}</p>
+                                            </td>
+
+                                            <td>{{this.mobile}}</td>
+
+                                            <td>
+                                                {{#if this.isActive}}
+                                                <a href="/admin/blockEachUser/{{this.id}}" class="btn btn-danger"
+                                                    value="Block" class="text-danger">Block</a>
+
+                                                {{else}}
+                                                <a href="/admin/blockEachUser/{{this.id}}" class="btn btn-success"
+                                                    value="Unblock" class="text-success" />Unblock</a>
+
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{!-- <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>

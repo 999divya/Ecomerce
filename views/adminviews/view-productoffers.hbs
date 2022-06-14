@@ -1,0 +1,212 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Offer Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Offers</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <form class="p-3" action="/admin/search-products" method="get">
+                                            <div class="form-group m-0">
+                                                <div class="input-group">
+                                                    <input type="text" name="searchdata" class="form-control"
+                                                        placeholder="Search ..." aria-label="Search Result">
+                                                    <button class="btn btn-primary" type="submit"><i
+                                                            class="mdi mdi-magnify"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="text-sm-end">
+                                        <a href="/admin/add-new-offer"
+                                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                class="mdi mdi-plus me-1"></i> Add New Offers</a>
+                                    </div>
+                                </div><!-- end col-->
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 20px;" class="align-middle">
+
+                                            </th>
+                                            <th scope="col" class="text-center">Sl.</th>
+                                            <th class="align-middle">Product Name</th>
+                                            <th class="align-middle">Price</th>
+                                            <th class="align-middle">offer name</th>
+                                            <th class="align-middle">Valid from</th>
+                                            <th class="align-middle">Valid to</th>
+                                            <th class="align-middle">Percentage discount</th>
+                                            <th class="align-middle">Discount amount</th>
+                                            <th class="align-middle">Discount price</th>
+                                            <th class="align-middle">Status</th>
+                                            <th class="align-middle">Action</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        {{#each offerdetails}}
+                                        <tr>
+                                            <form action="/admin/editEachProduct" method="get">
+                                                <td>
+
+                                                </td>
+                                                <td class="align-middle" scope="row">{{inc @index}}</td>
+
+
+                                                <td name="pnam" class="align-middle">
+                                                    {{this.productname}}
+                                                </td>
+                                                <td name="pprice" class="align-middle">
+
+                                                    {{this.productprice}}
+
+                                                    <input type="text" value="{{this._id}}" style="display:none" ,
+                                                        name="proid">
+
+                                                </td>
+
+
+                                                <td name="offer" class="align-middle">
+                                                    {{this.offername}}
+                                                </td class="align-middle">
+                                                <td name="from">
+                                                    {{this.fromDate}}
+                                                </td>
+                                                <td name="to" class="align-middle">
+                                                    {{this.toDate}}
+                                                </td>
+
+                                                <td>
+                                                    <span
+                                                        class="badge badge-pill badge-soft-success font-size-12">{{this.percentage}}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge badge-pill badge-soft-success font-size-12">{{percentage
+                                                        this.productprice this.percentage}}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge badge-pill badge-soft-success font-size-12">{{discountsubstract
+                                                        this.productprice this.percentage}}</span>
+                                                </td>
+                                                <td>
+
+
+
+
+
+                                                    <div class="form-group row mb-4">
+                                                        {{!-- <label for="taskname"
+                                                            class="col-form-label col-lg-2 ">Status</label> --}}
+                                                        <div class="col-lg-10">
+
+                                                            <select
+                                                                onchange="prodofferStatus(value,'{{this._id}}','{{this.proId}}')"
+                                                                class="btn btn-outline-light style"
+                                                                aria-label="Default select example">
+                                                                <option value="{{this.status}}" name="status"
+                                                                    onchange="prodofferStatus(status, '{{this._id}}','{{this.proId}}')"
+                                                                    class="badge badge-pill badge-soft-success font-size-12"
+                                                                    hidden selected disabled> {{this.status}}</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="Expired">Expired</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex gap-3">
+                                                        <a href="/admin/edit-offers/{{this._id}}" value="Edit"
+                                                            class="text-success"><i
+                                                                class="mdi mdi-pencil font-size-18"></i></button>
+                                                            <a href="/admin/delete-offer/{{this._id}}"
+                                                                data-method="delete" value="delete"
+                                                                class="text-danger"><i
+                                                                    class="mdi mdi-delete font-size-18"></i></a>
+                                                    </div>
+                                                </td>
+
+                                            </form>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function confirmDelete(id) {
+
+        Swal.fire({
+            title: 'Do you want to logout?',
+            showCancelButton: true,
+            confirmButtonColor: '#34c38f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = `/admin/deleteOffers/${id}`;
+
+            }
+        })
+    }
+</script>
+
+
+<script>
+    function prodofferStatus(status, prodofferId, proId) {
+        $.ajax({
+            url: '/admin/change-prodoffer-status',
+            type: 'post',
+            data: {
+                status: status,
+                prodofferId: prodofferId,
+                proId: proId
+            }
+        })
+    }
+</script>

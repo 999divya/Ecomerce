@@ -1,0 +1,287 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<header class="header navbar-area">
+
+    <div class="topbar">
+        <div class="container">
+            <div class="row align-items-center">
+
+
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-left">
+                        <ul>
+                            <li>
+                                <div class="select-position">
+                                    {{!-- <div class="col-lg-3 col-md-3 col-7">
+
+                                        <a class="navbar-brand" href="#">
+                                            <img src="userasset/images/logo/logo-sm.png" class="rounded-circle"
+                                                alt="Logo">
+                                        </a>
+                                    </div>
+                                    <select id="select4"> --}}
+                                        {{!-- <option value="0">₹ INR</option> --}}
+                                        {{!-- </select> --}}
+
+                            </li>
+                            <li>
+                                <div class="select-position">
+                                    {{!-- <select id="select5"> --}}
+                                        {{!-- <option value="0" selected>English</option> --}}
+                                        {{!-- </select> --}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-middle">
+                        <ul class="useful-links">
+                            {{!-- <li><a href="index-2.html">Home</a></li> --}}
+                            {{!-- <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact.html">Contact Us</a></li> --}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-end">
+                        <div class="user">
+                           
+                            {{#if userdetails}}
+                       
+                           <strong>Welcome</strong> 
+                            {{/if}}
+                        </div>
+
+
+                        {{#if userdetails }}
+                        <ul class="user-login">
+                            <li>
+                                 <a href="/userprofile" class="btn btn-dark"> <i class="lni lni-user"></i>
+                                <strong>{{userdetails.firstname}}</strong></a>
+                            </li>
+                            <li>
+                                <button class="btn btn-dark" style="text-decoration:none" type="submit"
+                                    onclick="toLogout()">Logout</button>
+                                       {{!-- <a href="/logout" class="btn btn-dark" style="text-decoration:none" type="button"
+                                    >Logout</a> --}}
+                            </li>
+
+                        </ul>
+
+                        {{else}}
+                        <ul class="user-login">
+                            <li>
+                                <a href="/login">Sign In</a>
+                            </li>
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{#if lk}}
+    <div class="header-middle">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-3 col-7">
+
+                    <a class="navbar-brand" href="#">
+                        <img src="userasset/images/logo/logo.png" alt="Logo">
+                    </a>
+                </div>
+
+                <div class="col-lg-5 col-md-7 d-xs-none">
+                    <div class="main-menu-search">
+                       <ul>
+
+                    <form id="getSearch">
+                        <div class="navbar-search search-style-5">
+
+                            <div class="search-input">
+                                <input type="text" placeholder="Search" name="searchdata">
+                                    
+                            </div>
+                            <div class="search-btn">
+                                <button onclick="showPro()"><i class="lni lni-search-alt"></i></button>
+
+                            </div>
+                        </div>
+                    </form>
+                       </ul>
+                    
+
+                     
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="middle-right-area">
+
+                        <div class="navbar-cart">
+                               {{#if userdetails}}
+                            <div class="wishlist">
+                                <a href="javascript:void(0)">
+                                    <i class="lni lni-heart"></i>
+                                    {{!-- <span class="total-items">0</span> --}}
+                                </a>
+                            </div>
+                                {{/if}}
+
+                                  
+
+                            <div class="cart-items">
+
+  
+                                <a href="/cart" class="main-btn">
+                             
+                                    <i class="lni lni-cart"></i>
+                                                                    {{#if userdetails}}
+                                    <span id="cart-count" class="total-items">{{count}}</span> 
+                                       {{/if}}
+                                </a>
+                                
+                             </div>
+                        
+
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-6 col-12">
+                <div class="nav-inner">
+                    <div class="mega-category-menu bg-white">
+                        <span class="cat-button"><i class="lni lni-menu"></i>All CATAGORIES</span>
+
+                        <ul class="sub-category btn btn-primary">
+                            {{#each categorys}}
+
+                            <form action="/category-view" method="post">
+                                <button class="btn btn-Light" type="submit"><input type="text" style="display: none;"
+                                        name="category" value="{{this.category}}">
+                                    <li><a>{{this.category}}</a></li>
+                                </button>
+                            </form>
+
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                    <nav class="navbar navbar-expand-lg">
+                        <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                            <ul id="nav" class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a href="/back-to-home" class="active" aria-label="Toggle navigation">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                     <a href="/back-to-home" class="active" aria-label="Toggle navigation">AboutUs</a>
+
+                                </li>
+                                  {{#each categorys}}
+                                     <li class="nav-item">
+                                     <form action="/category-view" method="post">
+                             <ul>
+                                 <li>
+                                    <button class="btn btn-Light active" aria-label="Toggle navigation" type="submit"><input type="text" style="display: none;"
+                                        name="category" value="{{this.category}}">
+                                    <a>{{this.category}}</a>
+                                </button>
+
+                                 </li>
+                             </ul>
+                       
+                             
+                                
+                                </form>
+                                </li>
+                                {{/each}}
+                                {{!-- <li class="nav-item">
+                                    <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                        data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Beauty</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-4">
+                                        <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a>
+                                        </li>
+                                        <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
+                                        <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single
+                                                Sibebar</a></li>
+                                    </ul>
+                                </li> --}}
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</header>
+
+<script>
+    function toLogout() {
+
+        Swal.fire({
+            title: 'Do you want to logout?',
+            showCancelButton: true,
+            confirmButtonColor: '#34c38f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "/logout";
+            }
+        })
+
+    }
+
+
+
+  /*function displayconfirm1(proId) {
+      alert('proid',proId)
+   // let quantity = document.getElementById(proId).value;
+        $.ajax({
+        method:'get',
+        url:-to-cart/'+proId
+
+        success:(response)=>{
+        if(response.status){
+        let count=$('#cart-count').html()
+        count=parseInt(count)+1
+
+        $("#cart-count").html(count)
+        }
+        }
+
+
+        }) 
+
+         }*/
+
+
+</script>

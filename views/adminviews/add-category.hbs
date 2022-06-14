@@ -1,0 +1,120 @@
+ <script defer src="https://cdn.crop.guide/loader/l.js?c=KWNXBR"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="main-content">
+
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Category Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Categories List</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                             {{#if c}}
+                            <h4 class="card-title mb-4">Edit existing category</h4>
+                            {{else}}
+                               <h4 class="card-title mb-4">Add new category</h4>
+                                {{/if}}
+
+
+                            {{#if message}}
+                            <p class="error" style="color:red">{{message}}</p>
+                            {{/if}}
+
+
+                            <form class="outer-repeater" action="/admin/view-category" method="post"
+                                enctype="multipart/form-data">
+                                <div data-repeater-list="outer-group" class="outer">
+                                    <div data-repeater-item="" class="outer">
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2"></label>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Category Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="id" style="display: none;" value={{editCategory._id}}>
+                                             
+                                                <input type="text" name="category" value={{editCategory.category}}>
+                                            </div>
+                                        </div>
+
+
+                            
+
+
+
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2" >Image</span></label>
+                                             
+                                            <div class="col-lg-10">
+                                                  <label type="text" class="col-form-label col-lg-2" style="display:none" value="imgPath" >{{editCategory.Image}}</label>
+                                                <input type="file" name="image" class="form-control"
+                                                    id="exampleInputPassword1" style="width: 35rem;">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-10 ">
+                                                <button type="submit" onclick="addCategory()" class="btn btn-success">Save</button>
+                                                <a href="/admin/view-category" class="btn btn-primary inner"
+                                                    value="cancel">Cancel</a>
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+</div>
+
+
+
+<script>
+    function addCategory(){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Data successfully entered',
+  showConfirmButton: false,
+  timer: 1500
+  
+})
+ } 
+    
+ </script>

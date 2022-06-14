@@ -1,0 +1,248 @@
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+
+  body {
+    font-family: 'Maven Pro', sans-serif;
+    background-color: white
+  }
+
+  hr {
+    color: #0000004f;
+    margin-top: 5px;
+    margin-bottom: 5px
+  }
+
+  .add td {
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 12px
+  }
+
+  .content {
+    font-size: 14px
+  }
+
+  .card {
+    background-color: aliceblue;
+  }
+</style>
+
+
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Invoice</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="index-2.html">Shop</a></li>
+          <li>Invoice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="checkout-wrapper section">
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="checkout-steps-form-style-1">
+          <ul id="accordionExample">
+
+            <li>
+
+              <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true"
+                aria-controls="collapseThree">
+                <image style="height:100px; width:100px;" src="/userasset/images/logo/move.svg">Click on to find your
+                  invoive or download it from here!!
+                  <button class="btn ms-1" id="downloadPdf"="" type="submit"><i class="ri-download-line"></i></button>
+              </h6>
+
+
+
+
+              <section class="checkout-steps-form-content collapse show" id="collapseThree"
+                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                {{!-- <input class="form-check-input d align-items-start ms-2 p-2" type="radio" name="checkoutAddress"
+                  onclick="selectAddress('1')" id="123"> --}}
+                {{!-- {{#each addres}} --}}
+
+                <div class="row">
+
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                      <div class="row">
+
+
+
+                        {{!-- {{#each orders}} --}}
+                        <div class="container-fluid mt-5 mb-3">
+                          <div class="row d-flex justify-content-center">
+                            <div class="col-md-8">
+                              <div class="card" id="invoice">
+                                <div class="d-flex flex-row">
+                                  <div class="d-flex flex-column"> <span class="font-weight-bold"> INVOICE</span>
+
+
+                                    <small>{{orders.date}}</small>
+
+                                    <small>{{orders.time}}</small>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="table-responsive p-2">
+                                  <table class="table table-borderless">
+                                    <thead>
+                                      <tr class="add">
+                                        <td>To</td>
+                                        <td>From</td>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr class="content">
+                                        <td class="font-weight-bold">{{orders.deliveryDetails.firstname}}
+                                          {{orders.deliveryDetails.lastname}}
+                                          <br>{{orders.deliveryDetails.shipping}},<br>
+                                          {{orders.deliveryDetails.mobile}},<br>{{orders.deliveryDetails.city}},<br>{{orders.deliveryDetails.state}},<br>{{orders.deliveryDetails.pincode}}
+                                        </td>
+                                        <td class="font-weight-bold"><i
+                                            class="fa-brands fa-pied-piper-pp"></i>Kstyles,<br>India</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <hr>
+
+
+
+
+                                <div class="products p-2">
+                                  {{!-- <div class="cart-single-list"> --}}
+
+                                    <div class="row">
+
+                                      <div class="col-lg-12 col-md-1 col-12 text-wrap">
+                                        <table class="table table-borderless">
+
+                                          <thead>
+                                            <tr class="add">
+                                              <td>Product Name</td>
+
+                                              <td>Price</td>
+                                              <td class=" text-center">Quantity</td>
+
+                                            </tr>
+                                          </thead>
+
+
+                                          <tr class="content text-wrap">
+                                            {{#each products}}
+                                            <tbody>
+                                              {{#each product}}
+                                              <td>{{this.name}}</td>
+                                              <td>₹{{this.realAmount}}</td>
+                                              {{/each}}
+                                              <td class="text-center">{{this.products.quantity}}</td>
+                                          </tr>
+
+                                          </tbody>
+                                          {{/each}}
+
+
+                                        </table>
+                                      </div>
+
+
+
+
+
+                                    </div>
+
+
+
+
+
+                                  </div>
+
+                                  <hr>
+
+                                  <div class="products p-2">
+
+                                    <div class="table-responsive ">
+                                      <table class="table table-borderless">
+                                        <tbody>
+                                          <tr class="add">
+
+
+                                            <td class="text-center">Total</td>
+                                            <td class="text-center me-5">₹{{orders.totalAmount}}</td>
+                                          </tr>
+
+
+                                        </tbody>
+                                      </table>
+                                    </div>
+
+
+                                  </div>
+
+
+                                  <div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+
+
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+              </section>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  document
+    .getElementById("downloadPdf")
+    .addEventListener("click", function download() {
+      const element = document.getElementById("invoice");
+      html2pdf()
+        .from(element)
+        .save();
+    });
+</script>

@@ -1,0 +1,228 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Cart</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="index-2.html">Shop</a></li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="shopping-cart section">
+  <div class="container">
+    <div class="cart-list-head">
+
+      <div class="cart-list-title">
+        <div class="row">
+          {{!-- <div class="col-lg-1 col-md-1 col-12">
+          </div> --}}
+          <div class="col-lg-3 col-md-3 col-12">
+            <p><strong>Image</strong></p>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+            <p><strong>Product Name</strong></p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p><strong> Product Qty</strong></p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12 text-center">
+            <p><strong>Price</strong></p>
+          </div>
+          {{!-- <div class="col-lg-2 col-md-2 col-12">
+            <p>Subtotal</p>
+          </div> --}}
+
+          <div class="col-lg-2 col-md-2 col-12 text-center">
+            <p><strong>Remove</strong></p>
+          </div>
+        </div>
+      </div>
+
+      {{#each cartData}}
+
+      <div class="cart-single-list">
+        <div class="row align-items-center">
+
+          <div class="col-lg-2 col-md-1 col-12 text-center">
+            <a href="product-details.html"><img src="{{#index_of this.product.Image 0}}{{/index_of}}" alt="#"></a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-12 text-center">
+
+            <h5 class="product-name"><a href="product-details.html">
+
+                {{this.product.name}}</a></h5>
+            {{!-- <p class="product-des"> --}}
+              {{!-- <span><em>{{this.quantity}}</em></span> --}}
+              {{!-- <span><em>Color:</em> Black</span> --}}
+            {{!-- </p> --}}
+          </div>
+          <div class="col-lg-3 col-md-2 col-12 text-center ">
+            <div class="count-input">
+              <input type="text" name="product" value="{{this.product._id}}" hidden>
+              <button class="btn btn-secondary" style="width:40px"
+                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)"><i class="lni lni-minus"></i></button>
+              <input type="text" id="{{this.product._id}}" value="{{this.quantity}}" style="width:28px">
+              <button class="btn btn-secondary"  style="width:40px"
+                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',1)"><i class="lni lni-plus"></i></button>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12 text-center">
+            <p>₹{{this.product.realAmount}}</p>
+          </div>
+          {{!-- <div class="col-lg-2 col-md-2 col-12">
+            <p>{{multiply this.quantity this.product.price}}</p>
+          </div> --}}
+
+          <div class="col-lg-2 col-md-2 col-12 text-center">
+
+  <button class="btn btn-danger"  style="width:50px"
+                onclick="removeItem('{{this._id}}','{{this.product._id}}')"><i class="lni lni-close"></i></button>
+
+
+            {{!-- <a class="remove-item" href="/deleteCartItem/{{this.product._id}}/{{this._id}}"><i class="lni lni-close"></i></a> --}}
+          </div>
+
+        </div>
+      </div>
+
+      {{/each}}
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+
+        <div class="total-amount">
+          <div class="row">
+            <div class="col-lg-8 col-md-6 col-12">
+              <div class="left">
+                {{!-- <div class="coupon">
+                  <form action="#" target="_blank">
+                    <input name="Coupon" placeholder="Enter Your Coupon">
+                    <div class="button">
+                      <button class="btn">Apply Coupon</button>
+                    </div>
+                  </form>
+                </div> --}}
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+              <div class="right">
+                <ul>
+               
+             
+{{!-- {{#if totalvalue}}
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+{{/if}} --}}
+
+
+    
+                  <li>Cart Subtotal  <span id="total">₹ {{totalvalue}}</span></li>
+                
+            {{!-- <span class="discount-price">₹ {{actualamount}}</span> --}}
+                  {{!-- <li>Shipping<span>Free</span></li>
+                  <li>You Save<span>$29.00</span></li>
+                  <li class="last">You Pay<span>$2531.00</span></li> --}}
+                </ul>
+                <div class="button">
+                  <a href="/checkout" class="btn">Proceed to Checkout</a>
+                  <a href="/back-to-home" class="btn btn-alt">Continue shopping</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function changeQuantiy(cartId, proId, userId, count) {
+
+
+  
+    let quantity1 = document.getElementById(proId).value;
+
+    quantity = parseInt(quantity1);
+    count = parseInt(count)
+   
+   
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+   
+        if (response.status && response.removeProduct) {
+          alert('product removed from cart'),
+            location.reload()
+        } else {
+
+          document.getElementById(proId).value = quantity + count;
+        
+             document.getElementById('total').innerHTML = response.totalvalue;
+            let currentVal = document.getElementById('cart-count').innerHTML;
+              var counter = parseInt(currentVal);
+             document.getElementById('cart-count').innerHTML=  (counter + count)  ;
+   
+        }
+      }
+
+    })
+  
+  
+}
+
+
+
+
+
+
+function removeItem(cartId, proId){
+
+
+$.ajax({
+   url: '/deleteCartItem',
+      data: {
+        cart: cartId,
+        product: proId,
+      },
+  method: 'post',
+ success: (response) => {
+ location.reload()
+
+ }
+})
+
+
+
+}
+
+
+</script>

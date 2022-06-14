@@ -1,0 +1,293 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">checkout</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="index-2.html">Shop</a></li>
+          <li>checkout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <form id="saveaddres">
+<section class="checkout-wrapper section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="checkout-steps-form-style-1">
+          <ul id="accordionExample">
+
+            <li>
+
+              {{!-- <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                aria-controls="collapseFour">Click on to add new delivery address</h6> --}}
+              {{!-- <section class="checkout-steps-form-content collapse" id="collapseFour" aria-labelledby="headingFour"
+                data-bs-parent="#accordionExample"> --}}
+<section>
+               
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="single-form form-default">
+                        <label>Full Name</label>
+                        <div class="row">
+                          <div class="col-md-6 form-input form">
+                            <input type="text" value="{{addres.firstname}}" id="reg-fn" name="firstname" onkeyup=" validatefName()" placeholder="First Name" required>
+                            <p id="FName-error" class="error text-danger"></p>
+                          </div>
+                          <div class="col-md-6 form-input form">
+                            <input type="text" name="lastname"  id="reg-ln"  value="{{addres.lastname}}" onkeyup="validatelName()" placeholder="Last Name" required>
+                           <p id="LName-error" class="error text-danger"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{!-- <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Email</label>
+                        <div class="form-input form">
+                          <input type="text" name="email" placeholder="Email">
+                        </div>
+                      </div>
+                    </div> --}}
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Mobile</label>
+                        <div class="form-input form">
+                          <input type="text" name="mobile" id="reg-phone" onkeyup="validatePhoneNUmber()" value="{{addres.mobile}}" placeholder="Mobile" required>
+                          <p id="Phone-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>City</label>
+                        <div class="form-input form">
+                          <input type="text" value="{{addres.city}}" id="reg-cn" onkeyup="validateCityName()" name="city" placeholder="City" required>
+                          <input value="{{addres._id}}" name="userid" type="text" hidden>
+                           <p id="CName-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>Pincode</label>
+                        <div class="form-input form">
+                          <input type="text" name="pincode" onkeyup="validatePincode()" id="reg-pin" value="{{addres.pincode}}" placeholder="Pincode" required>
+                           <p id="pin-error" class="error text-danger"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="single-form form-default">
+                        <label>State</label>
+                        <div class="select-items">
+                          <input type="text" value="{{addres.state}}" style="display:none">
+                          <select class="form-control" name="state" value="{{addres.state}}" required>
+                            <option value="0">select</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="checkout-payment-option">
+                        <h6 class="heading-6 font-weight-400 payment-title">Select Delivery Type
+                          Option</h6>
+                        <div class="payment-option-wrapper">
+                          <div class="single-payment-option">
+                            <input type="radio" name="shipping" value="{{addres.shipping}}" checked id="shipping-1" required>
+                            <label for="shipping-1">
+                              {{!-- <img src="#" alt="Sipping"> --}}
+                              <p>Home</p>
+                            </label>
+                          </div>
+
+                          <div class="single-payment-option">
+                            <input type="radio" name="shipping" value="{{addres.shipping}}" id="shipping-4" required>
+                            <label for="shipping-4">
+                              {{!-- <img src="#" alt="Sipping"> --}}
+                              <p>Office</p>
+
+                            </label>
+                            <input type="text" style="display:none"  name="shipping" value="{{address.shipping}}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="steps-form-btn button">
+                        {{!-- <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                          aria-expanded="false" aria-controls="collapseThree">previous</button> --}}
+                        {{!-- <input type="submit" class="btn btn-alt"></input> --}}
+                      </div>
+                    </div>
+                  </div>
+                 <button type="submit" onclick="saveAddress(event)" class="btn btn-primary">Save</button>
+              </section>
+            </li>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</form>
+
+
+<script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
+<script>
+
+
+
+  var fnameError = document.getElementById('FName-error');
+  var lnameError = document.getElementById('LName-error');
+  var phoneError = document.getElementById('Phone-error');
+  var cnameError = document.getElementById('CName-error');
+  var pinError = document.getElementById('pin-error');
+  var submitError = document.getElementById('Submit-error');
+
+
+
+
+
+  function validatefName() {
+    var name = document.getElementById('reg-fn').value;
+    if (name.length == 0) {
+      fnameError.innerHTML = '**Firstname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      fnameError.innerHTML = '**Please provide firstname';
+      return false;
+    }
+    fnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validatelName() {
+    var name = document.getElementById('reg-ln').value;
+    if (name.length == 0) {
+      lnameError.innerHTML = '**Lastname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      lnameError.innerHTML = '**Please provide lastname';
+      return false;
+    }
+    lnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+
+
+  function validatePhoneNUmber() {
+    var message = document.getElementById('reg-phone').value;
+    var required = 10;
+    var left = required - message.length;
+    if (left > 0) {
+      phoneError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> ' + 'length insufficient,' + left + ' more required';
+      return false;
+    }
+    phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validateCityName() {
+    var name = document.getElementById('reg-cn').value;
+    if (name.length == 0) {
+      cnameError.innerHTML = '**City is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      cnameError.innerHTML = '**Please provide city name';
+      return false;
+    }
+    cnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+  function validatePincode() {
+    var message = document.getElementById('reg-pin').value;
+    var required = 6;
+    var left = required - message.length;
+    if (left > 0) {
+      pinError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> ' + 'length insufficient,' + left + ' more required';
+      return false;
+    }
+    pinError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+
+
+  function validateForm() {
+    if (!validatelName() || !validatefName() || !validateCityName() || !validatePhoneNUmber() || !validatePincode()) {
+      alert('validation failed');
+      // submitError.style.display='block';
+     // submitError.innerHTML = 'Please fix error to submit';
+      //setTimeout(function () { submitError.style.display = 'none'; }, 5000);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function saveAddress(e) {
+  e.preventDefault()
+
+    $.ajax({
+      url: '/save-user-address',
+      method:'post',
+      data:$('#saveaddres').serialize(),
+      success:(response)=>{
+    
+         location.href = '/user-address'
+
+
+      }
+     
+
+    })
+
+  }
+
+
+
+</script>

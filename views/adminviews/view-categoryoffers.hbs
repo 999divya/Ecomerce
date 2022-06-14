@@ -1,0 +1,209 @@
+{{!--
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+<script type="text/javascript" src="DataTables/datatables.min.js"></script> --}}
+
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Offer Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Category Offers</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <form action="/admin/search-category" method="get">
+                                    <div class="col-sm-4">
+                                        <div class="search-box me-2 mb-2 d-inline-block">
+                                            <form class="p-3" action="/admin/search-category" method="get">
+                                                <div class="form-group m-0">
+                                                    <div class="input-group">
+                                                        <input type="text" name="searchdata" class="form-control"
+                                                            placeholder="Search ..." aria-label="Search Result">
+
+                                                        <button class="btn btn-primary" type="submit"><i
+                                                                class="mdi mdi-magnify"></i></button>
+
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-sm-11">
+                                    <div class="text-sm-end">
+                                        <a href="/admin/add-category-offer"
+                                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                class="mdi mdi-plus me-1"></i> Add New Offer</a>
+                                    </div>
+                                </div><!-- end col-->
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="#example" class="table align-middle table-nowrap table-check">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 20px;" class="align-middle">
+
+                                            </th>
+                                            <th scope="col">No.</th>
+                                            <th class="align-middle">Category Name</th>
+                                            <th class="align-middle">Offer Name</th>
+                                            <th class="align-middle">Valid from</th>
+                                            <th class="align-middle">Valid to</th>
+                                            <th class="align-middle">Percentage discount</th>
+                                            <th class="align-middle">Status</th>
+                                            <th class="align-middle">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        {{#each offerdetails}}
+                                        <tr>
+                                        
+                                              
+
+                                                <td>
+
+                                                </td>
+
+                                                <th class="align-middle" scope="row">{{inc @index}}</th>
+                                                <td name="catname">{{this.categoryname}}</td>
+
+
+                                                <td name="offername">{{this.offername}}</td>
+
+                                                <td name="from">{{this.fromDate}}</td>
+                                                <td name="to">{{this.toDate}}</td>
+                                                <td>
+                                                    <span
+                                                        class="badge badge-pill badge-soft-success font-size-12">{{this.percentage}}</span>
+                                                </td>
+                                       <td>
+
+
+
+
+
+                                                <div class="form-group row mb-4">
+                                                    {{!-- <label for="taskname"
+                                                        class="col-form-label col-lg-2 ">Status</label> --}}
+                                                    <div class="col-lg-10">
+
+                                                        <select onchange="catofferStatus(value,'{{this._id}}')"
+                                                            class="btn btn-outline-light style"
+                                                            aria-label="Default select example">
+                                                            <option value="{{this.status}}" name="status"   onchange="catofferStatus(status, '{{this._id}}')"
+                                                                class="badge badge-pill badge-soft-success font-size-12"
+                                                                selected disabled> {{this.status}}</option>
+                                                            <option value="Active">Active</option>
+                                                            <option value="Expired">Expired</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </td>
+                                                <td>
+                                                    <div class="d-flex gap-3">
+                                                        <a href="/admin/edit-category-offer/{{this.id}}" value="Edit"
+                                                            class="text-success"><i
+                                                                class="mdi mdi-pencil font-size-18"></i></button>
+                                                             <a href="/admin/delete-catOffer/{{this._id}}" data-method="delete" value="delete"
+                                                          
+                                                            class="text-danger"><i
+                                                                class="mdi mdi-delete font-size-18"></i></a>
+                                                    </div>
+                                                </td>
+                                       
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    {{!-- <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Divya.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> --}}
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+        });
+    });
+</script>
+
+<script>
+    function catofferStatus(status, catofferId) {
+        $.ajax({
+            url: '/admin/change-catoffer-status',
+            type: 'post',
+            data: {
+                status: status,
+               catofferId: catofferId
+            }
+        })
+    }
+</script>

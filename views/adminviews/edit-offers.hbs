@@ -1,0 +1,174 @@
+<script defer src="https://cdn.crop.guide/loader/l.js?c=KSRVJD"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Offer Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Offers</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {{#if p}}
+                            <h4 class="card-title mb-4">Edit existing Offer</h4>
+                            {{else}}
+                            <h4 class="card-title mb-4">Add new Offer</h4>
+                            {{/if}}
+
+                            {{#if message}}
+                            <p class="error" style="color:red">{{message}}</p>
+                            {{/if}}
+
+                            <form class="outer-repeater" id="addoffers" enctype="application/x-www-form-urlencoded">
+                                <div data-repeater-list="outer-group" class="outer">
+                                    <div data-repeater-item="" class="outer">
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2"></label>
+                                        </div>
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Offer Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="offer" value="{{offerdetails.offername}}">
+                                                <input type="text" name="offerid" style="display:none;"
+                                                    value="{{offerdetails._id}}">
+
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row mb-4">
+
+                                            <label for="taskname" class="col-form-label col-lg-2 ">Product Name</label>
+                                            <div class="col-lg-10">
+                                                <select type="text" name="proid" value="{{this.name}}"
+                                                    class="btn btn-outline-light style form-select" style="width:200px;"
+                                                    aria-label="Default select example">
+    
+                                                    <option style="width:100px;" selected>Available products</option>
+                                                    {{#each products}}
+                                                    <option value="{{this._id}}" name="proid">{{this.name}} &nbsp &nbsp<span
+                                                            class="badge badge-pill badge-soft-success font-size-12">
+                                                            <strong>₹{{this.price}}</strong> </span></option>
+
+
+                                                     
+
+                                                    {{/each}}
+                                                  
+                                                    
+
+                                                </select>
+                                                  <label for=""><span>{{offerdetails.productname}} &nbsp &nbsp<span
+                                                            class="badge badge-pill badge-soft-success font-size-12">
+                                                            <strong>₹{{offerdetails.productprice}}</strong> </span></label>
+
+                                                            <input type="text" name="proId" hidden value="{{offerdetails.proId}}">
+                                                            <input type="text" name="productprice" hidden value="{{offerdetails.productprice}}">
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Valid from</label>
+                                            <div class="col-lg-10">
+                                                <input type="date" name="from" value="{{time offerdetails.fromDate}}">
+                                              {{!-- <label for="">{{offerdetails.fromDate}}</label> --}}
+                                              {{!-- <input type="text" name="fromdate" value="{{offerdetails.fromDate}}" style="display:none"> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Valid to</label>
+                                            <div class="col-lg-10">
+                                                <input type="date" name="to"
+                                                    value="{{time offerdetails.toDate}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Percentage
+                                                discount</label>
+                                            <div class="col-lg-10">
+                                                <input style="width:45px;" type="text" name="percent"
+                                                    value="{{offerdetails.percentage}}">
+                                                    <label>{{offerdetails.percentage}}%</label>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-10 ">
+                                                <button type="submit" onclick="saveOffers(event)"
+                                                    class="btn btn-success">Save</button>
+                                                <a href="/admin/view-all-offers" class="btn btn-primary inner"
+                                                    value="cancel">Cancel</a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+</div>
+
+
+
+<script>
+
+
+    function saveOffers(e) {
+        e.preventDefault()
+
+  
+
+        $.ajax({
+            url: '/admin/save-editedoffers',
+            method: 'post',
+            data: $('#addoffers').serialize(),
+            success: (response) => {
+
+                location.href = '/admin/view-all-offers'
+                windows.reload()
+
+            }
+
+
+        })
+
+    }
+</script>

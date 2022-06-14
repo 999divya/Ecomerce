@@ -1,0 +1,246 @@
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
+<script>
+    function enable(e){
+        
+        //document.getElementById("test").style.display="block";
+        //e.preventDefault();
+    }
+</script>
+
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">Registration</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="/"><i class="lni lni-home"></i> Home</a></li>
+                    <li>Registration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="account-login section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                <div class="register-form">
+                    <div class="title">
+                        <h3>No Account? Register</h3>
+                        {{!-- <h6 style="color:red">{{message}}</h6> --}}
+                        {{#if message}}
+                        <div id="test" class="alert alert-warning alert-dismissible" >
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{message}}</strong>
+                        </div>
+                        {{else}}
+                        <P id="Submit-error" class="text-danger"></P>
+                        {{/if}}
+                    </div>
+                    {{!-- from which route in which we are calling the post is what indicated by action--}}
+
+
+
+                    <form class="row" action="/register" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-fn">First Name</label>
+                                <input class="form-control" type="text" name="fname" id="reg-fn" onkeyup=" validatefName()"  required>
+                           <p id="FName-error" class="error text-danger"  ></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-ln">Last Name</label>
+                                <input class="form-control" type="text" name="lname" id="reg-ln" onkeyup="validatelName()" required>
+                                <p id="LName-error" class="error text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-email">E-mail Address</label>
+                                <input class="form-control" type="email" name="email" id="reg-email" onkeyup="validateEmail()"  required>
+                                 <p id="Email-error" class="error text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-phone">Phone Number</label>
+                                <input class="form-control" type="text" name="mobile" onkeyup="validatePhoneNUmber()"  id="reg-phone" required>
+                                <p id="Phone-error" class="error text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass">Password</label>
+                                <input class="form-control" type="password" name="pass" id="reg-pass" onkeyup="validatePassword()"  required>
+                                 <p id="Password-error" class="error text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass-confirm">Confirm Password</label>
+                                <input class="form-control" type="password" name="repass" id="reg-pass-confirm"  onkeyup="rePassword()"
+                                    required>
+                                  <p id="rePassword-error" class="error text-danger"></p>
+                            </div>
+                        </div>
+                     <input type="text" style="display:none;" name="refered" value="{{refer}}" hidden>
+             
+                        <div class="button">
+                            <button class="btn" onclick="enable(event)" type="submit">Register</button>
+                        </div>
+                        <p class="outer-link">Already have an account? <a href="/login">Login Now</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var fnameError = document.getElementById('FName-error');
+  var lnameError = document.getElementById('LName-error');
+  var emailError = document.getElementById('Email-error');
+  var phoneError = document.getElementById('Phone-error')
+  var submitError = document.getElementById('Submit-error');
+  var PasswordError = document.getElementById('Password-error');
+  var conformPassword = document.getElementById('rePassword-error')
+
+  function validatefName() {
+    var name = document.getElementById('reg-fn').value;
+    if (name.length == 0) {
+     fnameError.innerHTML = '**Firstname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      fnameError.innerHTML = '**Please provide firstname';
+      return false;
+    }
+    fnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+    function validatelName() {
+    var name = document.getElementById('reg-ln').value;
+    if (name.length == 0) {
+      lnameError.innerHTML = '**Lastname is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      lnameError.innerHTML = '**Please provide lastname';
+      return false;
+    }
+    lnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+  function validateEmail() {
+    var email = document.getElementById('reg-email').value;
+    if (email.length == 0) {
+      emailError.innerHTML = '**Email is required'
+      return false;
+    }
+    if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+      emailError.innerHTML = '**Email invalid'
+      return false;
+    }
+    emailError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+  function validatePhoneNUmber() {
+    var message = document.getElementById('reg-phone').value;
+    var required = 10;
+    var left = required - message.length;
+    if (left > 0) {
+      phoneError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> '+'length insufficient,'+left+' more required';
+      return false;
+    }
+    phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+  function validatePassword() {
+    var message = document.getElementById('reg-pass').value;
+    var required = 5;
+    var left = required - message.length;
+      if (message.length == 0) {
+      PasswordError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> '+'Password is required';
+      return false;
+    }
+    if (left > 0) {
+      PasswordError.innerHTML = ' <i class="fa-solid fa-xmark text-danger"></i> length '+'length insufficient,'+left+' more required';
+      return false;
+    }
+  
+    PasswordError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function rePassword() {
+    var password1 = document.getElementById('reg-pass-confirm').value;
+    var password = document.getElementById('reg-pass').value;
+    if (password != password1) {
+      conformPassword.innerHTML = '<i class="fa-solid fa-xmark text-danger"></i> '+'password is not a match';
+      return false;
+    }
+     if (password1.length == 0) {
+     conformPassword.innerHTML = 'Password is required';
+      return false;
+    }
+    conformPassword.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+  function validateForm() {
+    if (!validatelName() || !validatefName() || !validateEmail() || !validatePassword() || !validatePhoneNUmber() || !rePassword()) {
+      // submitError.style.display='block';
+      submitError.innerHTML = 'Please fix error to submit';
+      setTimeout(function () { submitError.style.display = 'none'; }, 5000);
+      return false;
+    }
+  }
+</script>
+
+
+
+id="reg-fn"
+
+id="reg-ln"
+
+id="reg-phone" 
+id="reg-cn"
+id="reg-pin"

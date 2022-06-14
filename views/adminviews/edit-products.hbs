@@ -1,0 +1,109 @@
+
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">Customers</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Customers</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Edit existing user</h4>
+                                    <form class="outer-repeater" action="/admin/api/users/{{data._id}}?_method=PUT" method="post"
+                                        enctype="application/x-www-form-urlencoded">
+                                        <div data-repeater-list="outer-group" class="outer">
+                                            <div data-repeater-item="" class="outer">
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2"></label>
+                                                </div>
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2">User
+                                                        ID</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="taskname" name="_id" value="{{data._id}}"
+                                                            style="pointer-events:none;" type="text"
+                                                            class="form-control" placeholder="User ID">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2">First
+                                                        Name</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="taskname" name="fname" value="{{data.firstname}}"
+                                                            type="text" class="form-control" placeholder="First Name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2">Last
+                                                        Name</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="taskname" name="lname" value="{{data.lastname}}"
+                                                            type="text" class="form-control" placeholder="Last Name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2">Email</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="taskname" name="email" value="{{data.email}}"
+                                                            type="text" class="form-control" placeholder="Code">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-4">
+                                                    <label for="taskname" class="col-form-label col-lg-2">Mobile<br><span style="color:red;">(**Should be 10 digits)</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="taskname" email="mobile" value="{{data.mobile}}"
+                                                            type="text" class="form-control" placeholder="Mobile">
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-lg-10 ">
+
+                                                        {{!-- <input type="hidden" name="_method" value="put"> --}}
+                                                        <button type="submit" class="btn btn-success">Save</button>
+                                                           <a href="/admin/manage-users"   class="btn btn-primary inner" value="cancel" >Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+ 
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+    

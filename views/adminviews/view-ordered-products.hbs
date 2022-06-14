@@ -1,0 +1,214 @@
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Order Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Orders</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            {{!-- <div class="button text-sm-end">
+
+                <a href="/admin/manage-users" type="submit" name="adduser"
+                    class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">All users</a>
+            </div> --}}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <form class="p-3" action="/admin/user-search" method="get">
+                                            <div class="form-group m-0">
+                                                <div class="input-group">
+                                                    <input type="text" name="searchdata" class="form-control"
+                                                        placeholder="Search ..." aria-label="Search Result">
+
+                                                    <button class="btn btn-primary" type="submit"><i
+                                                            class="mdi mdi-magnify"></i></button>
+
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                                {{#if k}}
+                                <div class="col-sm-8">
+                                    <div class="button text-sm-end">
+                                        <a href="/admin/view-users" type="submit" name="viewusers"
+                                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                class="ri-arrow-go-back-line"></i>View all orders</a>
+                                    </div>
+                                </div><!-- end col-->
+                            </div>
+
+                            {{/if}}
+
+                            <div class="table-responsive">
+                                <table id="my_tab" class="table align-middle table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl.</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Product</th>
+                                            <th>Qty</th>
+                                            <th>Address</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                            <th>Payment</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each Order}}
+                                        <tr>
+
+                                            <th class="align-middle" scope="row">{{inc @index}}</th>
+
+                                            {{!-- {{#each userData}}
+                                            <td>{{firstname}}</td>
+                                            <td>{{this.lastname}}</td>
+
+                                            <td>
+                                                <p class="mb-0">{{this.email}}</p>
+                                            </td>
+
+
+
+                                            <td>{{this.mobile}}</td>
+                                            {{/each}} --}}
+                                            {{#each productData}}
+                                            <td>{{this.name}}</td>
+                                            {{/each}}
+                                            <td>{{this.products.quantity}}</td>
+                                            {{!-- <td>{{this.deliveryDetails.firstname}}
+                                                {{this.deliveryDetails.lastname}}<br>{{this.deliveryDetails.mobile}}<br>{{this.deliveryDetails.city}}><br>{{this.deliveryDetails.pincode}}<br>{{this.deliveryDetails.state}}
+                                            </td>
+                                            <td>{{this.date}}</td>
+                                            <td>₹{{this.totalAmount}}</td>
+                                            <td>{{this.paymentMethod}}</td>
+
+
+                               
+                                            <td>
+
+
+
+                                                <select onchange="deliveryStatus(value,'{{this._id}}')"
+                                                    class="custom-select form-control text-dark" style="width: 7rem;">
+
+
+
+
+                                                    <option value="{{this.status}}" name="status"
+                                                        onchange="deliveryStatus(status, '{{this._id}}')" selected
+                                                        disabled> {{this.status}}
+                                                    </option>
+
+
+
+
+                                                    <option value="Pending"><strong>Pending</strong></option>
+                                                    <option value="Dispached"><strong>Dispached</strong></option>
+                                                    <option value="Shipped"><strong>Shipped</strong></option>
+                                                    <option value="Deliverd"><strong>Delivered</strong></option>
+                                                    <option value="Cancel"><strong>Cancel</strong></option>
+                                                </select>
+
+
+                                            </td>
+
+                                
+
+                                            <td>
+                                                {{#if this.status}}
+                                                <a href="/admin/cancelEachOrder/{{this.id}}" class="btn btn-danger"
+                                                    value="Block" class="text-danger">Cancel</a>
+
+                                                {{else}}
+                                                <a href="/admin/blockEachUser/{{this.id}}" class="btn btn-success"
+                                                    value="Unblock" class="text-secondary hidden" />Cancelled</a>
+
+                                                {{/if}}
+                                            </td> --}}
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{!-- <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>
+
+
+
+<script>
+    function deliveryStatus(status, orderId) {
+        $.ajax({
+            url: '/admin/change-delivery-status',
+            type: 'post',
+            data: {
+                status: status,
+                orderId: orderId
+            }
+        })
+    }
+</script>

@@ -1,0 +1,306 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">Product Details</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+                    <li><a href="index-2.html">Shop</a></li>
+                    <li>Product Details</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="item-details section">
+
+    <div class="container">
+        <div class="text-sm-start pb-2 mb-2">
+            <a href="/back-to-home" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2"><i
+                    class="mdi mdi-plus me-1"></i>Home</a>
+        </div>
+        <div class="top-area">
+
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="product-images">
+                        <main id="gallery">
+                            <div class="main-img" style="height:400px; width:400px;">
+                                <img src="{{#index_of products.Image 0}}{{/index_of}}" id="current" alt="#">
+                            </div>
+                            <div class="images" >
+                                <img onclick="changeImage(this)" src="{{#index_of products.Image 1}}{{/index_of}}" id="first-image" class="img" alt="#">
+                                <img onclick="changeImage(this)" src="{{#index_of products.Image 2}}{{/index_of}}" class="img" id="second-image" alt="#">
+                                <img onclick="changeImage(this)" src="{{#index_of products.Image 3}}{{/index_of}}" class="img" id="third-image" alt="#">
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12">
+
+                    <div class="product-info">
+                        <h2 class="title">{{products.brand}}</h2>
+                        <p class="category"><i class="lni lni-tag"></i>{{products.name}}<a
+                                href="javascript:void(0)"></a></p>
+                        <h3 class="price">₹ {{products.price}}</h3>
+                        <p class="info-text">{{products.description}}</p>
+                        <div class="row">
+
+
+{{!-- 
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <div class="form-group">
+
+
+
+                                    <label class="title-label" for="size">Choose size</label>
+                                    <fieldset class="picker">
+
+                                        <label for="size-s">
+                                            <input type="radio" name="sizes" id="size-s">
+                                            <span>S</span>
+                                        </label>
+                                        <label for="size-m">
+                                            <input type="radio" name="sizes" id="size-m">
+                                            <span>M</span>
+                                        </label>
+                                        <label for="size-l">
+                                            <input type="radio" name="sizes" id="size-l">
+                                            <span>L</span>
+                                        </label>
+                                        <label for="size-xl">
+                                            <input type="radio" name="sizes" id="size-xl">
+                                            <span>XL</span>
+                                        </label>
+                                        <label for="size-xxl">
+                                            <input type="radio" name="sizes" id="size-xxl">
+                                            <span>XXL</span>
+                                        </label>
+                                        <label for="size-xxxl">
+                                            <input type="radio" name="sizes" id="size-xxxl">
+                                            <span>XXXL</span>
+                                        </label>
+                                    </fieldset>
+
+                                </div>
+                            </div> --}}
+
+
+{{!-- 
+                            <div class="col-lg-4 col-md-4 col-12">
+
+
+                                <div class="form-group color-option">
+                                    <label class="title-label" for="size">Choose color</label>
+                                    <div class="single-checkbox checkbox-style-1">
+                                        <input type="checkbox" id="checkbox-1" checked>
+                                        <label for="checkbox-1"><span></span></label>
+                                    </div>
+                                    <div class="single-checkbox checkbox-style-2">
+                                        <input type="checkbox" id="checkbox-2">
+                                        <label for="checkbox-2"><span></span></label>
+                                    </div>
+                                    <div class="single-checkbox checkbox-style-3">
+                                        <input type="checkbox" id="checkbox-3">
+                                        <label for="checkbox-3"><span></span></label>
+                                    </div>
+                                    <div class="single-checkbox checkbox-style-4">
+                                        <input type="checkbox" id="checkbox-4">
+                                        <label for="checkbox-4"><span></span></label>
+                                    </div>
+                                </div>
+
+
+                            </div> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="bottom-content">
+                            <div class="row align-items-end">
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="button cart-button">
+                                        {{!-- <button class="btn" style="width: 100%;">Add to Cart</button> --}}
+                                           <input type="text" value="{{products.id}}" name="productid" style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{products.id}}')" type="button">
+                                            <i class="lni lni-cart"></i>Add to Cart</button>
+                                    </div>
+                                </div>
+
+                                {{!-- <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="wish-button">
+                                        <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
+                                    </div>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        {{!-- <div class="product-details-info">
+            <div class="single-block">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="info-body custom-responsive-margin">
+                            <h4>Details</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
+                            <h4>Features</h4>
+                            <ul class="features">
+                                <li>Capture 4K30 Video and 12MP Photos</li>
+                                <li>Game-Style Controller with Touchscreen</li>
+                                <li>View Live Camera Feed</li>
+                                <li>Full Control of HERO6 Black</li>
+                                <li>Use App for Dedicated Camera Operation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="info-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+
+
+
+
+
+    </div>
+</section>
+
+
+
+
+<style>
+    .picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        margin-block-end: 1rem;
+        border: 1px solid #ddd;
+        border-radius: .5rem;
+    }
+
+    .picker legend {
+        font-size: .75rem;
+        text-transform: uppercase;
+        letter-spacing: .15em;
+        padding-inline: .5rem;
+    }
+
+    .picker label {
+        position: relative;
+        inline-size: 3rem;
+        block-size: 3rem;
+        isolation: isolate;
+        display: grid;
+        place-items: center;
+    }
+
+    .picker label>span {
+        position: absolute;
+        inset: 0;
+        block-size: 100%;
+        inline-size: 100%;
+    }
+
+    .picker label>input:focus~span {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+    }
+
+    /* Size pickers */
+
+    label[for*="size"]>span {
+        font-size: 1rem;
+        line-height: 1;
+        display: grid;
+        place-items: center;
+        padding: .5rem;
+        background-color: #eee;
+        border-radius: .25rem;
+    }
+
+    label[for*="size"]>input:checked~span {
+        background-color: #000;
+        color: #eee;
+    }
+</style>
+
+
+<script>
+
+    function displayconfirm(proId) {
+alert('proiduuuuuuuu'+proId)
+       $.ajax({
+            method: 'get',
+            url: '/add-to-cart/' + proId,
+                    success: (response) => {
+                if (response.status) {
+                    alert('cart added')
+                    let count = $('#cart-count').html()
+                    count = parseInt(count) + 1
+
+                    $("#cart-count").html(count)
+                }
+            }
+
+
+        })
+
+    }
+
+
+
+
+
+
+
+
+
+
+function changeImage(image){
+    var container = document.getElementById('current');
+    const mainSrc = container.src;
+    container.src = image.src;
+    image.src = mainSrc;
+
+}
+
+
+
+</script>

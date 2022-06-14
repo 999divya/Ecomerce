@@ -1,0 +1,221 @@
+ 
+<script defer src="https://cdn.crop.guide/loader/l.js?c=KWNXBR"></script>
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Product Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Products List</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {{#if p}}
+                            <h4 class="card-title mb-4">Edit existing product</h4>
+                            {{else}}
+                            <h4 class="card-title mb-4">Add new product</h4>
+                            {{/if}}
+
+                            {{#if message}}
+                            <p class="error" style="color:red">{{message}}</p>
+                            {{/if}}
+
+                            <form class="outer-repeater" action="/admin/view-products" method="post"
+                                enctype="multipart/form-data">
+                                <div data-repeater-list="outer-group" class="outer">
+                                    <div data-repeater-item="" class="outer">
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2"></label>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Product Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="id" style="display: none;"
+                                                    value={{editProducts.id}}>
+                                                <input type="text" name="name" value={{editProducts.name}}>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Product Code</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="code" value={{editProducts.code}}>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Price</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="price" value="{{editProducts.price}}">
+                                            </div>
+                                            
+                                        </div>
+                                   
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2 ">Brand</label>
+                                            <div class="col-lg-10">
+
+                                                <select type="text" name="brand" value="{{editProducts.brand}}"
+                                                    class="btn btn-outline-light style"
+                                                    aria-label="Default select example">
+                                                    <option selected disabled>Brand</option>
+                                                    <option value="BIBA">BIBA</option>
+                                                    <option value="H&M">H&M</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2 ">Product size</label>
+                                            <div class="col-lg-10">
+
+                                                <select type="text" name="size" value="{{editProducts.size}}"
+                                                    class="btn btn-outline-light style"
+                                                    aria-label="Default select example">
+                                                    <option selected disabled>Size</option>
+                                                    <option value="XS">XS</option>
+                                                    <option value="S">S</option>
+                                                    <option value="M">M</option>
+                                                    <option value="L">L</option>
+                                                    <option value="XL">XL</option>
+                                                    <option value="XXL">XXL</option>
+                                                    <option value="XXXL">XXXL</option>
+                                                </select>
+                                                {{!-- <label  value="{{editProducts.size}}"></label> --}}
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Description</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" name="description"
+                                                    value={{editProducts.description}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2 ">Main Category</label>
+                                            <div class="col-lg-10">
+
+                                                <select type="text" name="mainCategory"
+                                                    value="{{editProducts.category}}"
+                                                    class="btn btn-outline-light style"
+                                                    aria-label="Default select example">
+                                                      <option selected disabled>Category</option>
+{{#each categoryList}}
+                                                  
+                                                    <option value="{{this.category}}">{{this.category}}</option>
+                                                    {{/each}}
+                                                    {{!-- <option value="KIDS">KIDS</option> --}}
+                                            
+                                                </select>
+                                                <input type="text" name="perprocat" value="{{editProducts.category}}" hidden>
+                                            </div>
+                                        </div>
+
+                                 
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2 ">Product Type</label>
+                                            <div class="col-lg-10">
+
+                                                <select type="text" name="type" value="{{editProducts.type}}"
+                                                    class="btn btn-outline-light style"
+                                                    aria-label="Default select example">
+                                                    <option selected disabled>Type</option>
+                                                    <option value="Western Wear">Western Wear</option>
+                                                    <option value="Ethic Wear">Ethinic Wear</option>
+                                                </select>
+                                                 <span class="btn btn-outline-light style">{{editProducts.type}}</span></label>
+                                                    <input type="text"  name="protype" value="{{editProducts.type}}" hidden>
+                                                       <input type="text" value="{{this._id}}" style="display:none;"
+                                                    name="catid">
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="taskname" class="col-form-label col-lg-2">Image</label>
+
+                                            <div class="col-lg-10">
+                                                <input type="text" name="imagePath" style="display: none;"
+                                                    value={{editProducts.Image}}>
+                                                <input type="file" name="image" class="form-control mt-2"
+                                                    id="exampleInputPassword1" style="width: 35rem;">
+                                                        <input type="file" name="image1" class="form-control mt-2"
+                                                    id="exampleInputPassword2" style="width: 35rem;">
+                                                        <input type="file" name="image2" class="form-control mt-2"
+                                                    id="exampleInputPassword3" style="width: 35rem;">
+                                                        <input type="file" name="image3" class="form-control mt-2"
+                                                    id="exampleInputPassword4" style="width: 35rem;">
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-10 ">
+                                                <button type="submit" onclick="addProduct()" class="btn btn-success">Save</button>
+                                                <a href="/admin/view-products" class="btn btn-primary inner"
+                                                    value="cancel">Cancel</a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+</div>
+
+
+
+<script>
+    function addProduct(){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Data successfully entered',
+  showConfirmButton: false,
+  timer: 1500
+  
+})
+ } 
+    
+ </script>

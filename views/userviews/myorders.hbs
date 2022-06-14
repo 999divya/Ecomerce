@@ -1,0 +1,154 @@
+<!-- Data tables -->
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+
+
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">My Orders</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+                    <li><a href="index-2.html">Shop</a></li>
+                    <li>Orders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="button mb-3">
+            <a href="/back-to-home" class="btn btn-alt">Continue shopping</a>
+        </div>
+        <div class="cart-list-head">
+            <div class="cart-list-title">
+                <div class="row">
+
+
+                    <table id="example" class="display nowrap" style="width:100%">
+
+
+                        <thead>
+                            <tr>
+                                <th>Sl.</th>
+                                <th>Ordered Products</th>
+                                {{!-- <th>Image</th> --}}
+                                {{!-- <th>Price</th>
+                                <th>Qty</th> --}}
+                                <th>Date and time</th>
+                                <th>Delivery Address</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orders}}
+                            <tr>
+                                <td>{{inc @index}}</td>
+                                {{!-- {{#each orderProducts}}
+                                <td>{{this.name}}</td>
+                                <td>{{this.price}}</td>
+                                {{/each}} --}}
+                                <td><div class="button"><a href="/show-products/{{this._id}}" class="btn btn-alt">Products</a></td>
+
+                                {{!-- <td>{{this.products.quantity}}</td> --}}
+                                <td>{{this.date}}<br>{{this.time}}</td>
+                                <td>{{this.deliveryDetails.firstname}} {{this.deliveryDetails.lastname}}<br>
+                                    Mob: {{this.deliveryDetails.mobile}},<br>
+                                    {{this.deliveryDetails.city}},<br>
+                                    {{this.deliveryDetails.pincode}},<br>
+                                    {{this.deliveryDetails.state}},<br>
+                                    Shipping : {{this.deliveryDetails.shipping}}</td>
+                                <td>{{this.totalAmount}}</td>
+                                <td>{{this.paymentMethod}}</td>
+                                <td>
+
+                                    <label for="">{{this.status}}</label>
+
+                                </td>
+                                <td> <a href="/cancelEachUserOrder/{{this._id}}"
+                                        onclick="cancelOrder('{{this._id}}',event)" class="btn btn-danger"
+                                        value="delete" type="submit" class="text-danger">Cancel</a></td>
+
+                                <td>
+                                    <div class="button">
+                                        <a href="/invoice/{{this._id}}"
+                                            class="btn btn-alt mt-2">Invoice</a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {{/each}}
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $('#example').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
+                        });
+                    });
+                </script>
+
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>
+
+<script>
+    function cancelOrder(id, e) {
+        e.preventDefault()
+
+        $.ajax({
+            url: `/cancelEachUserOrder/${id}`,
+            method: 'get',
+            success: (response) => {
+
+                location.href = '/show-my-orders'
+            }
+               
+            )
+    })
+    }
+</script>

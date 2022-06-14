@@ -1,0 +1,331 @@
+ 
+<head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+</head>
+
+  
+
+<style>
+    body {
+        color: #1a202c;
+        text-align: left;
+        background-color: #e2e8f0;
+    }
+    .main-body {
+        padding: 15px;
+    }
+    .card {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
+    }
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+    .gutters-sm {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+    .gutters-sm>.col,
+    .gutters-sm>[class*=col-] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .mb-3,
+    .my-3 {
+        margin-bottom: 1rem !important;
+    }
+    .bg-gray-300 {
+        background-color: #e2e8f0;
+    }
+    .h-100 {
+        height: 100% !important;
+    }
+    .shadow-none {
+        box-shadow: none !important;
+    }
+</style>
+    
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Product Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Products List</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="main-body">
+
+        {{!--
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+        </nav> --}}
+        <!-- /Breadcrumb -->
+        <div class="text-center mb-5">
+            <h3>Sale <strong>Report</strong> <small> <strong>{{data.start}}-{{data.end}}</strong></small></h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/admin/save-report" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="start">Starting Date</label>
+                            <input type="date" class="form-control" id="start" name="StartDate" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="end">Ending Date</label>
+                            <input type="date" class="form-control" id="end" name="EndDate" required>
+                        </div>
+                        <div class="form-group col-md-4 mt-4">
+                            <input type="submit" value="Submit" class="btn btn-block btn-primary "
+                                style="margin-top: 8px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-investment"></i> Total Sales</h6>
+                            <span class="text-secondary">{{data.totalSales}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-shopping-basket"></i> Total Orders</h6>
+                            <span class="text-secondary">{{data.totalOrders}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-credit-cards"></i> Orders Confirmed</h6>
+                            <span class="text-secondary">{{data.successOrders}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-warning"></i> Orders Failed</h6>
+                            <span class="text-secondary">{{data.failedOrders}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-paypal"></i> Paypal Payment</h6>
+                            <span class="text-secondary">{{data.paypal}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-google-wallet"></i> Razorpay</h6>
+                            <span class="text-secondary">{{data.razorpay}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><i class="lni lni-wallet"></i> Cash On Delivery</h6>
+                            <span class="text-secondary">{{data.cod}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3 mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        Oder Summary
+                    </div>
+                    <div class="card-body ">
+                        <div class="row">
+                            <canvas id="myChart" width="1000" height="412"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card ">
+
+                    <div class="card-header">
+                        <i class="fas fa-chart-area "></i>
+                        All Transactions
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                        <div class="row text-center">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 card mt-4">
+                                {{#if data.noData}}
+                                <table id="example" class="display nowrap" style="width:100%">
+                                    {{else}}
+                                    <table id="example" class="display nowrap" style="width:100%">
+                                        {{/if}}
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">No.</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">User</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Payment</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data.currentOrders}}
+                                            <tr>
+                                                <td>{{inc @index}}</td>
+                                                <td>{{this.date}}</td>
+
+                                                <td>{{this.deliveryDetails.firstname}}</td>
+
+
+                                                <td>{{this.totalAmount}}</td>
+                                                <td>{{this.paymentMethod}}</td>
+                                                <td>{{this.status}}</td>
+
+
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+    integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Totel Orders', '  Success Orders', 'Fail Orders'],
+            datasets: [{
+                label: 'Order Summary',
+                data: [{{ data.totalOrders }}, {{ data.successOrders }},{{ data.failedOrders }}],
+    backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
+
+
+
+
+
+
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+</div>
+
+ <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script>
+    function addProduct(){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Data successfully entered',
+  showConfirmButton: false,
+  timer: 1500
+  
+})
+ } 
+    
+ </script>
+ {{!-- <script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script> --}}

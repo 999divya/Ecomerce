@@ -1,0 +1,106 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">checkout</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="index-2.html">Shop</a></li>
+          <li>checkout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="checkout-wrapper section">
+  <div class="container">
+    <div class="row align-items-center">
+
+
+
+
+
+      {{!-- <div class="col-lg-8">
+        <div class="checkout-steps-form-style-1">
+          <ul id="accordionExample">
+
+            <li>
+
+              <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                aria-controls="collapseFour">Click on to add new delivery address</h6>
+              <section class="checkout-steps-form-content collapse" id="collapseFour" aria-labelledby="headingFour"
+                data-bs-parent="#accordionExample"> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+                <h4>heyyyyy you</h4>
+
+
+
+
+
+
+
+{{!-- 
+              </section>
+            </li>
+            <li>
+
+            </li>
+          </ul>
+        </div> --}}
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  function saveAddress() {
+    alert('order-placed')
+    const pin = document.getElementById('pin').value;
+    const city = document.getElementById('city').value;
+    const country = document.getElementById('country').value;
+
+
+    $.ajax({
+      url: '/place-order',
+      data: {
+        pincode: pin,
+        city: city,
+        country: country
+      },
+      method: 'post',
+      success: (response) => {
+
+        if (response.status) {
+          alert('order-placed')
+        }
+      }
+    })
+
+  }
+
+
+
+</script>

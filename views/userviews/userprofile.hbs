@@ -1,0 +1,299 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">My profile</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
+                    <li><a href="index-2.html">Shop</a></li>
+                    <li>user profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="checkout-wrapper section">
+    <div class="container">
+
+
+
+
+            <div class="row container d-flex justify-content-center">
+
+                <div class="col-xl-8 col-md-10">
+                    <div class="button mb-2">
+                        <a href="/back-to-home" class="btn animate">Back to Home</a>
+                    </div>
+                    <div class="card user-card-full">
+
+                        <div class="row m-l-0 m-r-0">
+                            <div class="col-sm-4 bg-c-lite-green user-profile">
+                                <div class="card-block text-center text-white">
+
+                                    <div class="m-b-25">
+                                        <form action="/upload-pic" enctype="multipart/form-data" method="post">
+<label for="formFileDisabled" class="form-label">Add profile pic</label>
+
+                                            <input style="height:35px; width:100px; background-color:green;"  class="form-control"  type="file" name="pic">  
+                                            <button style="border:none; background-color:#f07968;" type="submit"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-plus-circle-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                                    </svg></button>    
+                                        </form>
+                                     
+                                        <img src="{{userdetails.uploadpic}}" class="img-radius"
+                                            alt="User-Profile-Image">
+
+
+                                    </div>
+                                    <div class="pt-3">
+                                        <a href="/edit-profile/{{userdetails._id}}" value="edit"
+                                            class="text-success"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-pencil"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                            </svg></a>
+                                        <p class="m-b-10 f-w-600">First Name :</p>
+                                        <h6 class="text-muted f-w-400">{{userdetails.firstname}}
+                                        </h6>
+                                        <p class="m-b-10 f-w-600">Last Name :</p>
+                                        <h6 class="text-muted f-w-400">{{userdetails.lastname}}
+                                        </h6>
+                                        <p class="m-b-10 f-w-600">Mobile:</p>
+                                        <h6 class="text-muted f-w-400">{{userdetails.mobile}}
+                                        </h6>
+                                        <p class="m-b-10 f-w-600">Email:</p>
+                                        <h6 class="text-muted f-w-400">{{userdetails.email}}
+                                        </h6><br>
+                                        <a href="/edit-password/{{userdetails._id}}" value="edit"
+                                            class="text-success"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-pencil"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                            </svg></a>
+                                        <p class="m-b-10 f-w-600">Password:</p>
+                                        <h6 class="text-muted f-w-400" value="{{userdetails.password}}">*************
+                                        </h6>
+                                        <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="card-block me-2 pt-4"><br><br>
+                                    <h6 class="m-b-20 me-3 p-b-5 b-b-default f-w-600"> <a href="/order-address">
+                                            <h6 class="text-muted f-w-400"><a href="/user-address"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-plus-circle-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                                    </svg>Address</a></h6>
+
+
+
+                                            <h6 class="m-b-20 me-3 p-b-5 b-b-default f-w-600">
+                                                <a href="/show-my-orders">
+                                                    <h6 class="text-muted f-w-400"><a href="/show-my-orders"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                                            </svg>My orders</a></h6>
+
+
+
+
+                                                    <h6 class="m-b-20 me-3 p-b-5 b-b-default f-w-600">
+                                                        <a href="/wallet">
+                                                            <h6 class="text-muted f-w-400"><a href="/wallet"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                        height="16" fill="currentColor"
+                                                                        class="bi bi-plus-circle-fill"
+                                                                        viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                                                    </svg>Wallet</a></h6>
+                                                            {{!-- <div class="row"><br>
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600">City :</p>
+                                                                    <h6 class="text-muted f-w-400">
+                                                                        {{city}}</h6>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600">Pincode :
+                                                                    </p>
+                                                                    <h6 class="text-muted f-w-400">
+                                                                        {{pincode}}</h6>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600">State :
+                                                                    </p>
+                                                                    <h6 class="text-muted f-w-400">
+                                                                        {{state}}</h6>
+                                                                </div>
+
+
+                                                            </div> --}}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            {{!--
+        </div> --}}
+        {{!--
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> --}}
+    </div>
+</section>
+
+
+<style>
+    body {
+        background-color: #f9f9fa
+    }
+
+    .padding {
+        padding: 3rem !important
+    }
+
+    .user-card-full {
+        overflow: hidden;
+    }
+
+    .card {
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        border: none;
+        margin-bottom: 30px;
+    }
+
+    .m-r-0 {
+        margin-right: 0px;
+    }
+
+    .m-l-0 {
+        margin-left: 0px;
+    }
+
+    .user-card-full .user-profile {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .bg-c-lite-green {
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263);
+    }
+
+    .user-profile {
+        padding: 20px 0;
+    }
+
+    .card-block {
+        padding: 1.25rem;
+    }
+
+    .m-b-25 {
+        margin-bottom: 25px;
+    }
+
+    .img-radius {
+        border-radius: 5px;
+    }
+
+
+
+    h6 {
+        font-size: 14px;
+    }
+
+    .card .card-block p {
+        line-height: 25px;
+    }
+
+    @media only screen and (min-width: 1400px) {
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .card-block {
+        padding: 1.25rem;
+    }
+
+    .b-b-default {
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .m-b-20 {
+        margin-bottom: 20px;
+    }
+
+    .p-b-5 {
+        padding-bottom: 5px !important;
+    }
+
+    .card .card-block p {
+        line-height: 25px;
+    }
+
+    .m-b-10 {
+        margin-bottom: 10px;
+    }
+
+    .text-muted {
+        color: #919aa3 !important;
+    }
+
+    .b-b-default {
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .f-w-600 {
+        font-weight: 600;
+    }
+
+    .m-b-20 {
+        margin-bottom: 20px;
+    }
+
+    .m-t-40 {
+        margin-top: 20px;
+    }
+
+    .p-b-5 {
+        padding-bottom: 5px !important;
+    }
+
+    .m-b-10 {
+        margin-bottom: 10px;
+    }
+
+    .m-t-40 {
+        margin-top: 20px;
+    }
+</style>
