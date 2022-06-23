@@ -57,6 +57,7 @@
                                             </th>
                                             <th scope="col">Sl.</th>
                                             <th class="align-middle">Coupon Code</th>
+                                             <th class="align-middle">Users List</th>
                                             <th class="align-middle">Valid from</th>
                                             <th class="align-middle">Valid to</th>
                                             <th class="align-middle">Coupon discount(%)</th>
@@ -80,9 +81,11 @@
 
 
                                             <td name="couponname">{{this.couponcode}}</td>
-
-                                            <td name="from">{{this.fromDate}}</td>
-                                            <td name="to">{{this.toDate}}</td>
+                                        
+                                            <td> <a href="/admin/all-coupon-users/{{this._id}}" class="btn btn-success"
+                                                    value="Users" class="text-secondary hidden" />Users</a></td>
+                                            <td name="from">{{time this.fromDate}}</td>
+                                            <td name="to">{{time this.toDate}}</td>
                                             <td>
                                                 <span
                                                     class="badge badge-pill badge-soft-success font-size-12">{{this.percentage}}</span>

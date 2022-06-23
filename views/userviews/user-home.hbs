@@ -103,8 +103,8 @@
 <section class="featured-categories section">
     <div class="container justify-content-center">
         <div class="row">
-            <div class="col-12">
-                <div class="section-title">
+            <div class="col-12 text-center">
+                <div class="section-title-main">
                     <h2>Featured Categories</h2>
 
                 </div>
@@ -149,13 +149,11 @@
     </div>
 </section>
 
-
-
 <section class="trending-product section">
     <div class="row">
-        <div class="col-12">
-            <div class="section-title">
-                <h2>Trending Products</h2>
+        <div class="col-12 text-center">
+            <div class="section-title-main1">
+                <h2>New Arrivals</h2>
                 {{!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                     suffered alteration in some form.</p> --}}
             </div>
@@ -165,16 +163,86 @@
 
         <div class="row">
 
-            {{#each products}}
+            {{#each newArrivals }}
             <div class="col-lg-3 col-md-6 col-12">
 
                 <div class="single-product shadow p-3 mb-5 bg-body rounded">
                     <div class="product-image ">
                         <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
                                 alt="#"></a>
-                           
+ {{#if this.discount}}
                         <span class="sale-tag">{{check this.percentage}}</span>
-                  
+{{/if}}
+                        <div class="button">
+                            <div class="button">
+                                {{!-- <form action="/add-to-cart" method="post"
+                                    enctype="application/x-www-form-urlencoded"> --}}
+                                    {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
+                                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
+                                            <i class="lni lni-cart"></i>Add to Cart</button>
+                                        {{!--
+                                    </form> --}}
+                                    {{!-- </form> --}}
+
+                                <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">{{this.type}}</span>
+                        <h4 class="title">
+                            <a href="/product-details/{{this._id}}">{{this.name}}</a>
+                        </h4>
+                        <span class="category">{{this.brand}}</span>
+
+                        <div class="price">₹
+                            <span>{{this.realAmount}}</span>
+                            {{#if this.discount}}
+                            <span class="discount-price">{{this.price}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+<section class="trending-product section">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-title">
+                <h2>Women's Fashion</h2>
+                {{!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                    suffered alteration in some form.</p> --}}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            {{#each womenFashion}}
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="single-product shadow p-3 mb-5 bg-body rounded">
+                    <div class="product-image ">
+                        <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                                alt="#"></a>
+ {{#if this.discount}}
+                        <span class="sale-tag">{{check this.percentage}}</span>
+{{/if}}
                         <div class="button">
                             <div class="button">
                                 {{!-- <form action="/add-to-cart" method="post"
@@ -199,41 +267,181 @@
                         <span class="category">{{this.brand}}</span>
 
                         <div class="price">₹
-                            <span>{{this.discount}}</span>
+                            <span>{{this.realAmount}}</span>
+                            {{#if this.discount}}
                             <span class="discount-price">{{this.price}}</span>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
             </div>
             {{/each}}
         </div>
-        
+
+    </div>
+
+    </div>
+
+</section>
+<section class="trending-product section">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-title">
+                <h2>Kids World</h2>
+                {{!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                    suffered alteration in some form.</p> --}}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            {{#each kidsWorld}}
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="single-product shadow p-3 mb-5 bg-body rounded">
+                    <div class="product-image ">
+                        <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                                alt="#"></a>
+ {{#if this.discount}}
+                        <span class="sale-tag">{{check this.percentage}}</span>
+{{/if}}
+                        <div class="button">
+                            <div class="button">
+                                {{!-- <form action="/add-to-cart" method="post"
+                                    enctype="application/x-www-form-urlencoded"> --}}
+                                    {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
+                                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
+                                            <i class="lni lni-cart"></i>Add to Cart</button>
+                                        {{!--
+                                    </form> --}}
+                                    {{!-- </form> --}}
+
+                                <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">{{this.type}}</span>
+                        <h4 class="title">
+                            <a href="product-grids.html">{{this.name}}</a>
+                        </h4>
+                        <span class="category">{{this.brand}}</span>
+
+                        <div class="price">₹
+                            <span>{{this.realAmount}}</span>
+                            {{#if this.discount}}
+                            <span class="discount-price">{{this.price}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+<section class="trending-product section">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-title">
+                <h2>All Products</h2>
+                {{!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                    suffered alteration in some form.</p> --}}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            {{#each products}}
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="single-product shadow p-3 mb-5 bg-body rounded">
+                    <div class="product-image ">
+                        <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                                alt="#"></a>
+ {{#if this.discount}}
+                        <span class="sale-tag">{{check this.percentage}}</span>
+{{/if}}
+                        <div class="button">
+                            <div class="button">
+                                {{!-- <form action="/add-to-cart" method="post"
+                                    enctype="application/x-www-form-urlencoded"> --}}
+                                    {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
+                                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
+                                            <i class="lni lni-cart"></i>Add to Cart</button>
+                                        {{!--
+                                    </form> --}}
+                                    {{!-- </form> --}}
+
+                                <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">{{this.type}}</span>
+                        <h4 class="title">
+                            <a href="product-grids.html">{{this.name}}</a>
+                        </h4>
+                        <span class="category">{{this.brand}}</span>
+
+                        <div class="price">₹
+                            <span>{{this.realAmount}}</span>
+                            {{#if this.discount}}
+                            <span class="discount-price">{{this.price}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
     </div>
 
     </div>
 
 </section>
 
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
     function displayconfirm(proId) {
-        
+
         $.ajax({
             method: 'get',
             url: '/add-to-cart/' + proId,
             success: (response) => {
-                if (response.status) {
-                    alert('cart added')
+  
+                if (response.status==true) {
+                 swal.fire({
+                    title: "Product added to the cart",
+
+                    dangerMode: true,
+                })
                     let count = $('#cart-count').html()
                     count = parseInt(count) + 1
 
                     $("#cart-count").html(count)
+                }else{
+                       swal.fire("Please login to add products")
+              .then((value) => {
+           
+                location.href = '/login'
+                
+              })
+                  
                 }
             }
-
-
         })
-
     }
 </script>

@@ -93,7 +93,7 @@
                 <div class="col-lg-3 col-md-3 col-7">
 
                     <a class="navbar-brand" href="#">
-                        <img src="userasset/images/logo/logo.png" alt="Logo">
+                        <img src="../userasset/images/logo/logo.png" alt="Logo">
                     </a>
                 </div>
 
@@ -192,19 +192,20 @@
                             <span class="toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                            <ul id="nav" class="navbar-nav ms-auto">
+                            <ul id="nav" class="navbar-nav ms-auto me-4">
                                 <li class="nav-item">
                                     <a href="/back-to-home" class="active" aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                     <a href="/back-to-home" class="active" aria-label="Toggle navigation">AboutUs</a>
+                                     <a href="/aboutUs" class="active" aria-label="Toggle navigation">About Us</a>
 
                                 </li>
+                                 </ul>
                                   {{#each categorys}}
-                                     <li class="nav-item">
+                                     {{!-- <li class="nav-item"> --}}
                                      <form action="/category-view" method="post">
-                             <ul>
-                                 <li>
+                             <ul id="nav" class="navbar-nav ms-auto">
+                                 <li class="nav-item">
                                     <button class="btn btn-Light active" aria-label="Toggle navigation" type="submit"><input type="text" style="display: none;"
                                         name="category" value="{{this.category}}">
                                     <a>{{this.category}}</a>
@@ -216,7 +217,7 @@
                              
                                 
                                 </form>
-                                </li>
+                                {{!-- </li> --}}
                                 {{/each}}
                                 {{!-- <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
@@ -230,7 +231,7 @@
                                                 Sibebar</a></li>
                                     </ul>
                                 </li> --}}
-                            </ul>
+                           
                         </div>
                     </nav>
 

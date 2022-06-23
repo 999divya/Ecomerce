@@ -1,14 +1,14 @@
-{{!-- 
+{{!--
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
-  
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
+
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script> --}}
+<script type="text/javascript" src="DataTables/datatables.min.js"></script> --}}
 
 
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="main-content">
 
     <div class="page-content">
@@ -38,29 +38,29 @@
                         <div class="card-body">
 
 
-                            
-                            <div class="row mb-2">
-                                <form action="/admin/search-category" method="get" >
-                                <div class="col-sm-4">
-                                    <div class="search-box me-2 mb-2 d-inline-block">
-                                        <form class="p-3" action="/admin/search-category" method="get">
-                                            <div class="form-group m-0">
-                                                <div class="input-group">
-                                                    <input type="text" name="searchdata" class="form-control"
-                                                        placeholder="Search ..." aria-label="Search Result">
 
-                                                    <button class="btn btn-primary" type="submit"><i
-                                                            class="mdi mdi-magnify"></i></button>
+                            <div class="row mb-2">
+                                <form action="/admin/search-category" method="get">
+                                    <div class="col-sm-4">
+                                        <div class="search-box me-2 mb-2 d-inline-block">
+                                            <form class="p-3" action="/admin/search-category" method="get">
+                                                <div class="form-group m-0">
+                                                    <div class="input-group">
+                                                        <input type="text" name="searchdata" class="form-control"
+                                                            placeholder="Search ..." aria-label="Search Result">
+
+                                                        <button class="btn btn-primary" type="submit"><i
+                                                                class="mdi mdi-magnify"></i></button>
+
+
+                                                    </div>
+
 
 
                                                 </div>
-
-
-
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
                                 </form>
                                 <div class="col-sm-11">
                                     <div class="text-sm-end">
@@ -72,11 +72,11 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table  id="hey_table" class="table align-middle table-nowrap table-check" >
+                                <table id="hey_table" class="table align-middle table-nowrap table-check">
                                     <thead class="table-light">
                                         <tr>
                                             <th style="width: 20px;" class="align-middle">
-                                          
+
                                             </th>
                                             <th scope="col">No.</th>
                                             <th class="align-middle">Category Name</th>
@@ -90,25 +90,25 @@
                                         {{#each categoryList}}
                                         <tr>
                                             <form action="/admin/editEachCategory" method="post">
-                                             
-                                           <td>
 
-                                           </td>
+                                                <td>
 
-                                              <th class="align-middle" scope="row">{{inc @index}}</th>
+                                                </td>
+
+                                                <th class="align-middle" scope="row">{{inc @index}}</th>
                                                 <td name="category">{{this.category}}</td>
-                                        
+
                                                 <td>
                                                     <img src="{{this.Image}}" alt="Italian Trulli" width="58px">
                                                 </td>
-                                            
+
                                                 <td>
                                                     <div class="d-flex gap-3">
-                                                        <a   href="/admin/editEachCategory/{{this.id}}" value="Edit"
+                                                        <a href="/admin/editEachCategory/{{this.id}}" value="Edit"
                                                             class="text-success"><i
                                                                 class="mdi mdi-pencil font-size-18"></i></button>
-                                                            <a data-method="delete" type="submit" onclick="confirmDelete1('{{this.id}}')"
-                                                             
+                                                            <a data-method="delete" type="submit"
+                                                                onclick="confirmDelete1('{{this.id}}')"
                                                                 class="text-danger"><i
                                                                     class="mdi mdi-delete font-size-18"></i></a>
                                                     </div>
@@ -119,7 +119,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                   
+
                         </div>
                     </div>
                 </div>
@@ -150,29 +150,39 @@
 
 
 <script>
-    function confirmDelete1(id){
+    function confirmDelete1(id) {
 
 
 
 
-    
- Swal.fire({
-                title: 'Do you want to delete?',
-                showCancelButton: true,
-                confirmButtonColor: '#34c38f',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Confirm'
-            }).then((result) => {
 
-              
-                if (result.isConfirmed) {
-                   
-                    window.location = `/admin/deleteEachCategory/${id}`;
-                }
-         
-            })
+        Swal.fire({
+            title: 'Do you want to delete?',
+            showCancelButton: true,
+            confirmButtonColor: '#34c38f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
 
-           
+
+            if (result.isConfirmed) {
+
+
+                swal.fire({
+                    title: "Category without any products can only be deleted!!!",
+
+                    dangerMode: true,
+                })
+
+                setTimeout(()=>{
+   window.location = `/admin/deleteEachCategory/${id}`;
+}, 3000)
+  
+            }
+
+        })
+
+
 
     }
 

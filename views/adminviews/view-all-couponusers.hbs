@@ -1,0 +1,107 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+
+
+
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Coupon Management</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Coupons</li>
+                                <li class="breadcrumb-item active">Users list</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row mb-2">
+                <div class="col-sm-11">
+                    <div class="text-sm-end text-right">
+                        <a href="/admin/view-all-coupons"
+                            class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                class="mdi mdi-plus me-1"></i>All coupons</a>
+                    </div>
+                </div><!-- end col-->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table align-middle table-nowrap table-check"
+                                    style="width:100%">
+                                    <thead>
+
+                                        <tr>
+                                            <th style="width: 20px;" class="align-middle">
+
+                                            </th>
+                                            <th scope="col">Sl.</th>
+                                            <th class="align-middle">User Details</th>
+                                           
+                                            <th class="align-middle">applied date</th>
+                                            <th class="align-middle">Discount Obtained</th>
+                                    
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                      {{#each couponusers}}
+                                        <tr>
+
+
+
+                                            <td>
+
+                                            </td>
+
+                                            <th class="align-middle" scope="row">{{inc @index}}</th>
+
+{{#each userinfo}}
+
+                                            <td name="couponname">{{this.firstname}} {{this.lastname}}<br>
+                                            
+                                            Mobile: {{this.mobile}}<br>
+                                            Email: {{this.email}}
+
+                                            </td>
+                                            {{/each}}
+                                            <td name="from">{{this.users.appliedDate}}</td>
+                                         
+                                            <td>
+                                                <span
+                                                    class="badge badge-pill badge-soft-success font-size-12">-₹ {{this.users.discount}}</span>
+                                            </td>
+                                         
+                                        </tr>
+                                   
+{{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

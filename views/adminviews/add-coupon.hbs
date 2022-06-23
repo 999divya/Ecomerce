@@ -53,8 +53,10 @@
 
                                         <div class="form-group row mb-4">
                                             <label for="taskname" class="col-form-label col-lg-2">Coupon Code</label>
+                                          
                                             <div class="col-lg-10">
                                                 <input type="text" name="coupon">
+                                                  <p id="err" style="color:red"></p>
                                             </div>
                                         </div>
 
@@ -98,7 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label for="taskname" class="col-form-label col-lg-2">Coupen
+                                            <label for="taskname" class="col-form-label col-lg-2">Coupon
                                                 discount</label>
                                             <div class="col-lg-10">
                                                 <input style="width:45px;" type="text" name="percent"><label>%</label>
@@ -132,6 +134,11 @@
 
 
 <script>
+
+    
+
+
+
     function addCategory() {
         Swal.fire({
             position: 'top-end',

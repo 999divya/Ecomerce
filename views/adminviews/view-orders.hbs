@@ -80,7 +80,12 @@
                                             <th>Product</th>
                                             <th>Address</th>
                                             <th>Date and Time</th>
-                                            <th>Total</th>
+                                              <th  class="text-wrap">Total MRP(₹)</th>
+        <th  class="text-wrap">Offer discount(₹)</th>
+         <th  class="text-wrap">Coupon percent(%)</th>
+    <th  class="text-wrap">Coupon discount(₹)</th>
+        <th  class="text-wrap">Wallet Discount(₹)</th>
+                                        <th class="text-wrap">Discounted Amount</th>
                                             <th>Payment</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -105,6 +110,12 @@
                                                 {{this.deliveryDetails.lastname}}<br>{{this.deliveryDetails.mobile}}<br>{{this.deliveryDetails.city}}><br>{{this.deliveryDetails.pincode}}<br>{{this.deliveryDetails.state}}
                                             </td>
                                             <td>{{this.date}}<br>{{this.time}}</td>
+                                                 <td>{{this.totalMRP}}</td>
+                                        <td>{{this.totalOfferDiscount}}</td>
+                                         <td>{{this.couponpercent}}</td>
+                                           <td>{{this.coupondiscount}}</td>
+                                             
+                                                 <td>{{this.usedwalletamount}}</td>  
                                             <td>₹{{this.totalAmount}}</td>
                                             <td>{{this.paymentMethod}}</td>
 
@@ -126,6 +137,9 @@
                                                       {{#ifEquals this.status "Placed"}}
                                                          <option value="Dispached"><strong>Dispached</strong></option>
                                                     {{/ifEquals}}
+                                                        {{#ifEquals this.status "online"}}
+                                                         <option value="Dispached"><strong>Dispached</strong></option>
+                                                    {{/ifEquals}}
 
                                                     {{#ifEquals this.status "Pending"}}
                                                          <option value="Dispached"><strong>Dispached</strong></option>
@@ -141,7 +155,7 @@
                                                      {{!-- {{#ifEquals this.status "Deliverd"}}
                                                          <option value="Cancel"><strong>Cancel</strong></option> --}}
                                                     {{!-- {{/ifEquals}} --}}
-                                                     <option value="Cancel"><strong>Cancel</strong></option>
+                                                     <option value="cancelled"><strong>cancelled</strong></option>
                                                 </select>
 
 
@@ -150,9 +164,10 @@
 
 
                                             <td>
-                                    
+                                                {{#ifNoteCancelled this.status}}
                                                 <a href="/admin/cancelEachOrder/{{this._id}}" class="btn btn-danger"
                                                     value="delete" class="text-danger">Cancel</a>
+                                                       {{/ifNoteCancelled}}
 
                                             </td>
                                         </tr>

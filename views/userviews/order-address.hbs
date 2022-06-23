@@ -8,8 +8,8 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <ul class="breadcrumb-nav">
-          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
-          <li><a href="index-2.html">Shop</a></li>
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
           <li>checkout</li>
         </ul>
       </div>
@@ -19,8 +19,16 @@
 
 <form id="saveaddres">
   <section class="checkout-wrapper section">
+         {{#if totalvalue1}}
     <div class="container">
+ 
       <div class="row justify-content-center">
+
+
+
+
+
+
         <div class="col-lg-8">
           <div class="checkout-steps-form-style-1">
             <ul id="accordionExample">
@@ -110,7 +118,7 @@
                           Option</h6>
                         <div class="payment-option-wrapper">
                           <div class="single-payment-option">
-                            <input type="radio" name="shipping" checked id="shipping-1" required>
+                            <input type="radio" name="Home" id="shipping-1" required>
                             <label for="shipping-1">
                               {{!-- <img src="#" alt="Sipping"> --}}
                               <p>Home</p>
@@ -118,7 +126,7 @@
                           </div>
 
                           <div class="single-payment-option">
-                            <input type="radio" name="shipping" id="shipping-4" required>
+                            <input type="radio" name="Office" id="shipping-4" required>
                             <label for="shipping-4">
                               {{!-- <img src="#" alt="Sipping"> --}}
                               <p>Office</p>
@@ -152,6 +160,7 @@
             <div class="single-form form-default">
               <div class="form-input form">
                 <input type="text" placeholder="Coupon Code" name="coupon" id="couponInput">
+
               </div>
               {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
               <div class="button">
@@ -210,20 +219,21 @@
 
 
 
-              <div class="payment">
-                <h5 class="title">Payment method</h5>
-                <label class=" radio-inline">
-                  <input type="radio" name="paymentMethod" onclick="selectPayment('COD')" value="COD"> COD
-                </label><br>
+                  <div class="payment">
+                    <h5 class="title">Payment method</h5>
+                    <label class=" radio-inline">
+                      <input type="radio" name="paymentMethod" onclick="selectPayment('COD')" value="COD"> COD
+                    </label><br>
 
-                <label class="radio-inline mt-2">
-                  <input type="radio" name="paymentMethod" onclick="selectPayment('Razorpay')" value="Razorpay"> Razorpay
-                </label><br>
-                <label class="radio-inline mt-2">
-                  <input type="radio" name="paymentMethod" onclick="selectPayment('paypal')" value="paypal"> Paypal
-                </label>
+                    <label class="radio-inline mt-2">
+                      <input type="radio" name="paymentMethod" onclick="selectPayment('Razorpay')" value="Razorpay">
+                      Razorpay
+                    </label><br>
+                    <label class="radio-inline mt-2">
+                      <input type="radio" name="paymentMethod" onclick="selectPayment('paypal')" value="paypal"> Paypal
+                    </label>
 
-              </div>
+                  </div>
 
 
 
@@ -239,11 +249,46 @@
             <div class="checkout-sidebar-price-table mt-30">
               <h5 class="title">Pricing Table</h5>
               <div class="sub-total-price">
+
+
+
+
+
+
+                <div class="total-price">
+                  <p class="value">Actual Price:</p>
+                  <p class="price" id="totval1">₹ {{actualMRP}}</p>
+                </div>
+                <div class="total-price">
+                  <p class="value">Offer discount:</p>
+                  <p class="price" id="totval2"> -{{totaldiscount}}</p>
+                </div>
+                <div class="total-price">
+                  <p class="value">Coupon discount:</p>
+                  <p class="price" id="totval5"> -{{coupondiscount}}</p>
+                </div>
+
+                <div class="total-price">
+                  <p class="value">Wallet discount:</p>
+                  <p class="price" id="totval4"> -{{walletdiscount}}</p>
+                </div>
+
+                <div class="total-price">
+                  <p class="value">Total amount:</p>
+                  <p class="price" id="totval">₹ {{totalvalue}}</p>
+                  <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
+                </div>
+
+
+
+
+
+                {{!--
                 <div class="total-price">
                   <p class="value">Subotal Price:</p>
                   <p class="price" id="totval">₹ {{totalvalue}}</p>
                   <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
-                </div>
+                </div> --}}
 
 
               </div>
@@ -271,6 +316,22 @@
         </div>
       </div>
     </div>
+    {{else}}
+<div class="container justify-content-center">
+ 
+      <div class="row justify-content-center">
+         <div class="col-lg-8" >
+
+         <img class="shadow p-3 mb-5 bg-body rounded" style="height:400px; width:500px" src="userasset/images/logo/storeopen.jpg"  alt="#">
+    <div class="button justify-content-center">
+                  <a href="/show-my-orders" class="btn"> Goto MyOrders</a>
+                  <a href="/back-to-home" class="btn btn-alt">Shop again</a>
+                </div>
+                </div>
+         </div>
+              
+         </div>
+    {{/if}}
   </section>
 </form>
 
@@ -307,24 +368,6 @@
 <script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   var fnameError = document.getElementById('FName-error');
   var lnameError = document.getElementById('LName-error');
   var phoneError = document.getElementById('Phone-error');
@@ -346,6 +389,8 @@
     fnameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
     return true;
   }
+
+
   function validatelName() {
     var name = document.getElementById('reg-ln').value;
     if (name.length == 0) {
@@ -374,6 +419,9 @@
     phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
     return true;
   }
+
+
+
   function validateCityName() {
     var name = document.getElementById('reg-cn').value;
     if (name.length == 0) {
@@ -406,9 +454,9 @@
 
   function validateForm() {
     if (!validatelName() || !validatefName() || !validateCityName() || !validatePhoneNUmber() || !validatePincode()) {
-      alert('validation failed');
+
       // submitError.style.display='block';
-     // submitError.innerHTML = 'Please fix error to submit';
+      // submitError.innerHTML = 'Please fix error to submit';
       //setTimeout(function () { submitError.style.display = 'none'; }, 5000);
       return false;
     } else {
@@ -421,8 +469,8 @@
 
 
 
-var paymentMethod;
- function selectPayment(payment) {
+  var paymentMethod;
+  function selectPayment(payment) {
 
     paymentMethod = payment
   }
@@ -455,8 +503,8 @@ var paymentMethod;
         if (response.status && response.total) {
 
 
-
-          document.getElementById("totval").innerHTML = response.total;
+          document.getElementById("totval5").innerHTML = "-" + response.coupondiscount;
+          document.getElementById("totval").innerHTML = "₹ " + response.total;
           document.getElementById("totalhidden").value = response.total;
 
           document.getElementById("couperr").innerHTML = response.err;
@@ -494,8 +542,7 @@ var paymentMethod;
 
         if (response.status && response.total) {
 
-          console.log(response);
-
+          document.getElementById("totval4").innerHTML = "-" + response.walletdiscount;
           document.getElementById("totval").innerHTML = response.total;
           document.getElementById("totalhidden").value = response.total;
           document.getElementById("walletid").innerHTML = response.msg;
@@ -521,70 +568,35 @@ var paymentMethod;
   function saveAddress(e) {
 
 
+    e.preventDefault()
 
-    
-/*if(! paymentMethod){
+    $.ajax({
+      url: '/place-order',
+      method: 'post',
+      data: $('#saveaddres').serialize(),
+      success: (response) => {
+        //location.href = '/order-success'
 
-     swal.fire({
-        title: "Please Select Address to Place Order",
-        icon: 'warning',
-        dangerMode: true,
-      })
-
-}*/
-//else{
-
-
-e.preventDefault()
-
-  $.ajax({
-        url: '/place-order',
-        method: 'post',
-        data: $('#saveaddres').serialize(),
-        success: (response) => {
-          //location.href = '/order-success'
-          console.log(response);
-          if (response.paymentMethod == 'COD') {
-            location.href = '/order-successful'
-          }
-
-          else if (response.paypal) {
-            location.href = response.url
-
-          } else {
-
-            razorpayPayment(response)
-          }
+        if (response.paymentMethod == 'COD') {
+          location.href = '/order-successful'
         }
 
-      })
+        else if (response.paypal) {
+          location.href = response.url
 
+        } else {
 
-  //}
-    
-//}
+          razorpayPayment(response)
+        }
+      }
 
-//}
-  //  if (validateForm()) {
-   
-   //}
+    })
   }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   function razorpayPayment(order) {
-    console.log('orderamount', order)
+
     var options = {
       "key": "rzp_test_gpdw4Vd4R7dTYf", // Enter the Key ID generated from the Dashboard
       "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -624,10 +636,12 @@ e.preventDefault()
       },
       method: 'post',
       success: (response) => {
+
         if (response.status) {
           location.href = '/order-successful'
 
         } else {
+
           location.href = '/order-failed'
         }
       }

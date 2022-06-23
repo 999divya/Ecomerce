@@ -1,0 +1,214 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Wallet</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
+          <li>Coupon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="checkout-wrapper section">
+
+  <div class="container">
+
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
+        <div class="button mb-3">
+          <a href="/userprofile" class="btn animate">User Profile</a>
+        </div>
+ 
+        <div class="checkout-steps-form-style-1">
+          <ul id="accordionExample">
+            <div class="button mb-3">
+          <a href="/coupon-history" class="btn animate">Coupon history</a>
+        </div>
+
+            <li>
+              <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true"
+                aria-controls="collapseThree">Please find your unused and used coupons here!!      </h6> 
+              <section class="checkout-steps-form-content collapse show" id="collapseThree"
+                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                {{!-- <input class="form-check-input d align-items-start ms-2 p-2" type="radio" name="checkoutAddress"
+                  onclick="selectAddress('1')" id="123"> --}}
+
+                {{#each notusedCoupons}}
+                <div class="row">
+
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+
+                          <div class="single-product">
+                            <div class="row align-items-center">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="product-image">
+                                  <img class="float-left" style="height:140px; width:140px;"
+                                    src="/userasset/images/logo/unusedcoupon.jpg" alt="">
+                                  <div class="button">
+                                    {{!-- <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                      Add to
+                                      Cart</a> --}}
+                                  </div>
+                                </div>
+                              </div>
+                            
+
+
+                              <div class="col-lg-8 col-md-8 col-12">
+
+                                <span>
+                                <h6 class="fst-italic">Unused Coupon</h6><br>
+                              
+                                 Coupon code: <strong style="color:rgb(35, 140, 105)">{{this.couponcode}}</strong><br>
+                                    Percent offer: <strong style="color:rgb(126, 64, 213)">{{this.percentage}}%</strong><br>
+                                       Valid from: <strong style="color:#362187">{{ time this.fromDate}}</strong><br>
+                                            Valid to: <strong style="color:#362187">{{ time this.toDate}}</strong><br>
+                                                Status: <strong style="color:rgb(48, 71, 40)">{{this.status}}</strong><br>
+
+                                </span><br><br>
+
+
+
+                              </div>
+
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {{/each}}
+
+                {{#each allusedCoupons}}
+                <div class="row">
+
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+
+                          <div class="single-product">
+                            <div class="row align-items-center">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="product-image">
+                                  <img class="float-left" style="height:140px; width:140px;"
+                                    src="/userasset/images/logo/usedcoupon.png" alt="">
+                                  <div class="button">
+                                    {{!-- <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                      Add to
+                                      Cart</a> --}}
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+
+                         
+
+
+
+                              <div class="col-lg-8 col-md-8 col-12">
+
+                                   <span>
+                                <h6 class="fst-italic">Used Coupon</h6><br>
+                                          Coupon code: <strong>{{this.couponcode}}</strong><br>
+                                    Percent offer: <strong>{{this.percentage}}%</strong><br>
+                                       Valid from: <strong>{{ time this.fromDate}}</strong><br>
+                                            Valid to: <strong>{{ time this.toDate}}</strong><br>
+                                             Status: <strong>{{this.status}}</strong><br>
+                                </span><br><br>
+
+                                {{!-- <span>
+                                  <h6>Refereal Link: </h6> {{referalLink}}
+                                </span> --}}
+
+
+                              </div>
+
+                       
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {{/each}}
+
+
+              </section>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+  /* function savePlaceOrder() {
+     alert('order-placed')
+ var a= document.getElementById('firstname').value
+ 
+ 
+     $.ajax({
+       url: '/place-order',
+       data: {
+         firstname: 'sa'
+         pincode: pin,
+         city: city,
+         country: country
+       },
+       method: 'post',
+       success: (response) => {
+ 
+         if (response.status) {
+           alert('order-placed')
+         }
+       }
+     })
+ 
+   }*/
+
+
+
+</script>

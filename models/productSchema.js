@@ -45,8 +45,11 @@ const productSchema = new Schema({
         type:String,
         required:true
     },
+    haspercent:{
+        type:Boolean,
+    },
     Image:Array,
    
 });
 
-module.exports = mongoose.model('Product', productSchema)
+module.exports = mongoose.model('Product', productSchema)//products

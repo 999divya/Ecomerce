@@ -1,12 +1,31 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Category</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
+          <li>Categories</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <section class="product-grids section">
   <div class="float-left">
-      {{!-- <a href="/back-to-home"><input type="button"  value="Back" class="btn btn-success ms-5"></input></a>
-       --}}
-  
-      </div>
+    {{!-- <a href="/back-to-home"><input type="button" value="Back" class="btn btn-success ms-5"></input></a>
+    --}}
+
+  </div>
   <div class="container">
-     <div class="button mb-3">
+    <div class="button mb-3 mt-5">
       <a href="/back-to-home" class="btn animate">Back to Home</a>
     </div>
     <div class="row">
@@ -27,15 +46,15 @@
           <div class="single-widget">
             <h3>All Categories</h3>
             <ul class="list">
-         
-                {{#each categorys}}
-                       <form action="/category-view" method="post">
-              <li>
-                 <button class="btn btn-Light" type="submit"><input type="text" style="display: none;"
-                                        name="category" value="{{this.category}}">
-                                    <li><a>{{this.category}}</a></li>
-                                </button>
-              </li>
+
+              {{#each categorys}}
+              <form action="/category-view" method="post">
+                <li>
+                  <button class="btn btn-Light" type="submit"><input type="text" style="display: none;" name="category"
+                      value="{{this.category}}">
+                <li><a>{{this.category}}</a></li>
+                </button>
+                </li>
               </form>
               {{/each}}
             </ul>
@@ -51,41 +70,33 @@
       <div class="col-lg-9 col-12">
         <div class="product-grids-head">
           <div class="product-grid-topbar">
-            
- 
-            <div class="row align-items-end">
 
-          
-            
-              <div class="col-lg-3 col-md-4 col-12">
-                <nav>
-                   
-  {{!-- {{#each products}} --}}
-                   <ul>
-                     <li>
-                       <img src="/userasset/images/logo/shopps.svg" alt="">
-  
-  {{!-- <h4 style="color:rgb(46, 46, 46)">{{this.category}}</h4> --}}
-                     </li>
-                   </ul>   
-  
-   {{!-- {{/each}}   --}}
-                  {{!-- <h3>{{products.category}}</h3> --}}
 
-                </nav>
+            <div style="height:200px; width:auto;" class="row align-items-center">
+
+
+
+              <div class="col-lg-3 col-md-4 col-12 ">
+         
+                      <img class="p-3" src="/userasset/images/logo/shopps.svg" alt="">
+
               </div>
-                      <div class="col-lg-2 col-md-4 col-12">
-  <h6><span style="color:rgb(243, 130, 130)"><strong>Express yourselves with the best aesthetic choices of outfit through Kstyles</strong></span> </h6>
-                      </div>
-          
+              <div class="col-lg-2 col-md-4 col-12">
+                <h6><span style="color:rgb(243, 130, 130)" class="text-center"><strong>Express yourselves with the best aesthetic choices of
+                      outfit through Kstyles</strong></span> </h6>
+              </div>
+              <div class="col-lg-7 col-md-4 col-12">
+                <img style="height:200px; width:600px" class="shadow-sm p-3 mb-5 bg-white rounded"
+                  src="userasset/images/logo/dresses.avif" alt="#">
+              </div>
             </div>
-             
+
           </div>
-          <div class="tab-content" id="nav-tabContent">
+          {{!-- <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
-                  
+
                 </div>
               </div>
               <div class="row">
@@ -98,7 +109,7 @@
               </div>
 
             </div>
-          </div>
+          </div> --}}
 
 
           <div class="container">
@@ -113,47 +124,50 @@
 
 
 
-            {{#each products}}
-            <div class="col-lg-3 col-md-6 col-12">
+              {{#each products}}
+              <div class="col-lg-3 col-md-6 col-12">
 
                 <div class="single-product shadow p-3 mb-5 bg-body rounded">
-                    <div class="product-image ">
-                        <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
-                                alt="#"></a>
-                           
-                        <span class="sale-tag">{{check this.percentage}}</span>
-                  
-                        <div class="button">
-                            <div class="button">
-                                {{!-- <form action="/add-to-cart" method="post"
-                                    enctype="application/x-www-form-urlencoded"> --}}
-                                    {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
-                                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
-                                        <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
-                                            <i class="lni lni-cart"></i>Add to Cart</button>
-                                        {{!--
-                                    </form> --}}
-                                    {{!-- </form> --}}
+                  <div class="product-image ">
+                    <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                        alt="#"></a>
+       {{#if this.discount}}
+                    <span class="sale-tag">{{check this.percentage}}</span>
+                    {{/if}}
 
-                                <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">{{this.type}}</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">{{this.name}}</a>
-                        </h4>
-                        <span class="category">{{this.brand}}</span>
+                    <div class="button">
+                      <div class="button">
+                        {{!-- <form action="/add-to-cart" method="post" enctype="application/x-www-form-urlencoded">
+                          --}}
+                          {{!-- <form action="/getCartCount/{{this.id}}" method="get"> --}}
+                            <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                            <button class="btn m-2" onclick="displayconfirm('{{this.id}}')" type="button">
+                              <i class="lni lni-cart"></i>Add to Cart</button>
+                            {{!--
+                          </form> --}}
+                          {{!-- </form> --}}
 
-                        <div class="price">₹
-                            <span>{{this.discount}}</span>
-                            <span class="discount-price">{{this.price}}</span>
-                        </div>
+                        <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
+                      </div>
                     </div>
+                  </div>
+                  <div class="product-info">
+                    <span class="category">{{this.type}}</span>
+                    <h4 class="title">
+                      <a href="product-grids.html">{{this.name}}</a>
+                    </h4>
+                    <span class="category">{{this.brand}}</span>
+
+                    <div class="price">₹
+                      <span>{{this.realAmount}}</span>
+                      {{#if this.discount}}
+                      <span class="discount-price">{{this.price}}</span>
+                      {{/if}}
+                    </div>
+                  </div>
                 </div>
-            </div>
-            {{/each}}
+              </div>
+              {{/each}}
 
 
 
@@ -163,30 +177,32 @@
 
 
 
-{{!-- 
+              {{!--
               {{#each products}}
               <div class="col-lg-3 col-md-6 col-12">
 
                 <div class="single-product">
                   <div class="product-image">
-                     <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
-                                alt="#"></a>
+                    <a href="/product-details/{{this._id}}"><img src="{{#index_of this.Image 0}}{{/index_of}}"
+                        alt="#"></a>
                     {{!-- <span class="new-tag">New</span> --}}
                     <div class="button">
                       <div class="button">
 
 
-                        {{!-- <form action="/add-to-cart" method="post" enctype="application/x-www-form-urlencoded"> --}}
+                        {{!-- <form action="/add-to-cart" method="post" enctype="application/x-www-form-urlencoded">
+                          --}}
                           {{!-- <input type="text" value="{{this.id}}" name="productid" style="display:none">
                           <button class="btn m-2" onclick="displayconfirm()" type="submit"><i
-                              class="lni lni-cart"></i><input style="display:none" name="pl">Add to Cart</input></button> --}}
-                        {{!-- </form> --}}
-{{!-- 
+                              class="lni lni-cart"></i><input style="display:none" name="pl">Add to
+                            Cart</input></button> --}}
+                          {{!--
+                        </form> --}}
+                        {{!--
 
-                             <input type="text" value="{{this.id}}" 
-                                            name="productid" style="display:none">
-                                        <button class="btn m-2" onclick="displayconfirm1('{{this.id}}')" type="submit"><i
-                                                class="lni lni-cart"></i>Add to Cart</button>
+                        <input type="text" value="{{this.id}}" name="productid" style="display:none">
+                        <button class="btn m-2" onclick="displayconfirm1('{{this.id}}')" type="submit"><i
+                            class="lni lni-cart"></i>Add to Cart</button>
 
                         <a href="#" class="btn m-2"><i class="lni lni-cart"></i>wishList</a>
                       </div>
@@ -206,7 +222,7 @@
                 </div>
 
               </div>
-              {{/each}} --}} 
+              {{/each}} --}}
 
 
 
@@ -230,22 +246,21 @@
 
 <script>
 
-       function displayconfirm1(proId) {
+  function displayconfirm1(proId) {
 
-                 $.ajax({
-                 url:'/add-to-cart/'+proId,
-                 method:'get',
-                    success:(response)=>{
-                    if(response.status){
-                        let count=$('#cartCountId').html()
-                        count=parseInt(count)+1
-                         $("#cart-count").html(count)
-                         }
-                         }
+    $.ajax({
+      url: '/add-to-cart/' + proId,
+      method: 'get',
+      success: (response) => {
+        if (response.status) {
+          let count = $('#cartCountId').html()
+          count = parseInt(count) + 1
+          $("#cart-count").html(count)
+        }
+      }
 
 
-                        })
-       
-              }
+    })
+
+  }
 </script>
-

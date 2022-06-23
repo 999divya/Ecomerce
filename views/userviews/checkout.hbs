@@ -22,7 +22,7 @@
 
 
 <section class="checkout-wrapper section">
-
+ {{#if totalvalue1}}
   <div class="container">
     <div class="button mb-3">
       <a href="/order-address" class="btn animate">Add new Address</a>
@@ -160,11 +160,10 @@
                 </div>
                 <p style="color:orangered" id="couperr">{{err}}</p>
               </div>
-          
           </div>
         
 
-             <div class="checkout-sidebar-coupon mt-30">
+          <div class="checkout-sidebar-coupon mt-30">
             <p>Enter the wallet Amount</p>
   
               <div class="single-form form-default">
@@ -216,13 +215,33 @@
           <div class="checkout-sidebar-price-table mt-30">
             <h5 class="title">Pricing Table</h5>
               <div class="sub-total-price">
-                <div class="total-price">
-                  <p class="value">Subotal Price:</p>
+              
+                  <div class="total-price">
+       <p class="value">Actual Price:</p>
+                  <p class="price" id="totval1">₹ {{actualMRP}}</p>
+                  </div>
+                   <div class="total-price">
+                            <p class="value">Offer discount:</p>
+                  <p class="price" id="totval2"> {{totaldiscount}}</p>
+                  </div>
+                      <div class="total-price">
+                            <p class="value">Coupon discount:</p>
+                  <p class="price" id="totval5">- {{coupondiscount}}</p>
+                  </div>
+
+                        <div class="total-price">
+                            <p class="value">Wallet discount:</p>
+                  <p class="price" id="totval4">- {{walletdiscount}}</p>
+                  </div>
+
+                
+               <div class="total-price">
+                       <p class="value">Total amount:</p>
                   <p class="price" id="totval">₹ {{totalvalue}}</p>
-                  <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
+                       <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
+                  </div>
+           
                 </div>
-
-
               </div>
 
 
@@ -236,6 +255,27 @@
       </div>
     </div>
   </div>
+
+    {{else}}
+<div class="container justify-content-center">
+ 
+      <div class="row justify-content-center">
+         <div class="col-lg-8" >
+
+         <img class="shadow p-3 mb-5 bg-body rounded" style="height:400px; width:500px" src="userasset/images/logo/storeopen.jpg"  alt="#">
+    <div class="button justify-content-center">
+                  <a href="/show-my-orders" class="btn"> Goto MyOrders</a>
+                  <a href="/back-to-home" class="btn btn-alt">Shop again</a>
+                </div>
+                </div>
+         </div>
+              
+         </div>
+    {{/if}}
+
+
+
+
 </section>
 
 
@@ -246,12 +286,14 @@
 <script>
   var checkoutAddressId;
   var paymentMethod;
+ 
 
   function selectAddress(addresId) {
 
     checkoutAddressId = addresId;
 
   }
+
 
   function selectPayment(payment) {
 
@@ -286,14 +328,14 @@
 
 
 
-
+ let amount = document.getElementById('walletInput').value;
       let couponCode = document.getElementById('couponInput').value
   
       $.ajax({
-        url: `/select-orderaddress?payment=${paymentMethod}&addressId=${checkoutAddressId}&code=${couponCode}`,
+        url: `/select-orderaddress?payment=${paymentMethod}&addressId=${checkoutAddressId}&code=${couponCode}&wallet=${amount}`,
         method: 'post',
         success: (res) => {
-          console.log(res)
+       
           if (res.paymentMethod=='COD') {
             swal.fire("Your Order Placed Successfully")
               .then((value) => {
@@ -306,7 +348,7 @@
             location.href = res.url
           }
           else {
-            console.log('oooopppppppp')
+            
             razorpayPayment(res)
           }
         }
@@ -323,6 +365,7 @@
  
     let couponCode = document.getElementById('couponInput').value;
 
+
     $.ajax({
       url: '/apply-coupon',
       data: {
@@ -334,8 +377,8 @@
 
         if (response.status && response.total) {
 
-          console.log(response);
-     
+       
+        document.getElementById("totval5").innerHTML ="-"+response.coupondiscount;
           document.getElementById("totval").innerHTML ="₹ "+ response.total;
           document.getElementById("totalhidden").value = response.total;
           document.getElementById("couperr").innerHTML = response.err;
@@ -372,8 +415,8 @@ function applyWalletAmount() {
 
         if (response.status && response.total) {
 
-          console.log(response);
      
+      document.getElementById("totval4").innerHTML ="-"+response.walletdiscount;
           document.getElementById("totval").innerHTML = "₹ "+response.total;
           document.getElementById("totalhidden").value = response.total;
           document.getElementById("walletid").innerHTML = response.msg;
@@ -394,7 +437,7 @@ function applyWalletAmount() {
 
 
 function razorpayPayment(order){
-  console.log('orderamount', order)
+
     var options = {
     "key": "rzp_test_gpdw4Vd4R7dTYf", // Enter the Key ID generated from the Dashboard
     "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -430,8 +473,7 @@ var rzp1 = new Razorpay(options);
 
 
 function verifyPayment(payment,order){
-  console.log('paymentttt',payment)
-  console.log('paymentttt',order)
+
 
   $.ajax({
     url:'/verify-payment',
@@ -463,7 +505,7 @@ function verifyPayment(payment,order){
            if(response.status){
               location.href='/order-successful'
            }else{
-             alert("Payment fail")
+           
             location.href='/order-failed'
            }
          }

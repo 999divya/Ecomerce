@@ -9,7 +9,7 @@
             <div class="col-lg-6 col-md-6 col-12">
                 <ul class="breadcrumb-nav">
                     <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
-                    <li><a href="index-2.html">Shop</a></li>
+                    <li><a href="/back-to-home">Shop</a></li>
                     <li>Product Details</li>
                 </ul>
             </div>
@@ -21,6 +21,7 @@
 <section class="item-details section">
 
     <div class="container">
+        
         <div class="text-sm-start pb-2 mb-2">
             <a href="/back-to-home" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2"><i
                     class="mdi mdi-plus me-1"></i>Home</a>
@@ -32,13 +33,25 @@
                     <div class="product-images">
                         <main id="gallery">
                             <div class="main-img" style="height:400px; width:400px;">
-                                <img src="{{#index_of products.Image 0}}{{/index_of}}" id="current" alt="#">
-                            </div>
+                                 <div id="img-container" style="width: 400px">
+                                {{!-- <div class="card"> --}}
+                            
+                                 {{!-- <div class="card-img-overlay"> --}}
+
+ {{!-- <button class="btn btn-info" onclick="zoomin()">+</button>
+  <button class="btn btn-info" onclick="zoomout()">-</button> --}}
+  {{!-- </div> --}}
+                                {{!-- </div> --}}
+                                  <img  src="{{#index_of products.Image 0}}{{/index_of}}" class="img1" id="current" alt="#">
                             <div class="images" >
+                              
                                 <img onclick="changeImage(this)" src="{{#index_of products.Image 1}}{{/index_of}}" id="first-image" class="img" alt="#">
+                             
                                 <img onclick="changeImage(this)" src="{{#index_of products.Image 2}}{{/index_of}}" class="img" id="second-image" alt="#">
                                 <img onclick="changeImage(this)" src="{{#index_of products.Image 3}}{{/index_of}}" class="img" id="third-image" alt="#">
                             </div>
+                         
+                             </div>
                         </main>
                     </div>
                 </div>
@@ -46,10 +59,25 @@
 
                     <div class="product-info">
                         <h2 class="title">{{products.brand}}</h2>
+                            <p class="category">{{products.type}}</p>
                         <p class="category"><i class="lni lni-tag"></i>{{products.name}}<a
                                 href="javascript:void(0)"></a></p>
-                        <h3 class="price">₹ {{products.price}}</h3>
-                        <p class="info-text">{{products.description}}</p>
+                                   <p class="category">{{products.size}}</p>
+
+                                      {{!-- <div class="price" >   <span><h3 >₹ {{products.realAmount}}</h3></span> 
+                            {{#if products.discount}}
+                            <span class="discount-price">{{products.price}}</span>
+                            {{/if}}
+                        </div> --}}
+
+                               <div class="price">₹
+                            {{products.realAmount}}
+                            {{#if products.discount}}
+                            <span class="discount-price">{{products.price}}</span>
+                            {{/if}}
+                        </div>
+                     
+                      <p class="info-text">Description: {{products.description}}</p>
                         <div class="row">
 
 
@@ -201,6 +229,62 @@
 
     </div>
 </section>
+  <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
+
+   <script src=
+"https://code.jquery.com/jquery-1.12.4.min.js">
+    </script>
+{{!-- <script>
+var options = {
+    width: 400,
+    zoomWidth: 500,
+    offset: {vertical: 0, horizontal: 10},
+
+};
+new ImageZoom(document.getElementById("img-container"), options);
+ 
+</script> --}}
+
+
+
+{{!-- function changeImage(image){
+    var container = document.getElementById('current');
+    var mainSrc = container.src;
+    container.src = image.src;
+    image.src = mainSrc;
+
+} --}}
+
+
+<script>
+    /* $(document).ready(function () {
+        $(".img").hover(function () {
+            $(".img1").attr('src', $(this).attr('src'
+            ))
+        })
+    }) */
+
+    function changeImage(image){
+    var container = document.getElementById('current');
+   var mainSrc = container.src;
+   container.src = image.src;
+   image.src = mainSrc;
+
+}
+
+
+    var options = {
+        width: 400,
+        height: 400,
+        zoomWidth: 400,
+        offset: { vertical: 0, horizontal: 10 },
+        scale: .7
+    }
+    new ImageZoom(document.getElementById("img-container"), options)
+        new ImageZoom(document.getElementById("first-image"), options)
+</script>
+
+
 
 
 
@@ -265,17 +349,29 @@
 <script>
 
     function displayconfirm(proId) {
-alert('proiduuuuuuuu'+proId)
+    
        $.ajax({
             method: 'get',
             url: '/add-to-cart/' + proId,
                     success: (response) => {
                 if (response.status) {
-                    alert('cart added')
+                       swal.fire({
+                    title: "Product added to the cart",
+
+                    dangerMode: true,
+                })
                     let count = $('#cart-count').html()
                     count = parseInt(count) + 1
 
                     $("#cart-count").html(count)
+                }else{
+                       swal.fire("Please login to add products")
+              .then((value) => {
+           
+                location.href = '/login'
+                
+              })
+                  
                 }
             }
 
@@ -293,13 +389,7 @@ alert('proiduuuuuuuu'+proId)
 
 
 
-function changeImage(image){
-    var container = document.getElementById('current');
-    const mainSrc = container.src;
-    container.src = image.src;
-    image.src = mainSrc;
 
-}
 
 
 

@@ -1,5 +1,5 @@
  
-<script defer src="https://cdn.crop.guide/loader/l.js?c=KWNXBR"></script>
+<script defer src="https://cdn.crop.guide/loader/l.js?c=HQBBBQ"></script>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="main-content">
 
@@ -33,6 +33,14 @@
                             {{else}}
                             <h4 class="card-title mb-4">Add new product</h4>
                             {{/if}}
+{{!-- 
+                         {{#if message}}
+                            <div class="alert alert-warning alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{message1.display}}</strong>{{message1.message}}
+                            </div>
+                            {{/if}} --}}
+
 
                             {{#if message}}
                             <p class="error" style="color:red">{{message}}</p>
@@ -91,13 +99,13 @@
 
 
                                         <div class="form-group row mb-4">
-                                            <label for="taskname" class="col-form-label col-lg-2 ">Product size</label>
+                                            <label for="taskname" class="col-form-label col-lg-2 ">size/age</label>
                                             <div class="col-lg-10">
 
                                                 <select type="text" name="size" value="{{editProducts.size}}"
                                                     class="btn btn-outline-light style"
                                                     aria-label="Default select example">
-                                                    <option selected disabled>Size</option>
+                                                    <option selected disabled>Size/Age</option>
                                                     <option value="XS">XS</option>
                                                     <option value="S">S</option>
                                                     <option value="M">M</option>
@@ -105,6 +113,7 @@
                                                     <option value="XL">XL</option>
                                                     <option value="XXL">XXL</option>
                                                     <option value="XXXL">XXXL</option>
+                                                       <option value="2-5 Years">2-5 Years</option>
                                                 </select>
                                                 {{!-- <label  value="{{editProducts.size}}"></label> --}}
                                             </div>

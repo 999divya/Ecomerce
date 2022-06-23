@@ -7,12 +7,12 @@ const Category = require('../../models/categorySchema');
 const otpController = require('../../controllers/otpController')
 const cartController = require('../../controllers/cartController')
 // const user = require('../../models/userSchema')
-// var ObjectId = require('mongoose').Types.ObjectId;
-// const Coupon = require('../../models/couponSchema')
+var ObjectId = require('mongoose').Types.ObjectId;
+const Coupon = require('../../models/couponSchema')
 // const order = require('../../models/orderSchema')
 // const offer = require('../../models/offerSchema')
 // const catOffer = require('../../models/catOfferSchema')
-// const cart = require('../../models/cartSchema');
+const cart = require('../../models/cartSchema');
 // const Address = require('../../models/addresSchema')
 const orderController = require('../../controllers/orderController')
 const swal = require('sweetalert2');
@@ -74,28 +74,50 @@ route.get('/', async (req, res) => {
 
 
 
-// route.get('/cart', (req,res)=>{
-//     if(req.session.isLoggedin){
+route.get('/home-page', async(req,res)=>{
+    const productDetails = await Product.find()
+    const newArrivals = await Product.find().sort({_id:-1}).limit(8);
+    const womenFashion = await Product.find({category:"WOMEN"}).sort({_id:-1}).limit(8);
+    const kidsWorld = await Product.find({category:"KIDS"}).sort({_id:-1}).limit(8);
+    const categoryDetails = await Category.find()
+    if (req.session.isLoggedin) {
+        const userId = req.session.user._id;
+        if (req.session.user._id) {
 
-//         res.render('userviews/cart',{lk:true, userdetails:req.session.user})
-//     }
+            var cartcount = await cart.find({ user: ObjectId(userId) })
+            var count = 0;
+            if (cartcount == '' || cartcount == null || cartcount == undefined) {
 
-// })
+                count = 0;
+            } else {
+                count = cartcount[0].products?.length;
+            }
+
+        }
+
+        res.render('userviews/user-home', { lk: true,newArrivals,kidsWorld, products: productDetails,womenFashion, count, categorys: categoryDetails, userdetails: req.session.user })
+        // res.render('userviews/user-home', { lk: true, userdetails: req.session.user })
 
 
 
+    }
+})
 
 
+route.get('/show-coupondata',async (req,res)=>{
+  if(req.session.isLoggedin){
+    let userid = req.session.user._id;
+
+    let allusedCoupons=await Coupon.find({users:{$elemMatch:{users:ObjectId(userid)}}})
+    let notusedCoupons=await Coupon.find({users:{$not:{$elemMatch:{users:ObjectId(userid)}}}})
+   
+    
+    res.render('userviews/couponData',{lk:false,allusedCoupons,notusedCoupons,userdetails:req.session.user})
+  }
+
+})
 
 
-
-
-// route.get('/product-details', async(req,res)=>{
-//     const productDetails = await Product.find()
-
-//     const categoryDetails = await Category.find()
-//     res.render('userviews/product-details',{lk:true, products:productDetails, category:categoryDetails})
-// })
 
 const productController = require('../../controllers/productController')
 
@@ -121,37 +143,60 @@ route.get('/checkout', orderController.checkoutDisplay)
 route.post('/category-view', userController.allTheCategoryView);
 
 
+const niceInvoice = require("nice-invoice");
+route.get('/download-invoice/:id',(req,res)=>{
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const invoiceDetail = {
+        shipping: {
+          name: "Micheal",
+          address: "1234 Main Street",
+          city: "Dubai",
+          state: "Dubai",
+          country: "UAE",
+          postal_code: 94111
+        },
+        items: [
+          {
+            item: "Chair",
+            description: "Wooden chair",
+            quantity: 1,
+            price: 50.00, 
+            tax: "10%"
+          },
+          {
+            item: "Watch",
+            description: "Wall watch for office",
+            quantity: 2,
+            price: 30.00,
+            tax: "10%"
+          },
+          {
+            item: "Water Glass Set",
+            description: "Water glass set for office",
+            quantity: 1,
+            price: 35.00,
+            tax: ""
+          }
+        ],
+        subtotal: 156,
+        total: 156,
+        order_number: 1234222,
+        header:{
+            company_name: "Nice Invoice",
+            company_logo: "logo.png",
+            company_address: "Nice Invoice. 123 William Street 1th Floor New York, NY 123456"
+        },
+        footer:{
+          text: "Any footer text - you can add any text here"
+        },
+        currency_symbol:"$", 
+        date: {
+          billing_date: "08 August 2020",
+          due_date: "10 September 2020",
+        }
+    };
+    niceInvoice(invoiceDetail, 'your-invoice-name.pdf');
+})
 
 
 
@@ -280,7 +325,7 @@ route.get('/back-to-home', userController.backToHome)
 //     }
 // })
 
-route.get('/show-my-orders', (orderController.showMyOrders))
+route.get('/show-my-orders', orderController.showMyOrders)
 
 route.get('/logout', userController.logoutHandler)
 
@@ -307,7 +352,7 @@ route.get('/order-successful', orderController.orderSuccessful)
 
 route.get('/wallet',userController.showWallet)
 
-
+route.get('/wallethistory', userController.walletHistory)
 
 
 
@@ -328,11 +373,15 @@ route.get('/order-failed', orderController.orderFailed)
 
 route.get('/show-products/:id', orderController.showUserSideOrderedProducts)
 
-
+route.get('/coupon-history', couponController.couponHistory)
 
 
 
 
 route.get('/invoice/:id', orderController.invoicehandler)
 
+
+
+
+route.get('/aboutUs', userController.aboutUs)
 module.exports = route;

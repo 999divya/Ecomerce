@@ -1,0 +1,158 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Wallet</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
+          <li>Wallet</li>
+          <li>Wallet History</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="checkout-wrapper section">
+
+  <div class="container">
+
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
+        <div class="button mb-3">
+          <a href="/wallet" class="btn animate">wallet</a>
+        </div>
+        <div class="checkout-steps-form-style-1">
+          <ul id="accordionExample">
+
+            <li>
+              <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true"
+                aria-controls="collapseThree">Please find your wallet history here </h6>
+              <section class="checkout-steps-form-content collapse show" id="collapseThree"
+                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                {{!-- <input class="form-check-input d align-items-start ms-2 p-2" type="radio" name="checkoutAddress"
+                  onclick="selectAddress('1')" id="123"> --}}
+
+                {{#each findwallethistory}}
+                <div class="row">
+
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+
+                          <div class="single-product">
+                            <div class="row align-items-center">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="product-image">
+                                  <img class="float-left" src="/userasset/images/logo/trans.png" alt="">
+                                  <div class="button">
+                                    {{!-- <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                      Add to
+                                      Cart</a> --}}
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <div class="col-lg-8 col-md-8 col-12">
+                                {{!--
+                                <span>
+                                  <h6>Wallet Balance(INR): </h6>{{ wallet}}
+                                </span><br><br> --}}
+
+                                {{!-- <span>
+                                  <h6>Refereal Link: </h6> {{referalLink}}
+                                </span> --}}
+                                <div class="product-info">
+
+                                  <div class="total-payable">
+                                    <input type="text" style="display:none;" id="firstname">
+
+                                    <strong>Order date: </strong> {{this.Orderdate}}<br>
+                                    <strong>Wallet Amount: </strong> {{this.WalletAmount}}(INR)<br>
+                                    <strong>Used wallet Amount: </strong> {{this.appliedWalletAmount}}(INR)<br>
+                                    <strong>Credited Amount: </strong> {{this.creditedAmount}}(INR)<br>
+                                    <strong>Current wallet Amount: </strong> {{this.currentWalletAmount}}(INR)<br>
+
+                                    <strong> Status: </strong> {{this.status}}<br>
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {{/each}}
+              </section>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+  /* function savePlaceOrder() {
+     alert('order-placed')
+ var a= document.getElementById('firstname').value
+ 
+ 
+     $.ajax({
+       url: '/place-order',
+       data: {
+         firstname: 'sa'
+         pincode: pin,
+         city: city,
+         country: country
+       },
+       method: 'post',
+       success: (response) => {
+ 
+         if (response.status) {
+           alert('order-placed')
+         }
+       }
+     })
+ 
+   }*/
+
+
+
+</script>

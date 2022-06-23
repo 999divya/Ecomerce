@@ -1,0 +1,198 @@
+
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+<style>  @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');</style>
+
+
+<section class="checkout-wrapper section justify-content-center ">
+  <div class="d-flex justify-content-center">
+   <div class="shadow p-3 mb-5 bg-body rounded justify-content-center" style="height:70px; width:90px;  background-color:rgb(246, 246, 246, 1)">   <button class="btn ms-1" id="downloadPdf"="" type="submit"><i class="ri-download-line"></i></button></div>
+</div>
+
+
+<div class="container  shadow p-3 mb-5 bg-body rounded justify-content-center " style="height:1200px;width:880px; background-color:rgb(255, 255, 255, 1)" id="invoice">
+<div class="container-fluid mt-4" style="height:1200px;width:600px">
+        {{!-- <div class="card" > --}}
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="left" valign="top" bgcolor="#ffe77b" style="background-color:#fff;">
+        <img height="40" width="100"
+           src="../userasset/images/logo/logo.png" alt="Logo">
+      </td>
+      <td align="left" bgcolor="#ffe77b" style="background-color: #fff;">
+        <h4 style="font-weight: 900;color: brown;">Kstyles Online Store</h4>
+        <p>227 Cobblestone Road, 30000 Delhi, India<br />
+          http://kstyles.shop | kstyles@gmail.com +555 7 789-1234</p>
+      </td>
+    </tr>
+  </table>
+  <h1 style="font-size: 22px;font-weight: 700; color: green; margin-top: 10px;">INVOICE</h1>
+  <h4>#1</h4>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="30%" align="left" valign="top" bgcolor="#ffe77b" style="background-color:#fff;">
+        <p>Invoice To:</p>
+     
+         <h5 style="font-weight: 800;color: brown;">{{orders.deliveryDetails.firstname}} {{orders.deliveryDetails.lastname}},</h5><hr>
+      </td>
+      <td width="70%" align="left" bgcolor="#ffe77b" style="background-color: #fff;">
+      </td>
+    </tr>
+    <tr>
+      <td width="30%" align="left" valign="top" bgcolor="#ffe77b" style="background-color:#fff;">
+
+        Delivery destination: {{orders.deliveryDetails.shipping}},
+         <br>Mobile : {{orders.deliveryDetails.mobile}},
+        <br>{{orders.deliveryDetails.city}},
+        <br>{{orders.deliveryDetails.state}},
+        <br>{{orders.deliveryDetails.pincode}}
+
+      </td>
+      <td width="70%" align="left" bgcolor="#ffe77b" style="background-color: #fff;">
+      </td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="30%" align="left" valign="top" bgcolor="#ffe77b" style="background-color:#fff;">
+   
+ 
+      </td>
+      <td width="40%" align="left" bgcolor="#ffe77b" style="background-color: #fff;">
+      </td>
+      <td width="30%" align="right" bgcolor="#ffe77b" style="background-color: #fff;">
+        <h6 style="font-weight: 700;color: #000000;">{{orders.date}}<br>{{orders.time}}</h6>
+        <h6 style="font-weight: 700;color: #000000;"><span>Invoice No: {{orders._id}}</span></h6>
+      </td>
+    </tr>
+  </table>
+  <table class="table" width="100%">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Name</th>
+        {{!-- <th scope="col">Type</th> --}}
+               <th scope="col" class="text-wrap">Percent Offer</th>
+        <th scope="col">Price</th>
+        <th scope="col">Offer Price</th>
+      
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+      <tr>
+        {{#each product}}
+        <td width="10%">
+          <img src="{{#index_of this.Image 0}}{{/index_of}}" alt="Italian Trulli" width="58px">
+        </td>
+        <th scope="row" width="50%">
+          <h5 style="font-weight: 700;color:chocolate">{{this.name}}</h5>
+          {{!-- <p class="text-wrap">{{this.description}}</p> --}}
+        </th>
+        {{!-- <td width="10%">{{this.unit}}</td> --}}
+        <td width="10%">%{{this.percentage}}</td>
+        <td width="10%">₹{{this.price}}</td>
+        <td width="10%">₹{{this.realAmount}}</td>
+
+
+        {{/each}}
+
+           <td width="10%">{{this.products.quantity}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="90%" align="right" style="font-size: 17px;font-weight: 500;color:darkred; background-color: #f6f6f6;">
+         Total MRP</td>
+      <td width="10%" align="right" style="background-color: lightgreen;">
+        <h6 style="font-size: 17px;font-weight: 700;color:#fff;">₹{{orders.totalMRP}}</h6>
+      </td>
+    </tr>
+    <tr>
+      <td width="70%" align="right" style="font-size: 17px;font-weight: 500;color:darkred; background-color: #f6f6f6;">
+        Offer discount </td>
+      <td width="10%" align="right" style="background-color: lightcoral;">
+        <h6 style="font-size: 17px;font-weight: 700;color:#fff;">{{orders.totalOfferDiscount}}</h6>
+      </td>
+    </tr>
+        <tr>
+      <td width="70%" align="right" style="font-size: 17px;font-weight: 500;color:darkred; background-color: #f6f6f6;">
+        Wallet amount </td>
+      <td width="10%" align="right" style="background-color: lightcoral;">
+        <h6 style="font-size: 17px;font-weight: 500;color:#fff;">{{orders.usedwalletamount}}</h6>
+      </td>
+    </tr>
+        <tr>
+      <td width="70%" align="right" style="font-size: 17px;font-weight: 500;color:darkred; background-color: #f6f6f6;">
+        Coupon discount </td>
+      <td width="10%" align="right" style="background-color: lightcoral;">
+        <h6 style="font-size: 17px;font-weight: 500;color:#fff;">{{orders.coupondiscount}}</h6>
+      </td>
+    </tr>
+    <tr>
+      <td width="70%" align="right" style="font-size: 17px;font-weight: 500;color:darkred; background-color: #f6f6f6;">
+        Grand Total </td>
+      <td width="10%" align="right" style="background-color: lightgreen;">
+        <h6 style="font-size: 17px;font-weight: 700;color:#fff;">₹{{orders.totalAmount}}</h6>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="100%" align="left" style="font-size: 15px;font-weight: 500;color:red; background-color: #f6f6f6;">
+        Notice: </td>
+    </tr>
+    <tr>
+      <td width="100%" align="left" style="font-size: 15px;font-weight: 400;color:#000; background-color: #f6f6f6;">After cancelling the order, amount will be refunded within 2-3 days</td>
+    </tr>
+  </table>
+       
+</div>
+</div>
+{{!-- </div> --}}
+
+</section>
+
+
+<script>
+  document
+    .getElementById("downloadPdf")
+    .addEventListener("click", function download() {
+      const element = document.getElementById("invoice");
+      html2pdf()
+        .from(element)
+        .save();
+    });
+</script>
+
+
+
+<script>
+  function downloadInvoice(id, e) {
+    e.preventDefault()
+   
+    $.ajax({
+      url: `/download-invoice/${a}`,
+      method: 'get',
+      success: (response) => {
+
+
+        swal.fire({
+          title: "Your invoive has downloaded",
+          icon: 'warning',
+          dangerMode: true,
+        })
+      }
+
+    })
+  }
+</script>

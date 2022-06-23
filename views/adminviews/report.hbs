@@ -58,11 +58,11 @@
     }
 </style>
     
-<div class="main-content">
 
+
+<div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -165,7 +165,7 @@
                 <div class="card mb-3 mt-3">
                     <div class="card-header">
                         <i class="fas fa-chart-area me-1"></i>
-                        Oder Summary
+                        Order Summary
                     </div>
                     <div class="card-body ">
                         <div class="row">
@@ -238,6 +238,68 @@
     </div>
 </div>
 
+
+
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card  mb-3 mt-5 ">
+                        <div class="card-header" style="background-color:aliceblue ;">
+                            <i class="fa fa-area-chart"></i> Weekly Sales Report
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart5" style="width:100%;max-width:700px;"></canvas>
+                        </div>
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
+                    </div>
+                </div>
+
+                {{!-- sales report monthly --}}
+
+                <div class="col-lg-3">
+                    <div class="card mb-3 mt-5">
+                        <div class="card-header" style="background-color:aliceblue ;">
+                            <i class="fa fa-area-chart"></i> Monthly Sales Report
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart3" style="width:100%;max-width:700px;"></canvas>
+                        </div>
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {{!-- Sale Report yearly --}}
+
+            <div class="col-lg-3">
+                <!-- Example Bar Chart Card-->
+                <div class="card  mb-3 mt-5">
+                    <div class="card-header" style="background-color:aliceblue ;">
+                        <i class="fa fa-bar-chart"></i> Yearly Sale Report
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-sm-8 my-auto">
+                                <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                </div>
+
+
+                <hr class="mt-2">
+                <div class="card-columns">
+
+                </div>
+
+            </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
     integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
@@ -329,3 +391,172 @@
         $('#table_id').DataTable();
     });
 </script> --}}
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+
+
+
+    
+<script>
+    // setup 
+    $(document).ready(function () {
+        
+        $.ajax({
+            url: '/admin/get-sales-details',
+            method: 'get',
+         
+            success: async (chartDatas) => {
+
+                data1 = []
+            
+                chartDatas.dailyIncome.map((value) => {
+                    data1.push({ x: value._id, y: value.totalAmount })
+                })
+                const data = {
+                    labels: chartDatas.daysOfWeek,
+                    datasets: [{
+                        label: 'Weekly Sales',
+                        data: data1,
+                        backgroundColor: [
+                            'rgb(60, 60, 60)',
+                        ],
+                        borderColor: [
+                            'red'
+                        ],
+                        borderWidth: 2
+                    }]
+                };
+                // config 
+                const config = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                };
+                // render init block                
+                const myChart = new Chart(
+                    document.getElementById('myChart5'),
+                    config
+                )
+            }
+        })
+    })
+    $(document).ready(function () {
+        $.ajax({
+            url: '/admin/get-sales-details',
+            method: 'get',
+            
+            success: (response) => {
+             
+                let data2 = []
+                response.yearlyIncome.map((value) => {
+                    data2.push({ x: value._id, y: value.total })
+                })
+                const ctx = document.getElementById('myChart2').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            label: 'Yearly Sales Report',
+                            data: data2,
+                            backgroundColor: [
+                                'rgba(167, 15, 93, 0.8)'
+                            ],
+                            borderColor: [
+                                'red'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        })
+    })
+    $(document).ready(function () {
+        $.ajax({
+            url: '/admin/get-sales-details',
+            method: 'get',
+            success: (response) => {
+      
+                let data3 = [];
+                response.month.map((value) => {
+                    data3.push({ x: value._id, y: value.totalAmount })
+                })
+                const ctx = document.getElementById('myChart3').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            label: 'Monthly Sales Report',
+                            data: data3,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        })
+    })
+</script>
+{{!-- side bar --}}
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+</script>

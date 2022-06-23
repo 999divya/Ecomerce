@@ -2,42 +2,63 @@ const catOffer = require('../models/catOfferSchema')
 const Product = require('../models/productSchema')
 const moment = require('moment');
 const Category = require('../models/categorySchema');
-const offer = require('../models/offerSchema')
+const offer = require('../models/offerSchema');
+const { findOne } = require('../models/productSchema');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 
 
-exports.viewAllCategoryOffers = async(req,res)=>{ // /view-all-catoffers
-    let today = new Date()
-    const offerdetails1 = await catOffer.find({})
-    let todate = moment(offerdetails1.toDate).format('YYYY-MM-DD')
-    let fromdate = moment(offerdetails1.fromDate).format('YYYY-MM-DD')
-    var to = new Date(todate);
-    var from = new Date(fromdate); // gives 1486492200000
-   
-    const setOfferExpiry = await catOffer.updateMany({toDate:{$lt:today}},{$set:{status:"Expired", percentage:0}})
+exports.viewAllCategoryOffers = async (req,res)=>{ // /view-all-catoffers
+  if (req.session.adminLoggedin) {
+    const offerdetails1 = await catOffer.find({toDate:{$lt:new Date()}})
+    // let today = new Date()
+
+    offerdetails1?.map(async(catoffer)=>{
+
+ 
+      const categoryname = await Category.find({_id:catoffer.catId})
+
+
+ 
+        const product = await Product.find({category:catoffer.categoryname})
+        product.map(async(prod)=>{
+          const canceloffer = await Product.updateOne({category:catoffer.categoryname},{$set:{percentage:0, discount:0, realAmount:prod.price}})
+
+        })
+       
+
+
+      const deleteItem = await catOffer.deleteOne({toDate:{$lt:new Date()}},{_id:catOffer._id})
+
+    })
+  
   
     const offerdetails = await catOffer.find({})
     res.render('adminviews/view-categoryoffers', { admin: true, offerdetails })
+  }else{
+    res.redirect('/login')
 }
+}
+
+
+
+
 
 
 exports.addCategoryOffer = async(req,res)=>{// /add-category-offer
-
+  if (req.session.adminLoggedin) {
     const category = await Category.find()
     res.render('adminviews/add-categoryoffer', { admin: true, category })
+  }else{
+    res.redirect('/login')
+}
 
 }
 
-exports.saveCategoryOffer = async(req,res)=>{
 
-    const category = await Category.find()
-    res.render('adminviews/add-categoryoffer', { admin: true, category })
 
-}
-
-exports.saveCategoryOffer = async(req,res)=>{ //  /save-category-offer
-
+exports.saveCategoryOffer = async(req,res)=>{ 
+  if (req.session.adminLoggedin) {
     const catid = req.body.catname;
 
     const categorydetails = await Category.findOne({ _id: ObjectId(catid) })
@@ -58,22 +79,12 @@ exports.saveCategoryOffer = async(req,res)=>{ //  /save-category-offer
     const constdiscount = await Category.updateOne({ _id: ObjectId(catid) },
       { $set: { percentage: req.body.percent } })
   
-    // db.orders.update({
-    //   "_id": ObjectId("56892f6065380a21019dc810")
-    // }, {
-    //   $set: {
-    //       "wartoscEUR": {
-    //           $multiply: ["wartoscPLN", 4]
-    //       } { wartoscPLN: 4 }
-    //   }
-    // })  "perc": { "$multiply": [ { "$divide": ["$ctv","$count"] }, 100 ] },
   
-    // const percent = parseInt(req.body.percent)/100
     const pervalue = parseInt(req.body.percent) / 100
-    console.log('categorydetails.category,', categorydetails.category);
+  
     let productUpdation = await Product.find({ category: categorydetails.category })
   
-    console.log('productUpdation', productUpdation)
+
   
     await productUpdation.map(async (product) => {
       let actualPrice = product.price;
@@ -98,18 +109,26 @@ exports.saveCategoryOffer = async(req,res)=>{ //  /save-category-offer
   
   
     res.redirect('/admin/view-all-catoffers')
+  }else{
+    res.redirect('/login')
+}
 }
 
 
 exports.editCategoryOffer = async(req,res)=>{
+  if (req.session.adminLoggedin) {
     const category = await Category.find({})
     const editdetails = await catOffer.findOne({ _id: req.params.id })
     res.render('adminviews/edit-categoryoffer', { admin: true, offerdetails: editdetails, category })
+  }else{
+    res.redirect('/login')
+}
 }
 
 
-exports.saveEditedCategoryOffer = async(req,res)=>{// /save-edited-catoffer
 
+exports.saveEditedCategoryOffer = async(req,res)=>{// /save-edited-catoffer
+  if (req.session.adminLoggedin) {
     const catofferdetails = await catOffer.updateOne({
         _id: req.body.catofferid
       }, {
@@ -155,25 +174,30 @@ exports.saveEditedCategoryOffer = async(req,res)=>{// /save-edited-catoffer
     
       res.redirect('/admin/view-all-catoffers')
 
-
+    }else{
+      res.redirect('/login')
+  }
 }
 
 exports.deleteCategoryOffer = async(req,res)=>{
+  if (req.session.adminLoggedin) {
+    const products = await catOffer.findOne({_id:req.params.id})
+    const catproducts = await Product.find({category:products.categoryname})
 
-    const products = await catOffer.find({_id:req.params.id})
-    const product = await Product.find({})
-   
-  products.map(async(thepro)=>{
-    const product = await Product.findOne({category:thepro.categoryname})
-    const canceloffer = await Product.updateOne({category:thepro.categoryname},{$set:{percentage:0, discount:0, realAmount:product.price}})
+   catproducts.map(async(thepro)=>{
+
+    const findAllproduct = await Product.findOne({_id:thepro._id, category:thepro.category})
+
+    const canceloffer = await Product.updateOne({_id:thepro._id, category:thepro.category},{$set:{percentage:0, discount:0, realAmount:thepro.price}})
+
   })
   
   const deletecatoffer = await catOffer.deleteOne({ _id: req.params.id })
   
-  
-  
-  
     res.redirect('/admin/view-all-catoffers')
+}else{
+  res.redirect('/login')
+}
 
 }
 
@@ -181,7 +205,7 @@ exports.deleteCategoryOffer = async(req,res)=>{
 
 exports.changeCategoryOfferStatus = async(req,res)=>{
 
-    
+  if (req.session.adminLoggedin) {
   const catofferId = req.body.catofferId;
 
   const catoffersStatus = await catOffer.updateOne({ _id: ObjectId(catofferId) }, { $set: { status: req.body.status} })
@@ -194,11 +218,13 @@ exports.changeCategoryOfferStatus = async(req,res)=>{
  
 products.map(async(thepro)=>{
   const product = await Product.findOne({category:thepro.categoryname})
-  console.log('product', product);
-  console.log('pricee', product.price);
+
  
   const canceloffer = await Product.updateOne({category:thepro.categoryname},{$set:{percentage:0, discount:0, realAmount:product.price}})
 })
 
   const deletecatoffer = await catOffer.deleteOne({ status: 'Expired'},{ _id:  req.params.id })
+}else{
+  res.redirect('/login')
+}
 } 

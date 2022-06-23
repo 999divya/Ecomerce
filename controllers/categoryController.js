@@ -15,6 +15,7 @@ const Product = require('../models/productSchema')
 
 
 exports.createNewCategory = async (req, res) => {
+    if (req.session.adminLoggedin) {
 
     const imgPath = [];
     if (req.body.id == '') {
@@ -73,7 +74,9 @@ exports.createNewCategory = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-
+    }else{
+        res.redirect('/login')
+    }
 }
 
 
@@ -81,10 +84,14 @@ exports.createNewCategory = async (req, res) => {
 
 
 exports.searchCategory = async (req, res) => {
+    if (req.session.adminLoggedin) {
     const searchCat = await Category.find({
         category: new RegExp(req.query.searchdata, "i"),
     })
     res.render('adminviews/view-category', { admin: true, categoryList: searchCat });
+}else{
+    res.redirect('/login')
+}
 }
 
 
@@ -97,29 +104,12 @@ exports.searchCategory = async (req, res) => {
 
 
 exports.deleteEachCategory = async (req, res) => {
-    // if(req.session.adminLoggedin){
+    if (req.session.adminLoggedin) {
     const findthatCat = await Category.find({ _id: req.params.id })
 
 
     const find = findthatCat[0].category;
-    console.log(find);
-
-    //    const find =objectId(req.params.id)
-
-
-
-    //         console.log(find)
-
-    //         const name = await Category.aggregate([
-
-    //             {$match:{_id:find}},
-    //             // {$group:{_id:"$category"}},
-    //             // {$project:{ category:"$category"}},
-    //             {$project:{category:1,_id:0}},
-
-
-    //         ])
-    //         console.log(name[0].category)
+   
 
     const result = await Product.find({ category: find })
 
@@ -134,7 +124,9 @@ exports.deleteEachCategory = async (req, res) => {
     // else {
     //     res.redirect('/admin/view-category');
     // }
-
+    }else{
+        res.redirect('/login')
+    }
 
 }
 
@@ -156,10 +148,12 @@ exports.deleteEachCategory = async (req, res) => {
 
 
     exports.editEachCategory = async (req, res) => {
-        // if(req.session.adminLoggedin){
+        if(req.session.adminLoggedin){
         const findCategoryToEdit = await Category.findOne({
             _id: req.params.id
         }).exec()
         res.render('adminviews/add-category', { admin: true, editCategory: findCategoryToEdit, c: true })
-        // }
+        }else{
+            res.redirect('/login')
+        }
     }

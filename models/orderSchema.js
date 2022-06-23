@@ -30,12 +30,34 @@ const orderschema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    dateIso:{
+        type:Date
+    },
     status:{
         type:String,
         required:true,
+    },
+    totalMRP:{
+        type:Number
+    },
+    totalOfferDiscount:{
+        type:Number
+    },
+    couponcode:{
+        type:String
+    },
+
+    couponpercent:{
+        type:Number
+    },
+    coupondiscount:{
+        type:Number
+    },
+    usedwalletamount:{
+        type:Number
     }
-    
+
 });
 
-module.exports= mongoose.model('Order', orderschema);
+module.exports= mongoose.model('Order', orderschema);//orders
 

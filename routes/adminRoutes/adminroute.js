@@ -11,36 +11,47 @@ const orderController = require('../../controllers/orderController');
 
 const { Route } = require('express');
 const Product = require('../../models/productSchema')
-const offer = require('../../models/offerSchema')
+// const offer = require('../../models/offerSchema')
 const order = require('../../models/orderSchema')
-const catOffer = require('../../models/catOfferSchema')
-const Coupon = require('../../models/couponSchema')
+// const catOffer = require('../../models/catOfferSchema')
+// const Coupon = require('../../models/couponSchema')
 
-const moment = require('moment');
+// const moment = require('moment');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 
 
+// const adminLoggedin = (req, res, next) => {
+
+//   // const user = await user.findOne({})
+//   // req.session.admin =user;
+//   req.session.adminLoggedin = true;
+//   if (req.session.adminLoggedin) {
+//     if (!req.user) {
+//       res.header(
+//           "cache-control",
+//           "private,no-cache,no-store, must-revalidate"
+//       )
+//       res.header("Expires","-1")
+//       res.header("Pragma","no-cache")
+//   }
+//     next()
+//   } else {
+//     res.redirect('/login');
+//   }
+// }
 
 
-
-
-const adminLoggedin = (req, res, next) => {
-
-  // const user = await user.findOne({})
-  // req.session.admin =user;
-  req.session.adminLoggedin = true;
-  if (req.session.adminLoggedin) {
-    next()
-  } else {
-    res.redirect('/login');
-  }
-}
-
-
+// route.get('/',(req,res)=>{
+//   if (req.session.adminLoggedin) {
+//   res.render('adminviews/dashboard',{admin:true})
+//   }
+// })
 
 
 route.get('/', async (req, res) => {
+
+  if (req.session.adminLoggedin) {
   let totalorders = await order.find().count()
   let totalusers = await user.find().count()
   let totalproducts = await Product.find().count()
@@ -60,7 +71,13 @@ route.get('/', async (req, res) => {
 
 
   const totalincome = totalincomes[0]?.total;
+
   res.render('adminviews/dashboard', { admin: true, totalorders, totalincome, totalusers, totalproducts })
+
+  }else{
+    res.redirect('/login')
+}
+
 })
 
 
@@ -72,22 +89,31 @@ route.get('/blockEachUser/:id', userController.userBlockHandler);
 
 
 
-route.get('/search-category', categoryController.searchCategory);
-route.post('/view-Category', adminLoggedin, categoryController.createNewCategory);
-route.get('/editEachCategory/:id', adminLoggedin, categoryController.editEachCategory);
-route.get('/deleteEachCategory/:id', adminLoggedin, categoryController.deleteEachCategory);
+route.get('/search-category',  categoryController.searchCategory);
+route.post('/view-Category', categoryController.createNewCategory);
+route.get('/editEachCategory/:id',  categoryController.editEachCategory);
+route.get('/deleteEachCategory/:id', categoryController.deleteEachCategory);
 
 
-route.get('/add-category', async (req, res) => {
+route.get('/add-category',  async (req, res) => {
+  if (req.session.adminLoggedin) {
   res.render('adminviews/add-category', { admin: true });
+  }else{
+    res.redirect('/login')
+}
 });
 
 
 
-route.get('/view-category', adminLoggedin, async (req, res) => {
+route.get('/view-category',  async (req, res) => {
   try {
+    if (req.session.adminLoggedin) {
     const Categorys = await Category.find().sort({ _id: -1 });
+
     res.render('adminviews/view-category', { admin: true, categoryList: Categorys });
+    }else{
+      res.redirect('/login')
+  }
   } catch (error) {
     console.log(error.message);
   }
@@ -95,28 +121,28 @@ route.get('/view-category', adminLoggedin, async (req, res) => {
 });
 
 
-
-
-
-
-
-route.get('/add-products', adminLoggedin, async (req, res) => {
+route.get('/add-products', async (req, res) => {
+  if (req.session.adminLoggedin) {
 
   const Categorys = await Category.find().exec();
 
   res.render('adminviews/add-products', { admin: true, categoryList: Categorys })
+  }else{
+    res.redirect('/login')
+}
 });
 
 
-
 route.get('/search-products', productController.searchProducts);
-route.get('/edit-products/:id', adminLoggedin, productController.editEachProducts);
-route.get('/view-products', adminLoggedin, productController.showAllProducts);
-route.post('/view-products', adminLoggedin, productController.productHandler);
-route.get('/deleteEachProduct/:id', adminLoggedin, productController.deleteEachProduct);
+route.get('/edit-products/:id', productController.editEachProducts);
+route.get('/view-products', productController.showAllProducts);
+route.post('/view-products', productController.productHandler);
+route.get('/deleteEachProduct/:id', productController.deleteEachProduct);
 
 route.get('/view-products', (req, res) => {
+  if (req.session.adminLoggedin) {
   res.render('adminviews/view-products', { admin: true })
+  }
 });
 
 
@@ -124,19 +150,7 @@ route.get('/view-products', (req, res) => {
 //     res.render('adminviews/view-orders',{admin:true})
 // })
 
-
-
-
-
-
-
-
-
-
-
-
-
-route.get('/view-orders', orderController.handleOrders)
+route.get('/view-orders',orderController.handleOrders)
 route.get('/cancelEachOrder/:id', orderController.cancelOrders)
 
 route.get('/show-products/:id', orderController.displayOrderedProducts)
@@ -156,12 +170,12 @@ route.get('/view-all-catoffers', categoryOfferController.viewAllCategoryOffers)
 route.get('/add-category-offer', categoryOfferController.addCategoryOffer)
 
 
-route.post('/save-category-offer', categoryOfferController.saveCategoryOffer)
+route.post('/save-category-offer',  categoryOfferController.saveCategoryOffer)
 
 route.get('/edit-category-offer/:id', categoryOfferController.editCategoryOffer)
 
 
-route.post('/save-edited-catoffer',categoryOfferController.saveEditedCategoryOffer)
+route.post('/save-edited-catoffer', categoryOfferController.saveEditedCategoryOffer)
 
 
 route.get('/delete-catOffer/:id', categoryOfferController.deleteCategoryOffer)
@@ -187,11 +201,11 @@ route.post('/save-new-offer',productOfferController.saveNewProductOffer)
 
 route.get('/edit-offers/:id', productOfferController.editProductOffers)
 
-route.post('/save-editedoffers',productOfferController.saveEditedProductOffers)
+route.post('/save-editedoffers', productOfferController.saveEditedProductOffers)
 
 route.get('/delete-offer/:id', productOfferController.deleteProductOffers)
 
-route.post('/change-prodoffer-status',productOfferController.changeProductOfferStatus)
+route.post('/change-prodoffer-status', productOfferController.changeProductOfferStatus)
 
 //******************************************************* 
 
@@ -201,25 +215,30 @@ route.get('/sales-report',salesController.salesReport )
 
 route.post('/save-report',salesController.saveReport)
 
+route.get('/get-sales-details', salesController.getChartDetails)
+
 
 //**********************************************************
 const couponController = require('../../controllers/couponController')
 
 
-route.post('/change-coupon-status', couponController.changeCouponStatus);
+route.post('/change-coupon-status',couponController.changeCouponStatus);
+// route.get('/all-coupon-users',(req,res)=>{
+//   res.render('adminviews/view-all-couponusers',{admin:true})
+// })
 
+route.get('/all-coupon-users/:id', couponController.allCouponUsers)
 
-
-route.get('/view-all-coupons', couponController.viewAllCoupons)
+route.get('/view-all-coupons',couponController.viewAllCoupons)
 
 
 route.get('/add-new-coupon', couponController.addNewCoupon)
 
-route.post('/save-coupon', couponController.saveCoupon)
+route.post('/save-coupon',  couponController.saveCoupon)
 
 
 
-route.get('/delete-coupon/:id',couponController.deleteCoupon)
+route.get('/delete-coupon/:id', couponController.deleteCoupon)
 //********************************************************* 
 
 

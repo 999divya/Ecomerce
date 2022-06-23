@@ -8,17 +8,26 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <ul class="breadcrumb-nav">
-          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
-          <li><a href="index-2.html">Shop</a></li>
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
           <li>Cart</li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
+{{#if emptyCart}}
 
 <div class="shopping-cart section">
+
+
+
+
+
+
+
+
+
   <div class="container">
     <div class="cart-list-head">
 
@@ -26,24 +35,35 @@
         <div class="row">
           {{!-- <div class="col-lg-1 col-md-1 col-12">
           </div> --}}
-          <div class="col-lg-3 col-md-3 col-12">
+          <div class="col-lg-2 col-md-3 col-12">
             <p><strong>Image</strong></p>
           </div>
-          <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+          <div class="col-lg-2 col-md-4 col-12 text-center">
             <p><strong>Product Name</strong></p>
           </div>
-          <div class="col-lg-2 col-md-2 col-12">
+          <div class="col-lg-2 col-md-2 col-12 text-center">
             <p><strong> Product Qty</strong></p>
           </div>
-          <div class="col-lg-2 col-md-2 col-12 text-center">
-            <p><strong>Price</strong></p>
+          <div class="col-lg-1 col-md-2 col-12">
+            <p><strong>Discount</strong></p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+            <p><strong>Current Price</strong></p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+            <p><strong>MRP</strong></p>
           </div>
           {{!-- <div class="col-lg-2 col-md-2 col-12">
             <p>Subtotal</p>
           </div> --}}
 
-          <div class="col-lg-2 col-md-2 col-12 text-center">
+          <div class="col-lg-1 col-md-2 col-12 text-center">
             <p><strong>Remove</strong></p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+
+            <img style="height:45px; width:45px;" class="rounded-circle" src="/userasset/images/logo/shpcart.WEBP"
+              alt="Logo">
           </div>
         </div>
       </div>
@@ -56,7 +76,7 @@
           <div class="col-lg-2 col-md-1 col-12 text-center">
             <a href="product-details.html"><img src="{{#index_of this.product.Image 0}}{{/index_of}}" alt="#"></a>
           </div>
-          <div class="col-lg-3 col-md-3 col-12 text-center">
+          <div class="col-lg-2 col-md-3 col-12 text-center">
 
             <h5 class="product-name"><a href="product-details.html">
 
@@ -64,32 +84,49 @@
             {{!-- <p class="product-des"> --}}
               {{!-- <span><em>{{this.quantity}}</em></span> --}}
               {{!-- <span><em>Color:</em> Black</span> --}}
-            {{!-- </p> --}}
+              {{!-- </p> --}}
           </div>
-          <div class="col-lg-3 col-md-2 col-12 text-center ">
+          <div class="col-lg-2 col-md-2 col-12 text-center ">
             <div class="count-input">
               <input type="text" name="product" value="{{this.product._id}}" hidden>
               <button class="btn btn-secondary" style="width:40px"
-                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)"><i class="lni lni-minus"></i></button>
+                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)"><i
+                  class="lni lni-minus"></i></button>
               <input type="text" id="{{this.product._id}}" value="{{this.quantity}}" style="width:28px">
-              <button class="btn btn-secondary"  style="width:40px"
-                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',1)"><i class="lni lni-plus"></i></button>
+              <button class="btn btn-secondary" style="width:40px"
+                onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',1)"><i
+                  class="lni lni-plus"></i></button>
             </div>
           </div>
-          <div class="col-lg-2 col-md-2 col-12 text-center">
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+            <p>%{{this.product.percentage}}</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12 text-center">
             <p>₹{{this.product.realAmount}}</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+            <p>₹{{this.product.price}}</p>
           </div>
           {{!-- <div class="col-lg-2 col-md-2 col-12">
             <p>{{multiply this.quantity this.product.price}}</p>
           </div> --}}
 
+          <div class="col-lg-1 col-md-2 col-12 text-center">
+
+            <button class="btn btn-danger" style="width:50px"
+              onclick="removeItem('{{this._id}}','{{this.product._id}}')"><i class="lni lni-close"></i></button>
+
+
+            {{!-- <a class="remove-item" href="/deleteCartItem/{{this.product._id}}/{{this._id}}"><i
+                class="lni lni-close"></i></a> --}}
+          </div>
           <div class="col-lg-2 col-md-2 col-12 text-center">
 
-  <button class="btn btn-danger"  style="width:50px"
-                onclick="removeItem('{{this._id}}','{{this.product._id}}')"><i class="lni lni-close"></i></button>
+            <img style="height:150px; width:150px;" src="/userasset/images/logo/addcart.jpg" alt="Logo">
 
 
-            {{!-- <a class="remove-item" href="/deleteCartItem/{{this.product._id}}/{{this._id}}"><i class="lni lni-close"></i></a> --}}
+            {{!-- <a class="remove-item" href="/deleteCartItem/{{this.product._id}}/{{this._id}}"><i
+                class="lni lni-close"></i></a> --}}
           </div>
 
         </div>
@@ -120,24 +157,26 @@
             <div class="col-lg-4 col-md-6 col-12">
               <div class="right">
                 <ul>
-               
-             
-{{!-- {{#if totalvalue}}
-<div class="preloader">
-    <div class="preloader-inner">
-        <div class="preloader-icon">
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</div>
-{{/if}} --}}
 
 
-    
-                  <li>Cart Subtotal  <span id="total">₹ {{totalvalue}}</span></li>
-                
-            {{!-- <span class="discount-price">₹ {{actualamount}}</span> --}}
+                  {{!-- {{#if totalvalue}}
+                  <div class="preloader">
+                    <div class="preloader-inner">
+                      <div class="preloader-icon">
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                  {{/if}} --}}
+
+
+                  <li>Total Amount <span id="noOffertotal">₹ {{withoutAnyOfferAmount}}</span></li>
+                  <li>Total Discount <span id="Offerdiscount"> {{totaldiscountamount}}</span></li>
+
+                  <li>Discounted Subtotal <span id="total">₹ {{totalvalue}}</span></li>
+
+                  {{!-- <span class="discount-price">₹ {{actualamount}}</span> --}}
                   {{!-- <li>Shipping<span>Free</span></li>
                   <li>You Save<span>$29.00</span></li>
                   <li class="last">You Pay<span>$2531.00</span></li> --}}
@@ -154,19 +193,42 @@
       </div>
     </div>
   </div>
+
+
 </div>
+
+
+{{else}}
+<section class="checkout-wrapper section">
+
+  <h4 style="color:rgb(177, 91, 151)" class="text-center">Empty cart!!<br> Lets add some items and enjoy shopping</h4>
+  <div class="container d-flex justify-content-center text-center">
+
+
+    <img style="height:400px; width:450px;" src="/userasset/images/logo/emptycart.webp">
+    
+
+  </div>
+       <div class="button justify-content-center text-center">
+                  <a href="/back-to-home" class="btn btn-alt">Continue shopping</a>
+                </div>
+</section>
+{{/if}}
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   function changeQuantiy(cartId, proId, userId, count) {
 
 
-  
+
     let quantity1 = document.getElementById(proId).value;
 
     quantity = parseInt(quantity1);
     count = parseInt(count)
-   
-   
+
+
     $.ajax({
       url: '/change-product-quantity',
       data: {
@@ -178,51 +240,79 @@
       },
       method: 'post',
       success: (response) => {
-   
+
         if (response.status && response.removeProduct) {
-          alert('product removed from cart'),
-            location.reload()
+          Swal.fire({
+            title: 'Item deleted, shop again!!!',
+            showCancelButton: false,
+            confirmButtonColor: '#34c38f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload()
+
+            }
+          })
+
+
         } else {
 
+
           document.getElementById(proId).value = quantity + count;
-        
-             document.getElementById('total').innerHTML = response.totalvalue;
-            let currentVal = document.getElementById('cart-count').innerHTML;
-              var counter = parseInt(currentVal);
-             document.getElementById('cart-count').innerHTML=  (counter + count)  ;
-   
+
+          document.getElementById('noOffertotal').innerHTML = "₹ " + response.withoutAnyOfferAmount;
+          document.getElementById('Offerdiscount').innerHTML = "-" + response.totaldiscountamount;
+          document.getElementById('total').innerHTML = "₹ " + response.totalvalue;
+          let currentVal = document.getElementById('cart-count').innerHTML;
+          var counter = parseInt(currentVal);
+          document.getElementById('cart-count').innerHTML = (counter + count);
+
         }
       }
 
     })
-  
-  
-}
+
+
+  }
 
 
 
 
 
 
-function removeItem(cartId, proId){
+  function removeItem(cartId, proId) {
 
 
-$.ajax({
-   url: '/deleteCartItem',
+    $.ajax({
+      url: '/deleteCartItem',
       data: {
         cart: cartId,
         product: proId,
       },
-  method: 'post',
- success: (response) => {
- location.reload()
-
- }
-})
+      method: 'post',
+      success: (response) => {
 
 
+        Swal.fire({
+          title: 'Item deleted, shop again!!!',
+          showCancelButton: false,
+          confirmButtonColor: '#34c38f',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload()
 
-}
+          }
+        })
+
+      }
+    })
+
+
+
+  }
 
 
 </script>

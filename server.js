@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
@@ -20,6 +21,7 @@ const registerRouter = require('./routes/registerroute');
 const logoutController = require('./routes/logoutroute')
 const handlebars = require('handlebars');
 const moment  = require('moment')
+const niceInvoice = require("nice-invoice");
 
 handlebars.registerHelper("multiply", function(a, b) {
     return parseInt(a) * parseInt(b);
@@ -41,6 +43,12 @@ handlebars.registerHelper("multiply", function(a, b) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
+handlebars.registerHelper('ifNoteCancelled', function(arg1, options) {
+
+  return (arg1!= 'cancelled') ? options.fn(this) : options.inverse(this)
+
+});
+
 
 
   handlebars.registerHelper("time", function(date) {
@@ -56,6 +64,14 @@ handlebars.registerHelper("multiply", function(a, b) {
    }
   });
 
+  handlebars.registerHelper('hasDiscountPrice', function( arg1, options) {
+   let arg = 0
+    if(arg1!=null){
+     arg= parseInt(arg1);
+   }
+
+    return (arg!= 0) ? options.fn(this) : options.inverse(this);
+});
 
 
 
@@ -70,6 +86,7 @@ app.use(bodyParser.json());
 
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(cookieParser());
 
 // app.use(morgan('tiny'));
 // override with the X-HTTP-Method-Override header in the request
@@ -81,8 +98,10 @@ app.use((req, res, next) => {
             "cache-control",
             "private,no-cache,no-store, must-revalidate"
         )
+
         res.header("Expires","-1")
         res.header("Pragma","no-cache")
+
     }
     next()
 })
@@ -90,6 +109,18 @@ app.use((req, res, next) => {
 
 //connect to the mongodb
 connectDB();
+
+
+
+
+// app.use((req,res,next)=>{
+//   req.locals.message1=req.session.message1
+//   delete req.session.message1
+//   next()
+// })
+
+
+
 
 
 app.set('views', path.join(__dirname,'views'))
@@ -145,9 +176,7 @@ app.use(
         secret: uuidv4(),
         resave: false,
         saveUninitialized: true,
-        // cookie:{
-        //     expires:6000000
-        // }
+        // cookie:{maxAge:600000}
     })
 )
 

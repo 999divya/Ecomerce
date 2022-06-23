@@ -18,9 +18,9 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12">
                 <ul class="breadcrumb-nav">
-                    <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
-                    <li><a href="index-2.html">Shop</a></li>
-                    <li>Orders</li>
+                    <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+                    <li><a href="/back-to-home">Shop</a></li>
+                    <li>My Orders</li>
                 </ul>
             </div>
         </div>
@@ -35,22 +35,31 @@
         </div>
         <div class="cart-list-head">
             <div class="cart-list-title">
-                <div class="row">
+                <div class="row table-responsive">
 
 
-                    <table id="example" class="display nowrap" style="width:100%">
+                    <table id="example" class="table display nowrap" style="width:100%">
 
 
                         <thead>
                             <tr>
                                 <th>Sl.</th>
-                                <th>Ordered Products</th>
+                                <th class="text-wrap">Ordered Products</th>
                                 {{!-- <th>Image</th> --}}
                                 {{!-- <th>Price</th>
                                 <th>Qty</th> --}}
-                                <th>Date and time</th>
-                                <th>Delivery Address</th>
-                                <th>Total</th>
+                                <th class="text-wrap">Date and time</th>
+                                <th class="text-wrap">Delivery Address</th>
+     <th  class="text-wrap">Total MRP(₹)</th>
+        <th  class="text-wrap">Offer discount(₹)</th>
+                <th  class="text-wrap">Coupon code</th>
+         <th  class="text-wrap">Coupon percent(%)</th>
+    <th  class="text-wrap">Coupon discount(₹)</th>
+        <th  class="text-wrap">Wallet Discount(₹)</th>
+    
+
+                                <th class="text-wrap">Discounted Amount</th>
+                                    
                                 <th>Payment</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -65,7 +74,10 @@
                                 <td>{{this.name}}</td>
                                 <td>{{this.price}}</td>
                                 {{/each}} --}}
-                                <td><div class="button"><a href="/show-products/{{this._id}}" class="btn btn-alt">Products</a></td>
+                                <td>
+                                    <div class="button"><a href="/show-products/{{this._id}}"
+                                            class="btn btn-alt">Products</a>
+                                </td>
 
                                 {{!-- <td>{{this.products.quantity}}</td> --}}
                                 <td>{{this.date}}<br>{{this.time}}</td>
@@ -75,23 +87,38 @@
                                     {{this.deliveryDetails.pincode}},<br>
                                     {{this.deliveryDetails.state}},<br>
                                     Shipping : {{this.deliveryDetails.shipping}}</td>
+
+                                     <td>{{this.totalMRP}}</td>
+                                        <td>{{this.totalOfferDiscount}}</td>
+                                           <td>{{this.couponcode}}</td>
+                                         <td>{{this.couponpercent}}</td>
+                                           <td>{{this.coupondiscount}}</td>
+                                             
+                                                 <td>{{this.usedwalletamount}}</td>  
                                 <td>{{this.totalAmount}}</td>
                                 <td>{{this.paymentMethod}}</td>
                                 <td>
 
                                     <label for="">{{this.status}}</label>
 
+
                                 </td>
-                                <td> <a href="/cancelEachUserOrder/{{this._id}}"
-                                        onclick="cancelOrder('{{this._id}}',event)" class="btn btn-danger"
-                                        value="delete" type="submit" class="text-danger">Cancel</a></td>
 
                                 <td>
-                                    <div class="button">
-                                        <a href="/invoice/{{this._id}}"
-                                            class="btn btn-alt mt-2">Invoice</a>
-                                    </div>
+                                    {{#ifNoteCancelled this.status}}
+                                    <a href="/cancelEachUserOrder/{{this._id}}"
+                                        onclick="cancelOrder('{{this._id}}',event)" class="btn btn-danger"
+                                        value="delete" type="submit" class="text-danger">Cancel</a>
+                                    {{/ifNoteCancelled}}
                                 </td>
+
+                                <td>
+                                 {{#ifNoteCancelled this.status}}
+                                        <a href="/invoice/{{this._id}}" type="submit" class="btn btn-dark">Invoice</a>
+                                         {{!-- <button style="height:30px; width:100px" type="submit"
+                            onclick="downloadInvoice('{{this._id}}', event)" id="downloadPdf"="" ></button> --}}
+                             {{!-- <button class="btn ms-1" id="downloadPdf"="" type="submit"><i class="ri-download-line"></i></button> --}}
+                             {{/ifNoteCancelled}}
 
                             </tr>
                             {{/each}}
@@ -151,4 +178,37 @@
             )
     })
     }
+</script>
+
+<script>
+  function downloadInvoice(id, e) {
+    e.preventDefault()
+var a = 123;
+    $.ajax({
+      url: `/download-invoice/${a}`,
+      method: 'get',
+      success: (response) => {
+
+
+        swal.fire({
+          title: "Your invoive has downloaded",
+          icon: 'warning',
+          dangerMode: true,
+        })
+      }
+
+    })
+  }
+</script>
+
+
+<script>
+  document
+    .getElementById("downloadPdf")
+    .addEventListener("click", function download() {
+      const element = document.getElementById("invoice");
+      html2pdf()
+        .from(element)
+        .save();
+    });
 </script>

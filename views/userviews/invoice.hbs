@@ -41,8 +41,8 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <ul class="breadcrumb-nav">
-          <li><a href="index-2.html"><i class="lni lni-home"></i> Home</a></li>
-          <li><a href="index-2.html">Shop</a></li>
+          <li><a href="/back-to-home"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="/back-to-home">Shop</a></li>
           <li>Invoice</li>
         </ul>
       </div>
@@ -89,6 +89,8 @@
 
                         {{!-- {{#each orders}} --}}
                         <div class="container-fluid mt-5 mb-3">
+                          <button style="height:40px; width:100px" type="submit"
+                            onclick="downloadInvoice('{{this._id}}', event)"></button>
                           <div class="row d-flex justify-content-center">
                             <div class="col-md-8">
                               <div class="card" id="invoice">
@@ -165,14 +167,7 @@
                                       </div>
 
 
-
-
-
                                     </div>
-
-
-
-
 
                                   </div>
 
@@ -236,6 +231,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
   document
     .getElementById("downloadPdf")
@@ -245,4 +256,27 @@
         .from(element)
         .save();
     });
+</script>
+
+
+
+<script>
+  function downloadInvoice(id, e) {
+    e.preventDefault()
+var a = 123;
+    $.ajax({
+      url: `/download-invoice/${a}`,
+      method: 'get',
+      success: (response) => {
+
+
+        swal.fire({
+          title: "Your invoive has downloaded",
+          icon: 'warning',
+          dangerMode: true,
+        })
+      }
+
+    })
+  }
 </script>
