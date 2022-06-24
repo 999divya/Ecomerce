@@ -64,10 +64,13 @@ route.get('/', async (req, res) => {
  
     const ProductDetails = await Product.find()
     const categoryDetails = await Category.find()
+    const newArrivals = await Product.find().sort({_id:-1}).limit(8);
+    const womenFashion = await Product.find({category:"WOMEN"}).sort({_id:-1}).limit(8);
+    const kidsWorld = await Product.find({category:"KIDS"}).sort({_id:-1}).limit(8);
 
 
 
-    res.render('userviews/user-home', { lk: true, products: ProductDetails, categorys: categoryDetails })
+    res.render('userviews/user-home', { newArrivals,womenFashion,kidsWorld, lk: true, products: ProductDetails, categorys: categoryDetails })
 
 });
 
@@ -279,38 +282,14 @@ route.post('/save-password', userController.savePasswordAgain)
 route.post('/select-orderaddress',orderController.selectOrderAddress)
 
 
-
-
-
-
-
-
-
-
-
-
-
 // route.post('/saveOrder-address', orderController.saveNewAddress)
 //save-address
 route.get('/order-address',orderController.orderAddress)
-
-
-
-
-
-
-
-
-
-
-
 
 route.post('/place-order', orderController.placeOrder)
 
 
 route.post('/verify-payment', orderController.paymentVerification)
-
-
 
 route.get('/back-to-home', userController.backToHome)
 
@@ -336,25 +315,11 @@ route.get('/cancelEachUserOrder/:id', orderController.cancelUserOrders)
 // route.post('/change-userdelivery-status',orderController.userDeliveryStatus)
 route.post('/change-userdelivery-status', orderController.userDeliveryStatus)
 
-
-
 route.get('/order-successful', orderController.orderSuccessful)
-
-
-
-
-
-
-
-
-
-
 
 route.get('/wallet',userController.showWallet)
 
 route.get('/wallethistory', userController.walletHistory)
-
-
 
 route.post('/WalletAmount', userController.walletAmount)
 

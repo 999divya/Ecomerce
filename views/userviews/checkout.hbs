@@ -1,7 +1,5 @@
-
-
 <div class="breadcrumbs">
-  <div class="container">
+  <div class="container ">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-12">
         <div class="breadcrumbs-content">
@@ -22,14 +20,17 @@
 
 
 <section class="checkout-wrapper section">
- {{#if totalvalue1}}
-  <div class="container">
+  {{#if totalvalue1}}
+  <div class="container pt-5 pb-5">
     <div class="button mb-3">
+
       <a href="/order-address" class="btn animate">Add new Address</a>
+
+
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-lg-8">
+      <div class="col-lg-8 ">
         <div class="checkout-steps-form-style-1">
           <ul id="accordionExample">
 
@@ -147,37 +148,37 @@
         </div> --}}
 
 
-            <div class="checkout-sidebar-coupon">
-            <p>Appy Coupon to get discount!</p>
-  
-              <div class="single-form form-default">
-                <div class="form-input form">
-                  <input type="text" placeholder="Coupon Code" name="coupon" id="couponInput">
-                </div>
-                {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
-                <div class="button">
-                  <button class="btn" type="button" onclick="couponApply()">Apply</button>
-                </div>
-                <p style="color:orangered" id="couperr">{{err}}</p>
-              </div>
-          </div>
-        
+        <div class="checkout-sidebar-coupon">
+          <p>Appy Coupon to get discount!</p>
 
-          <div class="checkout-sidebar-coupon mt-30">
-            <p>Enter the wallet Amount</p>
-  
-              <div class="single-form form-default">
-                <div class="form-input form">
-                  <input type="text" placeholder="Wallet amount" name="wallet" id="walletInput">
-                </div>
-                {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
-                <div class="button">
-                  <button class="btn" type="button" onclick="applyWalletAmount()">Apply</button>
-                </div>
-                <p style="color:orangered" id="walletid"></p>
-              </div>
-          
+          <div class="single-form form-default">
+            <div class="form-input form">
+              <input type="text" placeholder="Coupon Code" name="coupon" id="couponInput">
+            </div>
+            {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
+            <div class="button">
+              <button class="btn" type="button" onclick="couponApply()">Apply</button>
+            </div>
+            <p style="color:orangered" id="couperr">{{err}}</p>
           </div>
+        </div>
+
+
+        <div class="checkout-sidebar-coupon mt-30">
+          <p>Enter the wallet Amount</p>
+
+          <div class="single-form form-default">
+            <div class="form-input form">
+              <input type="text" placeholder="Wallet amount" name="wallet" id="walletInput">
+            </div>
+            {{!-- <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden> --}}
+            <div class="button">
+              <button class="btn" type="button" onclick="applyWalletAmount()">Apply</button>
+            </div>
+            <p style="color:orangered" id="walletid"></p>
+          </div>
+
+        </div>
         <div class="checkout-sidebar">
 
 
@@ -202,7 +203,8 @@
                 </label><br>
 
                 <label class="radio-inline mt-2">
-                  <input type="radio" name="paymentMethod" onclick="selectPayment('Razorpay')" value="Razorpay"> Razorpay
+                  <input type="radio" name="paymentMethod" onclick="selectPayment('Razorpay')" value="Razorpay">
+                  Razorpay
                 </label><br>
                 <label class="radio-inline mt-2">
                   <input type="radio" name="paymentMethod" onclick="selectPayment('paypal')" value="paypal"> Paypal
@@ -214,64 +216,66 @@
 
           <div class="checkout-sidebar-price-table mt-30">
             <h5 class="title">Pricing Table</h5>
-              <div class="sub-total-price">
-              
-                  <div class="total-price">
-       <p class="value">Actual Price:</p>
-                  <p class="price" id="totval1">₹ {{actualMRP}}</p>
-                  </div>
-                   <div class="total-price">
-                            <p class="value">Offer discount:</p>
-                  <p class="price" id="totval2"> {{totaldiscount}}</p>
-                  </div>
-                      <div class="total-price">
-                            <p class="value">Coupon discount:</p>
-                  <p class="price" id="totval5">- {{coupondiscount}}</p>
-                  </div>
+            <div class="sub-total-price">
 
-                        <div class="total-price">
-                            <p class="value">Wallet discount:</p>
-                  <p class="price" id="totval4">- {{walletdiscount}}</p>
-                  </div>
+              <div class="total-price">
+                <p class="value">Actual Price:</p>
+                <p class="price" id="totval1">₹ {{actualMRP}}</p>
+              </div>
+              <div class="total-price">
+                <p class="value">Offer discount:</p>
+                <p class="price" id="totval2"> {{totaldiscount}}</p>
+              </div>
+              <div class="total-price">
+                <p class="value">Coupon discount:</p>
+                <p class="price" id="totval5">- {{coupondiscount}}</p>
+              </div>
 
-                
-               <div class="total-price">
-                       <p class="value">Total amount:</p>
-                  <p class="price" id="totval">₹ {{totalvalue}}</p>
-                       <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
-                  </div>
-           
-                </div>
+              <div class="total-price">
+                <p class="value">Wallet discount:</p>
+                <p class="price" id="totval4">- {{walletdiscount}}</p>
               </div>
 
 
+              <div class="total-price">
+                <p class="value">Total amount:</p>
+                <p class="price" id="totval">₹ {{totalvalue}}</p>
+                <input type="text" id="totalhidden" value="{{totalvalue}}" style="display:none" name="total">
+              </div>
 
+            </div>
               <button type="submit" onclick="placeOrder()" class="btn btn-primary">place Order</button>
-
-
           </div>
 
+
+
+        
+
+
         </div>
+
       </div>
     </div>
   </div>
+  </div>
 
-    {{else}}
-<div class="container justify-content-center">
- 
-      <div class="row justify-content-center">
-         <div class="col-lg-8" >
+  {{else}}
+  <div class="container justify-content-center pt-5 pb-5">
 
-         <img class="shadow p-3 mb-5 bg-body rounded" style="height:400px; width:500px" src="userasset/images/logo/storeopen.jpg"  alt="#">
-    <div class="button justify-content-center">
-                  <a href="/show-my-orders" class="btn"> Goto MyOrders</a>
-                  <a href="/back-to-home" class="btn btn-alt">Shop again</a>
-                </div>
-                </div>
-         </div>
-              
-         </div>
-    {{/if}}
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <img class="shadow p-3 mb-5 bg-body rounded" style="height:400px; width:500px"
+          src="userasset/images/logo/storeopen.jpg" alt="#">
+        <div class="button justify-content-center">
+          <a href="/show-my-orders" class="btn"> Goto MyOrders</a>
+          <a href="/back-to-home" class="btn btn-alt">Shop again</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {{/if}}
 
 
 
@@ -279,14 +283,14 @@
 </section>
 
 
- <script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
   var checkoutAddressId;
   var paymentMethod;
- 
+
 
   function selectAddress(addresId) {
 
@@ -310,7 +314,7 @@
         dangerMode: true,
       })
     }
-   else if (!paymentMethod && checkoutAddressId) {
+    else if (!paymentMethod && checkoutAddressId) {
       swal.fire({
         title: "Please Select Payment Method to Place Order",
         icon: 'warning',
@@ -328,27 +332,27 @@
 
 
 
- let amount = document.getElementById('walletInput').value;
+      let amount = document.getElementById('walletInput').value;
       let couponCode = document.getElementById('couponInput').value
-  
+
       $.ajax({
         url: `/select-orderaddress?payment=${paymentMethod}&addressId=${checkoutAddressId}&code=${couponCode}&wallet=${amount}`,
         method: 'post',
         success: (res) => {
-       
-          if (res.paymentMethod=='COD') {
+
+          if (res.paymentMethod == 'COD') {
             swal.fire("Your Order Placed Successfully")
               .then((value) => {
-           
+
                 location.href = '/order-successful'
-                
+
               })
           }
           else if (res.paypal) {
             location.href = res.url
           }
           else {
-            
+
             razorpayPayment(res)
           }
         }
@@ -361,8 +365,8 @@
 
 
 
- function couponApply() {
- 
+  function couponApply() {
+
     let couponCode = document.getElementById('couponInput').value;
 
 
@@ -370,23 +374,23 @@
       url: '/apply-coupon',
       data: {
         coupon: document.getElementById("couponInput").value,
-       
+
       },
       method: 'post',
       success: (response) => {
 
         if (response.status && response.total) {
 
-       
-        document.getElementById("totval5").innerHTML ="-"+response.coupondiscount;
-          document.getElementById("totval").innerHTML ="₹ "+ response.total;
+
+          document.getElementById("totval5").innerHTML = "-" + response.coupondiscount;
+          document.getElementById("totval").innerHTML = "₹ " + response.total;
           document.getElementById("totalhidden").value = response.total;
           document.getElementById("couperr").innerHTML = response.err;
-          document.getElementById("couperr").style.color ="green";
-         
-        }else{
-             document.getElementById("couperr").innerHTML =response.err;
-            document.getElementById("couperr").style.color ="red";
+          document.getElementById("couperr").style.color = "green";
+
+        } else {
+          document.getElementById("couperr").innerHTML = response.err;
+          document.getElementById("couperr").style.color = "red";
 
         }
 
@@ -399,32 +403,32 @@
 
 
 
-/*****************************************************************/
-function applyWalletAmount() {
- 
+  /*****************************************************************/
+  function applyWalletAmount() {
+
     let amount = document.getElementById('walletInput').value;
 
     $.ajax({
       url: '/WalletAmount',
       data: {
         amount: amount,
-       
+
       },
       method: 'post',
       success: (response) => {
 
         if (response.status && response.total) {
 
-     
-      document.getElementById("totval4").innerHTML ="-"+response.walletdiscount;
-          document.getElementById("totval").innerHTML = "₹ "+response.total;
+
+          document.getElementById("totval4").innerHTML = "-" + response.walletdiscount;
+          document.getElementById("totval").innerHTML = "₹ " + response.total;
           document.getElementById("totalhidden").value = response.total;
           document.getElementById("walletid").innerHTML = response.msg;
-          document.getElementById("walletid").style.color ="green";
-   
-        }else{
+          document.getElementById("walletid").style.color = "green";
+
+        } else {
           document.getElementById("walletid").innerHTML = response.msg;
-          document.getElementById("walletid").style.color ="red";
+          document.getElementById("walletid").style.color = "red";
         }
 
       }
@@ -436,81 +440,81 @@ function applyWalletAmount() {
 
 
 
-function razorpayPayment(order){
+  function razorpayPayment(order) {
 
     var options = {
-    "key": "rzp_test_gpdw4Vd4R7dTYf", // Enter the Key ID generated from the Dashboard
-    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Kstyles",
-    "description": "Test Transaction",
-    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
+      "key": "rzp_test_gpdw4Vd4R7dTYf", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Kstyles",
+      "description": "Test Transaction",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
 
-        verifyPayment(response,order)
-    },
-    "prefill": {
+        verifyPayment(response, order)
+      },
+      "prefill": {
         "name": "Divyadas M P",
         "email": "ranidivyadas@gmail.com",
         "contact": "8086986052"
-    },
-    "notes": {
+      },
+      "notes": {
         "address": "Kstyles Corporate Office"
-    },
-    "theme": {
+      },
+      "theme": {
         "color": "#3399cc"
-    }
-};
+      }
+    };
 
 
 
 
-var rzp1 = new Razorpay(options);
- rzp1.open();
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
   }
 
 
 
 
-function verifyPayment(payment,order){
+  function verifyPayment(payment, order) {
 
 
-  $.ajax({
-    url:'/verify-payment',
-    data:{
-      payment,
-      order
-    },
-    method:'post',
-    success:(response)=>{
-      if(response.status){
-        location.href='/order-successful'
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-successful'
 
-      }else{
-        location.href='/order-failed'
+        } else {
+          location.href = '/order-failed'
+        }
       }
-    }
-  })
-}
+    })
+  }
 
-function verifyPayment(payment,order){
-       $.ajax({
-         url:'/verify-payment',
-         data:{
-           payment,
-           order
-         },
-         method:'post',
-         success:(response)=>{
-           if(response.status){
-              location.href='/order-successful'
-           }else{
-           
-            location.href='/order-failed'
-           }
-         }
-       })
-     }
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-successful'
+        } else {
+
+          location.href = '/order-failed'
+        }
+      }
+    })
+  }
 
 
 

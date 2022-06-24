@@ -18,10 +18,10 @@
 </div>
 
 
-<section class="item-details section">
+<section class="item-details section pt-5 pb-5">
 
     <div class="container">
-        
+
         <div class="text-sm-start pb-2 mb-2">
             <a href="/back-to-home" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2"><i
                     class="mdi mdi-plus me-1"></i>Home</a>
@@ -30,28 +30,37 @@
 
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-12 col-12">
-                    <div class="product-images">
+                    <div class="product-images" >
                         <main id="gallery">
-                            <div class="main-img" style="height:400px; width:400px;">
-                                 <div id="img-container" style="width: 400px">
-                                {{!-- <div class="card"> --}}
-                            
-                                 {{!-- <div class="card-img-overlay"> --}}
+                            <div class="main-img">
+                                <div id="img-container">
+                                    {{!-- <div class="card"> --}}
 
- {{!-- <button class="btn btn-info" onclick="zoomin()">+</button>
-  <button class="btn btn-info" onclick="zoomout()">-</button> --}}
-  {{!-- </div> --}}
-                                {{!-- </div> --}}
-                                  <img  src="{{#index_of products.Image 0}}{{/index_of}}" class="img1" id="current" alt="#">
-                            <div class="images" >
-                              
-                                <img onclick="changeImage(this)" src="{{#index_of products.Image 1}}{{/index_of}}" id="first-image" class="img" alt="#">
-                             
-                                <img onclick="changeImage(this)" src="{{#index_of products.Image 2}}{{/index_of}}" class="img" id="second-image" alt="#">
-                                <img onclick="changeImage(this)" src="{{#index_of products.Image 3}}{{/index_of}}" class="img" id="third-image" alt="#">
+                                        {{!-- <div class="card-img-overlay"> --}}
+
+                                            {{!-- <button class="btn btn-info" onclick="zoomin()">+</button>
+                                            <button class="btn btn-info" onclick="zoomout()">-</button> --}}
+                                            {{!--
+                                        </div> --}}
+                                        {{!-- </div> --}}
+                                    <img  src="{{#index_of products.Image 0}}{{/index_of}}"
+                                        class="img1" id="current" alt="#">
+                                    <div class="images">
+
+                                        <img onclick="changeImage(this)"
+                                            src="{{#index_of products.Image 1}}{{/index_of}}" id="first-image"
+                                            class="img" alt="#">
+
+                                        <img onclick="changeImage(this)"
+                                            src="{{#index_of products.Image 2}}{{/index_of}}" class="img"
+                                            id="second-image" alt="#">
+                                        <img onclick="changeImage(this)"
+                                            src="{{#index_of products.Image 3}}{{/index_of}}" class="img"
+                                            id="third-image" alt="#">
+                                    </div>
+
+                                </div>
                             </div>
-                         
-                             </div>
                         </main>
                     </div>
                 </div>
@@ -59,29 +68,31 @@
 
                     <div class="product-info">
                         <h2 class="title">{{products.brand}}</h2>
-                            <p class="category">{{products.type}}</p>
+                        <p class="category">{{products.type}}</p>
                         <p class="category"><i class="lni lni-tag"></i>{{products.name}}<a
                                 href="javascript:void(0)"></a></p>
-                                   <p class="category">{{products.size}}</p>
+                        <p class="category">{{products.size}}</p>
 
-                                      {{!-- <div class="price" >   <span><h3 >₹ {{products.realAmount}}</h3></span> 
+                        {{!-- <div class="price"> <span>
+                                <h3>₹ {{products.realAmount}}</h3>
+                            </span>
                             {{#if products.discount}}
                             <span class="discount-price">{{products.price}}</span>
                             {{/if}}
                         </div> --}}
 
-                               <div class="price">₹
+                        <div class="price">₹
                             {{products.realAmount}}
                             {{#if products.discount}}
                             <span class="discount-price">{{products.price}}</span>
                             {{/if}}
                         </div>
-                     
-                      <p class="info-text">Description: {{products.description}}</p>
+
+                        <p class="info-text">Description: {{products.description}}</p>
                         <div class="row">
 
 
-{{!-- 
+                            {{!--
                             <div class="col-lg-6 col-md-4 col-12">
                                 <div class="form-group">
 
@@ -120,7 +131,7 @@
                             </div> --}}
 
 
-{{!-- 
+                            {{!--
                             <div class="col-lg-4 col-md-4 col-12">
 
 
@@ -168,8 +179,10 @@
                                 <div class="col-lg-4 col-md-4 col-12">
                                     <div class="button cart-button">
                                         {{!-- <button class="btn" style="width: 100%;">Add to Cart</button> --}}
-                                           <input type="text" value="{{products.id}}" name="productid" style="display:none">
-                                        <button class="btn m-2" onclick="displayconfirm('{{products.id}}')" type="button">
+                                        <input type="text" value="{{products.id}}" name="productid"
+                                            style="display:none">
+                                        <button class="btn m-2" onclick="displayconfirm('{{products.id}}')"
+                                            type="button">
                                             <i class="lni lni-cart"></i>Add to Cart</button>
                                     </div>
                                 </div>
@@ -229,29 +242,29 @@
 
     </div>
 </section>
-  <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
+<script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
 
-   <script src=
-"https://code.jquery.com/jquery-1.12.4.min.js">
-    </script>
-{{!-- <script>
-var options = {
-    width: 400,
-    zoomWidth: 500,
-    offset: {vertical: 0, horizontal: 10},
+<script src="https://code.jquery.com/jquery-1.12.4.min.js">
+</script>
+{{!--
+<script>
+    var options = {
+        width: 400,
+        zoomWidth: 500,
+        offset: { vertical: 0, horizontal: 10 },
 
-};
-new ImageZoom(document.getElementById("img-container"), options);
- 
+    };
+    new ImageZoom(document.getElementById("img-container"), options);
+
 </script> --}}
 
 
 
 {{!-- function changeImage(image){
-    var container = document.getElementById('current');
-    var mainSrc = container.src;
-    container.src = image.src;
-    image.src = mainSrc;
+var container = document.getElementById('current');
+var mainSrc = container.src;
+container.src = image.src;
+image.src = mainSrc;
 
 } --}}
 
@@ -264,13 +277,13 @@ new ImageZoom(document.getElementById("img-container"), options);
         })
     }) */
 
-    function changeImage(image){
-    var container = document.getElementById('current');
-   var mainSrc = container.src;
-   container.src = image.src;
-   image.src = mainSrc;
+    function changeImage(image) {
+        var container = document.getElementById('current');
+        var mainSrc = container.src;
+        container.src = image.src;
+        image.src = mainSrc;
 
-}
+    }
 
 
     var options = {
@@ -281,7 +294,7 @@ new ImageZoom(document.getElementById("img-container"), options);
         scale: .7
     }
     new ImageZoom(document.getElementById("img-container"), options)
-        new ImageZoom(document.getElementById("first-image"), options)
+    new ImageZoom(document.getElementById("first-image"), options)
 </script>
 
 
@@ -349,29 +362,29 @@ new ImageZoom(document.getElementById("img-container"), options);
 <script>
 
     function displayconfirm(proId) {
-    
-       $.ajax({
+
+        $.ajax({
             method: 'get',
             url: '/add-to-cart/' + proId,
-                    success: (response) => {
+            success: (response) => {
                 if (response.status) {
-                       swal.fire({
-                    title: "Product added to the cart",
+                    swal.fire({
+                        title: "Product added to the cart",
 
-                    dangerMode: true,
-                })
+                        dangerMode: true,
+                    })
                     let count = $('#cart-count').html()
                     count = parseInt(count) + 1
 
                     $("#cart-count").html(count)
-                }else{
-                       swal.fire("Please login to add products")
-              .then((value) => {
-           
-                location.href = '/login'
-                
-              })
-                  
+                } else {
+                    swal.fire("Please login to add products")
+                        .then((value) => {
+
+                            location.href = '/login'
+
+                        })
+
                 }
             }
 

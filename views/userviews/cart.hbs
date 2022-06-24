@@ -28,10 +28,10 @@
 
 
 
-  <div class="container">
-    <div class="cart-list-head">
+  <div class="container pt-5 ">
+    <div class="cart-list-head ">
 
-      <div class="cart-list-title">
+      <div class="cart-list-title ">
         <div class="row">
           {{!-- <div class="col-lg-1 col-md-1 col-12">
           </div> --}}
@@ -39,16 +39,16 @@
             <p><strong>Image</strong></p>
           </div>
           <div class="col-lg-2 col-md-4 col-12 text-center">
-            <p><strong>Product Name</strong></p>
+            <p class="text-wrap"><strong class="text-wrap">Product Name</strong></p>
           </div>
           <div class="col-lg-2 col-md-2 col-12 text-center">
-            <p><strong> Product Qty</strong></p>
+            <p class="text-wrap"><strong> Product Qty</strong></p>
           </div>
           <div class="col-lg-1 col-md-2 col-12">
             <p><strong>Discount</strong></p>
           </div>
           <div class="col-lg-1 col-md-2 col-12 text-center">
-            <p><strong>Current Price</strong></p>
+            <p class="text-wrap"><strong>Current Price</strong></p>
           </div>
           <div class="col-lg-1 col-md-2 col-12 text-center">
             <p><strong>MRP</strong></p>
@@ -60,9 +60,9 @@
           <div class="col-lg-1 col-md-2 col-12 text-center">
             <p><strong>Remove</strong></p>
           </div>
-          <div class="col-lg-1 col-md-2 col-12 text-center">
+          <div class="col-lg-2 col-md-2 col-12 text-center">
 
-            <img style="height:45px; width:45px;" class="rounded-circle" src="/userasset/images/logo/shpcart.WEBP"
+            <img style="height:60px; width:85px;" src="/userasset/images/logo/shopnw.png"
               alt="Logo">
           </div>
         </div>
@@ -92,7 +92,7 @@
               <button class="btn btn-secondary" style="width:40px"
                 onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)"><i
                   class="lni lni-minus"></i></button>
-              <input type="text" id="{{this.product._id}}" value="{{this.quantity}}" style="width:28px">
+              <input type="text" id="{{this.product._id}}" value="{{this.quantity}}" class="text-center" style="width:28px; border:none;">
               <button class="btn btn-secondary" style="width:40px"
                 onclick="changeQuantiy('{{this._id}}','{{this.product._id}}','{{../userId}}',1)"><i
                   class="lni lni-plus"></i></button>
@@ -113,7 +113,7 @@
 
           <div class="col-lg-1 col-md-2 col-12 text-center">
 
-            <button class="btn btn-danger" style="width:50px"
+            <button class="btn btn-danger" style="width:40px"
               onclick="removeItem('{{this._id}}','{{this.product._id}}')"><i class="lni lni-close"></i></button>
 
 
@@ -122,7 +122,7 @@
           </div>
           <div class="col-lg-2 col-md-2 col-12 text-center">
 
-            <img style="height:150px; width:150px;" src="/userasset/images/logo/addcart.jpg" alt="Logo">
+            <img style="height:150px; width:150px;" src="/userasset/images/logo/addcart1.jpg" alt="Logo">
 
 
             {{!-- <a class="remove-item" href="/deleteCartItem/{{this.product._id}}/{{this._id}}"><i
@@ -138,7 +138,7 @@
 
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 mb-5">
 
         <div class="total-amount">
           <div class="row">
@@ -199,7 +199,7 @@
 
 
 {{else}}
-<section class="checkout-wrapper section">
+<section class="checkout-wrapper section pt-5 pb-5">
 
   <h4 style="color:rgb(177, 91, 151)" class="text-center">Empty cart!!<br> Lets add some items and enjoy shopping</h4>
   <div class="container d-flex justify-content-center text-center">
