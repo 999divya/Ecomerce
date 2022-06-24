@@ -257,7 +257,7 @@ req.session.orderItems = orderItems;
                     appliedWalletAmount: req.session.usedwalletamount,
                     currentWalletAmount: req.session.currentWlletAmount,
                     creditedAmount: 0,
-                    status: "Wallet amount deducted"
+                    status: "order placed, wallet amount deducted if applied"
                 }
             )
 
@@ -272,7 +272,7 @@ req.session.orderItems = orderItems;
                 percentage:  req.session.couponpercent?req.session.couponpercent:0 ,
                 discount: req.session.coupondiscount?req.session.coupondiscount:0,
                 discountedAmt: req.session.coupontotalvalue?req.session.coupontotalvalue:0,
-                status: "Coupon amount deducted"
+                status: "Coupon amount deducted if applied"
             })
 
             res.json({ status: true, paymentMethod: 'COD' })
@@ -299,7 +299,7 @@ req.session.orderItems = orderItems;
                             appliedWalletAmount: req.session.usedwalletamount,
                             currentWalletAmount: req.session.currentWlletAmount,
                             creditedAmount: 0,
-                            status: "Wallet amount deducted"
+                            status: "order placed, wallet amount deducted if applied"
                         }
                     )
 
@@ -314,7 +314,7 @@ req.session.orderItems = orderItems;
                         percentage:  req.session.couponpercent?req.session.couponpercent:0 ,
                         discount: req.session.coupondiscount?req.session.coupondiscount:0,
                         discountedAmt: req.session.coupontotalvalue?req.session.coupontotalvalue:0,
-                        status: "Coupon amount deducted"
+                        status: "order placed, Coupon amount deducted if applied"
                     })
                     res.json(order);
                 }
@@ -330,8 +330,8 @@ req.session.orderItems = orderItems;
                     payment_method: "paypal",
                 },
                 redirect_urls: {
-                    return_url: "http://localhost:5500/order-successful",
-                    cancel_url: "http://localhost:5500/order-failed",
+                    return_url: "https://www.kstyles.shop/order-successful",
+                    cancel_url: "https://www.kstyles.shop/order-failed",
                 },
                 transactions: [
                     {
@@ -375,7 +375,7 @@ req.session.orderItems = orderItems;
                                     appliedWalletAmount: req.session.usedwalletamount,
                                     currentWalletAmount: req.session.currentWlletAmount,
                                     creditedAmount: 0,
-                                    status: "Wallet amount deducted"
+                                    status: "order placed, Wallet amount deducted if applied"
                                 }
                             )
 
@@ -390,7 +390,7 @@ req.session.orderItems = orderItems;
                         percentage:  req.session.couponpercent?req.session.couponpercent:0 ,
                         discount: req.session.coupondiscount?req.session.coupondiscount:0,
                         discountedAmt: req.session.coupontotalvalue?req.session.coupontotalvalue:0,
-                        status: "Coupon amount deducted"
+                        status: "order placed, Coupon amount deducted if applied"
                     })
 
                             res.json({ paypal: true, url: link })
