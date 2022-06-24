@@ -645,7 +645,7 @@ exports.walletHistory = async(req,res)=>{
     if(req.session.isLoggedin){
         const userId = req.session.user._id;
         const findwallethistory = await wallethistory.find({user:ObjectId(userId)}).sort({_id:-1})
-        res.render('userviews/walletHistory',{findwallethistory ,userdetails:req.session.user})
+        res.render('userviews/wallethistory',{lk:false, findwallethistory, userdetails:req.session.user})
     }
 }
 
