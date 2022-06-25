@@ -671,5 +671,5 @@ exports.aboutUs = async(req,res)=>{
         }
     
     }
-    res.render('userviews/aboutUs',{lk:true, userdetails, count, products: ProductDetails, categorys: categoryDetails})
+    res.render('userviews/AboutUs',{lk:true, userdetails, count, products: ProductDetails, categorys: categoryDetails})
 }
