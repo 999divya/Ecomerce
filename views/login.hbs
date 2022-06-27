@@ -2,6 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://kit.fontawesome.com/7a72d6e1e2.js" crossorigin="anonymous"></script>
 
 
 <div class="breadcrumbs">
@@ -43,11 +44,14 @@
                         </div>
                         <div class="form-group input-group">
                             <label for="reg-fn">Email</label>
-                            <input class="form-control" type="email" name="email" id="reg-email" required>
+                            <input class="form-control" type="email" name="email" onkeyup="validateEmail()"
+                                id="reg-email" required>
+                            <p id="Email-error" class="error text-danger"></p>
                         </div>
                         <div class="form-group input-group">
                             <label for="reg-fn">Password</label>
                             <input class="form-control" type="password" name="pass" id="reg-pass" required>
+
                         </div>
 
                         <div class="button">
@@ -65,17 +69,40 @@
 <script>
 
 
+    var emailError = document.getElementById('Email-error');
+
+
+
+    function validateEmail() {
+        console.log(" emailError", emailError)
+        var email = document.getElementById('reg-email').value;
+        if (email.length == 0) {
+            emailError.innerHTML = '**Email is required'
+            return false;
+        }
+        if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+            emailError.innerHTML = '**Email invalid'
+            return false;
+        }
+        emailError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+        return true;
+    }
+
+
+
     function display() {
 
+        if (validateEmail()) {
+            Swal.fire({
+                position: 'top-end',
+                title: 'login Credentials submitted',
+                showConfirmButton: false,
+                timer: 1800
 
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'login Credentials submitted successfully',
-            showConfirmButton: false,
-            timer: 1800
+            })
+        }
 
-        })
     }
+
 
 </script>

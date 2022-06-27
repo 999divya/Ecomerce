@@ -67,12 +67,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Product Management</h4>
+                        <h4 class="mb-sm-0 font-size-18">Sales Report</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                <li class="breadcrumb-item active">Products List</li>
+                                <li class="breadcrumb-item active">sales</li>
                             </ol>
                         </div>
 
@@ -161,6 +161,7 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="col-md-8">
                 <div class="card mb-3 mt-3">
                     <div class="card-header">
@@ -240,7 +241,7 @@
 
 
 
-
+<div class="container">
 
             <div class="row">
                 <div class="col-lg-3">
@@ -300,7 +301,7 @@
                 </div>
 
             </div>
-
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
     integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -310,7 +311,7 @@
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Totel Orders', '  Success Orders', 'Fail Orders'],
+            labels: ['Total Orders', '  Success Orders', 'Failed Orders'],
             datasets: [{
                 label: 'Order Summary',
                 data: [{{ data.totalOrders }}, {{ data.successOrders }},{{ data.failedOrders }}],
@@ -419,7 +420,8 @@
 
                 data1 = []
             
-                chartDatas.dailyIncome.map((value) => {
+                chartDatas.dailySale.map((value) => {
+                 
                     data1.push({ x: value._id, y: value.totalAmount })
                 })
                 const data = {
@@ -470,7 +472,7 @@
             success: (response) => {
              
                 let data2 = []
-                response.yearlyIncome.map((value) => {
+                response.yearlySale.map((value) => {
                     data2.push({ x: value._id, y: value.total })
                 })
                 const ctx = document.getElementById('myChart2').getContext('2d');
@@ -507,7 +509,7 @@
             success: (response) => {
       
                 let data3 = [];
-                response.month.map((value) => {
+                response.currentmonthSale.map((value) => {
                     data3.push({ x: value._id, y: value.totalAmount })
                 })
                 const ctx = document.getElementById('myChart3').getContext('2d');
